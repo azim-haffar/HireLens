@@ -49,7 +49,12 @@ app.add_middleware(SecurityHeadersMiddleware)
 # ── CORS ──────────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_url, "https://hire-lens-topaz.vercel.app", "http://localhost:5173", "http://localhost:3000"],
+    allow_origins=[
+        "https://hire-lens-topaz.vercel.app",
+        "https://hire-lens-git-main-lightnin1s-projects.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:3000",
+    ],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PATCH", "DELETE"],
     allow_headers=["Content-Type", "Authorization"],
