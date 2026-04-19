@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${window.location.origin}/dashboard` },
+      options: { redirectTo: 'https://hire-lens-topaz.vercel.app/auth/callback' },
     })
     if (error) throw error
   }

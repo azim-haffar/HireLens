@@ -12,6 +12,7 @@ import AnalysisResult from './pages/AnalysisResult'
 import Compare from './pages/Compare'
 import Applications from './pages/Applications'
 import History from './pages/History'
+import AuthCallback from './pages/AuthCallback'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route
             path="/*"
             element={
