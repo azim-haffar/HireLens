@@ -7,15 +7,22 @@ export default function AuthCallback() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    // Subscribe first so we navigate only after AuthContext has the session
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        navigate('/dashboard', { replace: true })
+      }
+    })
+
     supabase.auth.exchangeCodeForSession(window.location.href)
       .then(({ error }) => {
         if (error) {
           console.error('OAuth callback error:', error)
           navigate('/login', { replace: true })
-        } else {
-          navigate('/dashboard', { replace: true })
         }
       })
+
+    return () => subscription.unsubscribe()
   }, [navigate])
 
   return (
