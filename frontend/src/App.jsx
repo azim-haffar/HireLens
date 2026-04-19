@@ -1,4 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { startKeepalive } from './utils/keepalive'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -15,6 +17,8 @@ import History from './pages/History'
 import AuthCallback from './pages/AuthCallback'
 
 export default function App() {
+  useEffect(() => { startKeepalive() }, [])
+
   return (
     <ErrorBoundary>
     <ThemeProvider>
