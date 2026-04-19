@@ -42,7 +42,23 @@
     "passwordMismatch": "Şifreler eşleşmiyor",
     "passwordTooShort": "Şifre en az 8 karakter olmalıdır",
     "accountCreated": "Hesap oluşturuldu! Onaylamak için e-postanı kontrol et.",
-    "registerFailed": "Kayıt başarısız"
+    "registerFailed": "Kayıt başarısız",
+    "forgotPassword": "Şifremi unuttum?",
+    "forgotPasswordHeading": "Şifreni sıfırla",
+    "forgotPasswordDesc": "E-postanı gir, sana bir sıfırlama bağlantısı gönderelim.",
+    "sendResetLink": "Sıfırlama bağlantısı gönder",
+    "sending": "Gönderiliyor...",
+    "resetEmailSent": "Bağlantı gönderildi! Gelen kutunu kontrol et.",
+    "resetEmailDesc": "E-postana şifre sıfırlama bağlantısı gönderdik. Yeni şifre belirlemek için tıkla.",
+    "checkYourEmail": "E-postanı kontrol et",
+    "backToSignIn": "Girişe geri dön",
+    "resetFailed": "Sıfırlama bağlantısı gönderilemedi",
+    "newPasswordHeading": "Yeni şifre belirle",
+    "newPasswordDesc": "Hesabın için güçlü bir şifre seç.",
+    "updatePassword": "Şifreyi güncelle",
+    "updating": "Güncelleniyor...",
+    "passwordUpdated": "Şifre güncellendi! Lütfen giriş yap.",
+    "verifyingLink": "Bağlantı doğrulanıyor…"
   },
 
   "dashboard": {

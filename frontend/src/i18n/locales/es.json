@@ -42,7 +42,23 @@
     "passwordMismatch": "Las contraseñas no coinciden",
     "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
     "accountCreated": "¡Cuenta creada! Revisa tu correo para confirmar.",
-    "registerFailed": "Error en el registro"
+    "registerFailed": "Error en el registro",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "forgotPasswordHeading": "Restablecer contraseña",
+    "forgotPasswordDesc": "Ingresa tu correo y te enviaremos un enlace de restablecimiento.",
+    "sendResetLink": "Enviar enlace",
+    "sending": "Enviando...",
+    "resetEmailSent": "¡Enlace enviado! Revisa tu bandeja de entrada.",
+    "resetEmailDesc": "Hemos enviado un enlace de restablecimiento a tu correo. Haz clic para establecer una nueva contraseña.",
+    "checkYourEmail": "Revisa tu correo",
+    "backToSignIn": "Volver a iniciar sesión",
+    "resetFailed": "Error al enviar el enlace",
+    "newPasswordHeading": "Nueva contraseña",
+    "newPasswordDesc": "Elige una contraseña segura para tu cuenta.",
+    "updatePassword": "Actualizar contraseña",
+    "updating": "Actualizando...",
+    "passwordUpdated": "¡Contraseña actualizada! Por favor inicia sesión.",
+    "verifyingLink": "Verificando enlace…"
   },
 
   "dashboard": {

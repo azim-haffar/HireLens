@@ -105,7 +105,12 @@ export default function Login() {
               </div>
             </div>
             <div>
-              <label className="label">{t('auth.password')}</label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="label mb-0">{t('auth.password')}</label>
+                <Link to="/forgot-password" className="text-xs text-brand-600 dark:text-brand-400 hover:underline font-medium">
+                  {t('auth.forgotPassword')}
+                </Link>
+              </div>
               <div className="relative">
                 <Lock className="absolute left-3.5 top-3 w-4 h-4 text-gray-400" />
                 <input type="password" className="input pl-10" placeholder={t('auth.passwordPlaceholder')}

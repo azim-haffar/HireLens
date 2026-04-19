@@ -42,7 +42,23 @@
     "passwordMismatch": "Adgangskoderne stemmer ikke overens",
     "passwordTooShort": "Adgangskoden skal være mindst 8 tegn",
     "accountCreated": "Konto oprettet! Tjek din e-mail for at bekræfte.",
-    "registerFailed": "Registrering mislykkedes"
+    "registerFailed": "Registrering mislykkedes",
+    "forgotPassword": "Glemt adgangskode?",
+    "forgotPasswordHeading": "Nulstil adgangskode",
+    "forgotPasswordDesc": "Indtast din e-mail, så sender vi dig et nulstillingslink.",
+    "sendResetLink": "Send nulstillingslink",
+    "sending": "Sender...",
+    "resetEmailSent": "Link sendt! Tjek din indbakke.",
+    "resetEmailDesc": "Vi har sendt et link til nulstilling af adgangskode til din e-mail. Klik på det for at angive en ny adgangskode.",
+    "checkYourEmail": "Tjek din e-mail",
+    "backToSignIn": "Tilbage til log ind",
+    "resetFailed": "Kunne ikke sende nulstillingslink",
+    "newPasswordHeading": "Angiv ny adgangskode",
+    "newPasswordDesc": "Vælg en stærk adgangskode til din konto.",
+    "updatePassword": "Opdater adgangskode",
+    "updating": "Opdaterer...",
+    "passwordUpdated": "Adgangskode opdateret! Log venligst ind.",
+    "verifyingLink": "Bekræfter link…"
   },
 
   "dashboard": {

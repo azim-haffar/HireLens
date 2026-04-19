@@ -42,7 +42,23 @@
     "passwordMismatch": "Passwords do not match",
     "passwordTooShort": "Password must be at least 8 characters",
     "accountCreated": "Account created! Check your email to confirm.",
-    "registerFailed": "Registration failed"
+    "registerFailed": "Registration failed",
+    "forgotPassword": "Forgot password?",
+    "forgotPasswordHeading": "Reset your password",
+    "forgotPasswordDesc": "Enter your email and we'll send you a reset link.",
+    "sendResetLink": "Send reset link",
+    "sending": "Sending...",
+    "resetEmailSent": "Reset link sent! Check your inbox.",
+    "resetEmailDesc": "We've sent a password reset link to your email. Click it to set a new password.",
+    "checkYourEmail": "Check your email",
+    "backToSignIn": "Back to sign in",
+    "resetFailed": "Failed to send reset link",
+    "newPasswordHeading": "Set new password",
+    "newPasswordDesc": "Choose a strong password for your account.",
+    "updatePassword": "Update password",
+    "updating": "Updating...",
+    "passwordUpdated": "Password updated! Please sign in.",
+    "verifyingLink": "Verifying link…"
   },
 
   "dashboard": {
