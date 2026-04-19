@@ -2,28 +2,22 @@ import asyncio
 import json
 import logging
 import re
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from fastapi import HTTPException
 from app.config import get_settings
 
 logger = logging.getLogger(__name__)
 
-_model = None
+_client = None
 
 
-def get_gemini_model():
-    global _model
-    if _model is None:
+def get_gemini_client():
+    global _client
+    if _client is None:
         settings = get_settings()
-        genai.configure(api_key=settings.gemini_api_key)
-        _model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",
-            generation_config=genai.types.GenerationConfig(
-                temperature=0.2,
-                max_output_tokens=8192,
-            ),
-        )
-    return _model
+        _client = genai.Client(api_key=settings.gemini_api_key)
+    return _client
 
 
 def _extract_json(text: str) -> dict | list:
@@ -40,11 +34,18 @@ def _extract_json(text: str) -> dict | list:
 
 
 async def call_gemini(prompt: str) -> dict | list:
-    model = get_gemini_model()
+    client = get_gemini_client()
     logger.info("Gemini request starting (prompt length=%d)", len(prompt))
 
     def _sync_call():
-        return model.generate_content(prompt)
+        return client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                temperature=0.2,
+                max_output_tokens=8192,
+            ),
+        )
 
     try:
         response = await asyncio.wait_for(
