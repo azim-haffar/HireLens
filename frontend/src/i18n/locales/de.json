@@ -1,0 +1,305 @@
+{
+  "brand": "HireLens",
+  "tagline": "KI-gestützte Bewerberauswahl",
+
+  "nav": {
+    "dashboard": "Dashboard",
+    "analyze": "Analysieren",
+    "compare": "Vergleichen",
+    "tracker": "Tracker",
+    "history": "Verlauf",
+    "signOut": "Abmelden",
+    "signedInAs": "Angemeldet als",
+    "lightMode": "Zu hellem Modus wechseln",
+    "darkMode": "Zu dunklem Modus wechseln"
+  },
+
+  "auth": {
+    "signIn": "Anmelden",
+    "signInHeading": "Bei deinem Konto anmelden",
+    "signingIn": "Anmelden...",
+    "signUp": "Kostenlos registrieren",
+    "signUpHeading": "Kostenloses Konto erstellen",
+    "creatingAccount": "Konto wird erstellt...",
+    "createAccount": "Konto erstellen",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "orContinueEmail": "oder mit E-Mail fortfahren",
+    "orSignUpEmail": "oder mit E-Mail registrieren",
+    "email": "E-Mail",
+    "emailPlaceholder": "du@beispiel.de",
+    "password": "Passwort",
+    "passwordPlaceholder": "••••••••",
+    "passwordMinPlaceholder": "Mind. 8 Zeichen",
+    "confirmPassword": "Passwort bestätigen",
+    "confirmPasswordPlaceholder": "Passwort wiederholen",
+    "noAccount": "Kein Konto?",
+    "alreadyAccount": "Bereits ein Konto?",
+    "perk1": "KI-gestützte Lebenslauf-Bewertung in Sekunden",
+    "perk2": "ATS-Kompatibilitätsprüfungen",
+    "perk3": "Interview-Fragen-Generator",
+    "loginFailed": "Anmeldung fehlgeschlagen",
+    "googleFailed": "Google-Anmeldung fehlgeschlagen",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "passwordTooShort": "Das Passwort muss mindestens 8 Zeichen lang sein",
+    "accountCreated": "Konto erstellt! Überprüfe deine E-Mail zur Bestätigung.",
+    "registerFailed": "Registrierung fehlgeschlagen"
+  },
+
+  "dashboard": {
+    "welcomeBack": "Willkommen zurück, <grad>{{name}}</grad> 👋",
+    "subtitle": "Hier ist deine Rekrutierungsaktivität auf einen Blick.",
+    "newAnalysis": "Neue Analyse",
+    "analysesRun": "Analysen durchgeführt",
+    "applications": "Bewerbungen",
+    "interviews": "Interviews",
+    "avgScore": "Ø-Bewertung",
+    "quickActions": "Schnellaktionen",
+    "qaAnalyzeTitle": "Neue Analyse",
+    "qaAnalyzeDesc": "Lebenslauf und Job hochladen, um sofort KI-bewertet zu werden",
+    "qaCompareTitle": "Lebensläufe vergleichen",
+    "qaCompareDesc": "Zwei Versionen nebeneinander vergleichen",
+    "qaTrackTitle": "Bewerbungen verfolgen",
+    "qaTrackDesc": "Bewerbungsstatus verwalten und aktualisieren",
+    "recentAnalyses": "Letzte Analysen",
+    "viewAll": "Alle anzeigen",
+    "noAnalyses": "Noch keine Analysen",
+    "runFirst": "Erste Analyse starten",
+    "noCVTitle": "Noch kein Lebenslauf hochgeladen",
+    "noCVDesc": "Lade einen Lebenslauf hoch, um Analysen und Vergleiche zu starten.",
+    "noCVAction": "Jetzt hochladen",
+    "lastAnalysisToday": "Letzte Analyse: heute",
+    "lastAnalysisYesterday": "Letzte Analyse: gestern",
+    "lastAnalysisDaysAgo": "Letzte Analyse: vor {{count}} Tagen"
+  },
+
+  "analyze": {
+    "heading": "Neue",
+    "headingGradient": "Analyse",
+    "subtitle": "Lade deinen Lebenslauf hoch und füge einen Job hinzu, um sofort von der KI bewertet zu werden.",
+    "step1Label": "Lebenslauf hochladen",
+    "step1Desc": "Dein Lebenslauf oder Curriculum Vitae",
+    "step2Label": "Job hinzufügen",
+    "step2Desc": "Jobbeschreibung oder URL einfügen",
+    "step3Label": "Wird analysiert",
+    "step3Desc": "KI-Bewertung läuft",
+    "analyzingHeading": "Lebenslauf wird analysiert…",
+    "analyzingSubtitle": "Unsere KI führt eine vollständige Kompatibilitätsprüfung durch. Dies dauert ca. 15–30 Sekunden.",
+    "task1": "Lebenslauf gegen Jobanforderungen prüfen",
+    "task2": "10 ATS-Kompatibilitätsprüfungen durchführen",
+    "task3": "Gewichteten Übereinstimmungsscore berechnen",
+    "task4": "Interviewfragen generieren",
+    "complete": "Analyse abgeschlossen!",
+    "failed": "Analyse fehlgeschlagen"
+  },
+
+  "analysisResult": {
+    "backToHistory": "Zurück zum Verlauf",
+    "heading": "Analyseergebnis",
+    "savedToTracker": "Im Tracker gespeichert",
+    "saveToTracker": "Im Tracker speichern",
+    "tabScore": "Bewertung",
+    "tabATS": "ATS-Bericht",
+    "tabInterview": "Interview-Vorbereitung",
+    "tabCoverLetter": "Anschreiben",
+    "loadFailed": "Analyse konnte nicht geladen werden"
+  },
+
+  "history": {
+    "heading": "Analyse",
+    "headingGradient": "Verlauf",
+    "totalOne": "{{count}} Analyse insgesamt",
+    "totalMany": "{{count}} Analysen insgesamt",
+    "searchPlaceholder": "Analysen durchsuchen…",
+    "loading": "Verlauf wird geladen…",
+    "noMatching": "Keine passenden Analysen",
+    "noAnalyses": "Noch keine Analysen",
+    "tryDifferent": "Versuche einen anderen Suchbegriff.",
+    "runFirst": "Starte deine erste Analyse, um Ergebnisse hier zu sehen.",
+    "runFirstBtn": "Erste Analyse starten",
+    "loadFailed": "Verlauf konnte nicht geladen werden",
+    "unknownRole": "Unbekannte Stelle @ Unbekanntes Unternehmen"
+  },
+
+  "applications": {
+    "heading": "Bewerbungs",
+    "headingGradient": "Tracker",
+    "subtitle": "Verfolge den Status jeder Stelle, auf die du dich beworben hast.",
+    "statsTotal": "Gesamt verfolgt",
+    "statsResponseRate": "Rücklaufquote",
+    "statsAvgScore": "Ø Match-Score",
+    "statsInterviews": "Interviews + Angebote",
+    "filterAll": "Alle ({{count}})",
+    "loading": "Bewerbungen werden geladen…",
+    "emptyAll": "Noch keine Bewerbungen",
+    "emptyFiltered": "Keine Bewerbungen mit Status \"{{filter}}\"",
+    "emptyAllDesc": "Starte eine Analyse und speichere eine Stelle, um sie hier zu verfolgen.",
+    "emptyFilterDesc": "Versuche einen anderen Statusfilter.",
+    "runFirst": "Erste Analyse starten",
+    "untitledRole": "Unbenannte Stelle",
+    "unknownCompany": "Unbekanntes Unternehmen",
+    "added": "Hinzugefügt am {{date}}",
+    "viewAnalysis": "Analyse anzeigen",
+    "remove": "Entfernen",
+    "confirmRemove": "Diese Bewerbung entfernen?",
+    "removed": "Bewerbung entfernt",
+    "loadFailed": "Bewerbungen konnten nicht geladen werden",
+    "updateFailed": "Aktualisierung fehlgeschlagen",
+    "deleteFailed": "Löschen fehlgeschlagen",
+    "status": {
+      "saved": "gespeichert",
+      "applied": "beworben",
+      "interview": "Interview",
+      "offer": "Angebot",
+      "rejected": "abgelehnt",
+      "ghosted": "ignoriert"
+    }
+  },
+
+  "compare": {
+    "heading": "Lebenslauf-Versionen vergleichen",
+    "subtitle": "Sieh, wie sich dein Lebenslauf zwischen Versionen für denselben Job verbessert hat.",
+    "backToSelection": "← Zurück zur Auswahl",
+    "selectHeading": "Lebensläufe und Job auswählen",
+    "uploadNew": "Neuen Lebenslauf hochladen",
+    "cv1Label": "Lebenslauf Version 1 (Basis)",
+    "cv2Label": "Lebenslauf Version 2 (verbessert)",
+    "jobLabel": "Ziel-Job",
+    "selectCV": "Lebenslauf auswählen...",
+    "selectJob": "Job auswählen...",
+    "comparing": "Wird verglichen...",
+    "compareCVs": "Lebensläufe vergleichen",
+    "selectBoth": "Wähle beide Lebenslauf-Versionen und einen Job",
+    "selectDifferent": "Wähle zwei verschiedene Lebensläufe",
+    "comparisonFailed": "Vergleich fehlgeschlagen",
+    "newCVUploaded": "Neuer Lebenslauf hochgeladen — unten auswählen",
+    "scoreComparison": "Bewertungsvergleich",
+    "v1": "Version 1",
+    "v2": "Version 2",
+    "change": "Änderung",
+    "points": "Punkte",
+    "skillChanges": "Kompetenzänderungen",
+    "newSkills": "Neue Kompetenzen in V2",
+    "stillMissing": "Noch fehlend",
+    "summary": "Zusammenfassung",
+    "remainingImprovements": "Verbleibende Verbesserungen",
+    "needTwoCVs": "Lade mindestens 2 Lebenslauf-Versionen hoch, um sie zu vergleichen",
+    "needTwoCVsDesc": "Gehe zu Analysieren → Lebenslauf hochladen, um deine Versionen hinzuzufügen.",
+    "goUploadCV": "Lebenslauf hochladen"
+  },
+
+  "score": {
+    "matchScore": "Übereinstimmungsscore",
+    "strong": "Starke Übereinstimmung",
+    "moderate": "Moderate Übereinstimmung",
+    "weak": "Schwache Übereinstimmung",
+    "notAMatch": "Keine Übereinstimmung",
+    "matchedSkills": "Übereinstimmende Kompetenzen",
+    "missingSkills": "Fehlende Kompetenzen",
+    "skillMatch": "Kompetenzübereinstimmung (40%)",
+    "experienceRelevance": "Erfahrungsrelevanz (30%)",
+    "educationFit": "Bildungseignung (15%)",
+    "keywordCoverage": "Schlüsselwortabdeckung (15%)",
+    "whyScore": "Warum dieser Score",
+    "recommendations": "Empfehlungen"
+  },
+
+  "ats": {
+    "heading": "ATS-Kompatibilitätsbericht",
+    "critical": "kritisch",
+    "warning": "Warnung",
+    "info": "Info",
+    "criticalCount": "kritische",
+    "warningsCount": "Warnungen",
+    "passedCount": "bestanden",
+    "issuesFound": "Gefundene Probleme",
+    "howToFix": "So behebst du es",
+    "passedChecks": "Bestandene Prüfungen"
+  },
+
+  "interview": {
+    "heading": "Top 10 Interviewfragen",
+    "description": "Basierend auf deinen Kompetenzlücken und den Jobanforderungen generiert. Klicke auf eine Frage, um eine Antwortempfehlung zu sehen.",
+    "whyAsk": "Warum sie das fragen",
+    "answerFramework": "Starkes Antwort-Framework",
+    "categories": {
+      "technical": "technisch",
+      "behavioral": "verhaltensbezogen",
+      "situational": "situativ"
+    },
+    "difficulty": {
+      "easy": "leicht",
+      "medium": "mittel",
+      "hard": "schwer"
+    }
+  },
+
+  "coverLetter": {
+    "heading": "Anschreiben-Generator",
+    "copied": "Kopiert!",
+    "copy": "Kopieren",
+    "description": "Erstelle ein maßgeschneidertes Anschreiben basierend auf deinem Lebenslauf und dieser Jobbeschreibung.",
+    "generating": "Wird generiert...",
+    "generate": "Anschreiben generieren",
+    "subjectLine": "Betreffzeile",
+    "keyHighlights": "Verwendete Kernpunkte",
+    "coverLetter": "Anschreiben",
+    "regenerate": "Neu generieren",
+    "generated": "Anschreiben generiert!",
+    "failed": "Generierung fehlgeschlagen"
+  },
+
+  "cvUpload": {
+    "heading": "Schritt 1: Lebenslauf hochladen",
+    "uploading": "Lebenslauf wird hochgeladen und verarbeitet...",
+    "parsedSuccess": "Erfolgreich verarbeitet",
+    "dropPrompt": "Lebenslauf hierher ziehen oder klicken zum Durchsuchen",
+    "dropActive": "Lebenslauf hier ablegen",
+    "requirement": "Nur PDF, max. 10MB",
+    "parsedTitle": "Lebenslauf erfolgreich verarbeitet",
+    "parsedSummary": "{{skills}} Kompetenzen, {{experience}} Erfahrungseinträge gefunden",
+    "pdfOnly": "Nur PDF-Dateien werden unterstützt",
+    "uploadSuccess": "Lebenslauf hochgeladen und verarbeitet!",
+    "uploadFailed": "Hochladen fehlgeschlagen"
+  },
+
+  "jobInput": {
+    "heading": "Schritt 2: Jobbeschreibung hinzufügen",
+    "pasteURL": "URL einfügen",
+    "pasteText": "Text einfügen",
+    "urlLabel": "URL der Stellenausschreibung",
+    "urlPlaceholder": "https://linkedin.com/jobs/view/...",
+    "urlHelper": "Funktioniert mit LinkedIn, Indeed, Greenhouse, Lever und den meisten Jobbörsen.",
+    "textLabel": "Jobbeschreibungstext",
+    "textPlaceholder": "Vollständige Jobbeschreibung hier einfügen...",
+    "parsing": "Jobbeschreibung wird verarbeitet...",
+    "saved": "Job gespeichert — Analyse läuft...",
+    "parseBtn": "Verarbeiten & Weiter",
+    "skillsExtracted": "erforderliche Kompetenzen extrahiert",
+    "enterURL": "Job-URL eingeben",
+    "minChars": "Mindestens 50 Zeichen der Jobbeschreibung einfügen",
+    "parseSuccess": "Jobbeschreibung verarbeitet!",
+    "parseFailed": "Job konnte nicht verarbeitet werden"
+  },
+
+  "error": {
+    "somethingWrong": "Etwas ist schiefgelaufen",
+    "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten. Bitte lade die Seite neu.",
+    "refresh": "Seite neu laden",
+    "loading": "HireLens wird geladen..."
+  },
+
+  "verdicts": {
+    "strong": "stark",
+    "moderate": "moderat",
+    "weak": "schwach",
+    "rejected": "abgelehnt"
+  },
+
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "da": "Dansk",
+    "de": "Deutsch",
+    "tr": "Türkçe"
+  }
+}

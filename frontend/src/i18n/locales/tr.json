@@ -1,0 +1,305 @@
+{
+  "brand": "HireLens",
+  "tagline": "Yapay zeka destekli işe alım taraması",
+
+  "nav": {
+    "dashboard": "Panel",
+    "analyze": "Analiz Et",
+    "compare": "Karşılaştır",
+    "tracker": "Takipçi",
+    "history": "Geçmiş",
+    "signOut": "Çıkış yap",
+    "signedInAs": "Oturum açıldı:",
+    "lightMode": "Aydınlık moda geç",
+    "darkMode": "Karanlık moda geç"
+  },
+
+  "auth": {
+    "signIn": "Giriş yap",
+    "signInHeading": "Hesabına giriş yap",
+    "signingIn": "Giriş yapılıyor...",
+    "signUp": "Ücretsiz kaydol",
+    "signUpHeading": "Ücretsiz hesap oluştur",
+    "creatingAccount": "Hesap oluşturuluyor...",
+    "createAccount": "Hesap oluştur",
+    "continueWithGoogle": "Google ile devam et",
+    "orContinueEmail": "veya e-posta ile devam et",
+    "orSignUpEmail": "veya e-posta ile kaydol",
+    "email": "E-posta",
+    "emailPlaceholder": "sen@ornek.com",
+    "password": "Şifre",
+    "passwordPlaceholder": "••••••••",
+    "passwordMinPlaceholder": "En az 8 karakter",
+    "confirmPassword": "Şifreyi onayla",
+    "confirmPasswordPlaceholder": "Şifreyi tekrar gir",
+    "noAccount": "Hesabın yok mu?",
+    "alreadyAccount": "Zaten hesabın var mı?",
+    "perk1": "Yapay zeka ile saniyeler içinde CV puanlaması",
+    "perk2": "ATS uyumluluk kontrolleri",
+    "perk3": "Mülakat sorusu oluşturucu",
+    "loginFailed": "Giriş başarısız",
+    "googleFailed": "Google girişi başarısız",
+    "passwordMismatch": "Şifreler eşleşmiyor",
+    "passwordTooShort": "Şifre en az 8 karakter olmalıdır",
+    "accountCreated": "Hesap oluşturuldu! Onaylamak için e-postanı kontrol et.",
+    "registerFailed": "Kayıt başarısız"
+  },
+
+  "dashboard": {
+    "welcomeBack": "Tekrar hoş geldin, <grad>{{name}}</grad> 👋",
+    "subtitle": "İşe alım aktivitene tek bakışta göz at.",
+    "newAnalysis": "Yeni Analiz",
+    "analysesRun": "Yapılan analizler",
+    "applications": "Başvurular",
+    "interviews": "Mülakatlar",
+    "avgScore": "Ort. puan",
+    "quickActions": "Hızlı İşlemler",
+    "qaAnalyzeTitle": "Yeni Analiz",
+    "qaAnalyzeDesc": "CV ve iş ilanını yükle, yapay zeka ile anında puan al",
+    "qaCompareTitle": "CV Karşılaştır",
+    "qaCompareDesc": "İki versiyonu yan yana karşılaştır",
+    "qaTrackTitle": "Başvuruları Takip Et",
+    "qaTrackDesc": "Başvuru durumlarını yönet ve güncelle",
+    "recentAnalyses": "Son Analizler",
+    "viewAll": "Tümünü gör",
+    "noAnalyses": "Henüz analiz yok",
+    "runFirst": "İlk analizini başlat",
+    "noCVTitle": "Henüz CV yüklenmedi",
+    "noCVDesc": "Analiz ve karşılaştırma başlatmak için bir CV yükle.",
+    "noCVAction": "Şimdi yükle",
+    "lastAnalysisToday": "Son analiz: bugün",
+    "lastAnalysisYesterday": "Son analiz: dün",
+    "lastAnalysisDaysAgo": "Son analiz: {{count}} gün önce"
+  },
+
+  "analyze": {
+    "heading": "Yeni",
+    "headingGradient": "Analiz",
+    "subtitle": "CV'ni ve bir iş ilanını yükle, yapay zeka ile anında puan al.",
+    "step1Label": "CV Yükle",
+    "step1Desc": "Özgeçmişin veya CV'n",
+    "step2Label": "İş Ekle",
+    "step2Desc": "İş tanımı veya URL yapıştır",
+    "step3Label": "Analiz Ediliyor",
+    "step3Desc": "Yapay zeka puanlaması devam ediyor",
+    "analyzingHeading": "CV'n analiz ediliyor…",
+    "analyzingSubtitle": "Yapay zekamız tam bir uyumluluk kontrolü yapıyor. Bu yaklaşık 15–30 saniye sürer.",
+    "task1": "CV iş gereksinimlerine karşı analiz ediliyor",
+    "task2": "10 ATS uyumluluk kontrolü çalıştırılıyor",
+    "task3": "Ağırlıklı eşleşme puanı hesaplanıyor",
+    "task4": "Mülakat soruları oluşturuluyor",
+    "complete": "Analiz tamamlandı!",
+    "failed": "Analiz başarısız"
+  },
+
+  "analysisResult": {
+    "backToHistory": "Geçmişe dön",
+    "heading": "Analiz Sonucu",
+    "savedToTracker": "Takipçiye kaydedildi",
+    "saveToTracker": "Takipçiye kaydet",
+    "tabScore": "Puan",
+    "tabATS": "ATS Raporu",
+    "tabInterview": "Mülakat Hazırlığı",
+    "tabCoverLetter": "Ön Yazı",
+    "loadFailed": "Analiz yüklenemedi"
+  },
+
+  "history": {
+    "heading": "Analiz",
+    "headingGradient": "Geçmişi",
+    "totalOne": "Toplam {{count}} analiz",
+    "totalMany": "Toplam {{count}} analiz",
+    "searchPlaceholder": "Analiz ara…",
+    "loading": "Geçmiş yükleniyor…",
+    "noMatching": "Eşleşen analiz bulunamadı",
+    "noAnalyses": "Henüz analiz yok",
+    "tryDifferent": "Farklı bir arama terimi deneyin.",
+    "runFirst": "Sonuçları görmek için ilk analizini başlat.",
+    "runFirstBtn": "İlk analizi başlat",
+    "loadFailed": "Geçmiş yüklenemedi",
+    "unknownRole": "Bilinmeyen Pozisyon @ Bilinmeyen Şirket"
+  },
+
+  "applications": {
+    "heading": "Başvuru",
+    "headingGradient": "Takipçi",
+    "subtitle": "Başvurduğun her pozisyonun durumunu takip et.",
+    "statsTotal": "Toplam takip",
+    "statsResponseRate": "Yanıt oranı",
+    "statsAvgScore": "Ort. eşleşme skoru",
+    "statsInterviews": "Mülakatlar + Teklifler",
+    "filterAll": "Tümü ({{count}})",
+    "loading": "Başvurular yükleniyor…",
+    "emptyAll": "Henüz başvuru yok",
+    "emptyFiltered": "\"{{filter}}\" durumunda başvuru yok",
+    "emptyAllDesc": "Buradan takip etmek için bir analiz yap ve pozisyon kaydet.",
+    "emptyFilterDesc": "Farklı bir durum filtresi deneyin.",
+    "runFirst": "İlk analizi başlat",
+    "untitledRole": "İsimsiz pozisyon",
+    "unknownCompany": "Bilinmeyen Şirket",
+    "added": "{{date}} tarihinde eklendi",
+    "viewAnalysis": "Analizi görüntüle",
+    "remove": "Kaldır",
+    "confirmRemove": "Bu başvuruyu kaldır?",
+    "removed": "Başvuru kaldırıldı",
+    "loadFailed": "Başvurular yüklenemedi",
+    "updateFailed": "Güncelleme başarısız",
+    "deleteFailed": "Silme başarısız",
+    "status": {
+      "saved": "kaydedildi",
+      "applied": "başvuruldu",
+      "interview": "mülakat",
+      "offer": "teklif",
+      "rejected": "reddedildi",
+      "ghosted": "cevap yok"
+    }
+  },
+
+  "compare": {
+    "heading": "CV Versiyonlarını Karşılaştır",
+    "subtitle": "Aynı iş için CV'nin versiyonlar arasında nasıl geliştiğini gör.",
+    "backToSelection": "← Seçime geri dön",
+    "selectHeading": "CV'leri ve işi seç",
+    "uploadNew": "Yeni CV yükle",
+    "cv1Label": "CV Versiyon 1 (temel)",
+    "cv2Label": "CV Versiyon 2 (geliştirilmiş)",
+    "jobLabel": "Hedef İş",
+    "selectCV": "CV seç...",
+    "selectJob": "İş seç...",
+    "comparing": "Karşılaştırılıyor...",
+    "compareCVs": "CV'leri Karşılaştır",
+    "selectBoth": "Her iki CV versiyonunu ve bir işi seç",
+    "selectDifferent": "İki farklı CV seç",
+    "comparisonFailed": "Karşılaştırma başarısız",
+    "newCVUploaded": "Yeni CV yüklendi — aşağıdan seç",
+    "scoreComparison": "Puan Karşılaştırması",
+    "v1": "Versiyon 1",
+    "v2": "Versiyon 2",
+    "change": "Değişim",
+    "points": "puan",
+    "skillChanges": "Beceri Değişiklikleri",
+    "newSkills": "V2'de eşleşen yeni beceriler",
+    "stillMissing": "Hâlâ eksik",
+    "summary": "Özet",
+    "remainingImprovements": "Kalan iyileştirmeler",
+    "needTwoCVs": "Karşılaştırmak için en az 2 CV versiyonu yükle",
+    "needTwoCVsDesc": "CV versiyonlarını eklemek için Analiz Et → CV Yükle bölümüne git.",
+    "goUploadCV": "CV Yükle"
+  },
+
+  "score": {
+    "matchScore": "Eşleşme Puanı",
+    "strong": "Güçlü Eşleşme",
+    "moderate": "Orta Eşleşme",
+    "weak": "Zayıf Eşleşme",
+    "notAMatch": "Eşleşme Yok",
+    "matchedSkills": "Eşleşen beceriler",
+    "missingSkills": "Eksik beceriler",
+    "skillMatch": "Beceri eşleşmesi (40%)",
+    "experienceRelevance": "Deneyim uygunluğu (30%)",
+    "educationFit": "Eğitim uyumu (15%)",
+    "keywordCoverage": "Anahtar kelime kapsamı (15%)",
+    "whyScore": "Bu puan neden",
+    "recommendations": "Öneriler"
+  },
+
+  "ats": {
+    "heading": "ATS Uyumluluk Raporu",
+    "critical": "kritik",
+    "warning": "Uyarı",
+    "info": "Bilgi",
+    "criticalCount": "kritik",
+    "warningsCount": "uyarı",
+    "passedCount": "geçti",
+    "issuesFound": "Bulunan sorunlar",
+    "howToFix": "Nasıl düzeltilir",
+    "passedChecks": "Geçilen kontroller"
+  },
+
+  "interview": {
+    "heading": "En İyi 10 Mülakat Sorusu",
+    "description": "Beceri eksikliklerine ve iş gereksinimlerine göre oluşturuldu. Önerilen bir cevap görmek için herhangi bir soruya tıkla.",
+    "whyAsk": "Neden bunu soruyorlar",
+    "answerFramework": "Güçlü cevap çerçevesi",
+    "categories": {
+      "technical": "teknik",
+      "behavioral": "davranışsal",
+      "situational": "durumsal"
+    },
+    "difficulty": {
+      "easy": "kolay",
+      "medium": "orta",
+      "hard": "zor"
+    }
+  },
+
+  "coverLetter": {
+    "heading": "Ön Yazı Oluşturucu",
+    "copied": "Kopyalandı!",
+    "copy": "Kopyala",
+    "description": "CV'n ve bu iş tanımına göre özelleştirilmiş bir ön yazı oluştur.",
+    "generating": "Oluşturuluyor...",
+    "generate": "Ön yazı oluştur",
+    "subjectLine": "Konu satırı",
+    "keyHighlights": "Kullanılan önemli noktalar",
+    "coverLetter": "Ön yazı",
+    "regenerate": "Yeniden oluştur",
+    "generated": "Ön yazı oluşturuldu!",
+    "failed": "Oluşturma başarısız"
+  },
+
+  "cvUpload": {
+    "heading": "Adım 1: CV'ni yükle",
+    "uploading": "CV yükleniyor ve işleniyor...",
+    "parsedSuccess": "Başarıyla işlendi",
+    "dropPrompt": "CV'ni buraya sürükle veya göz atmak için tıkla",
+    "dropActive": "CV'ni buraya bırak",
+    "requirement": "Yalnızca PDF, maks. 10MB",
+    "parsedTitle": "CV başarıyla işlendi",
+    "parsedSummary": "{{skills}} beceri, {{experience}} deneyim girişi bulundu",
+    "pdfOnly": "Yalnızca PDF dosyaları desteklenir",
+    "uploadSuccess": "CV yüklendi ve işlendi!",
+    "uploadFailed": "Yükleme başarısız"
+  },
+
+  "jobInput": {
+    "heading": "Adım 2: İş tanımı ekle",
+    "pasteURL": "URL yapıştır",
+    "pasteText": "Metin yapıştır",
+    "urlLabel": "İş ilanı URL'si",
+    "urlPlaceholder": "https://linkedin.com/jobs/view/...",
+    "urlHelper": "LinkedIn, Indeed, Greenhouse, Lever ve çoğu iş ilanı sitesiyle çalışır.",
+    "textLabel": "İş tanımı metni",
+    "textPlaceholder": "İş tanımının tamamını buraya yapıştır...",
+    "parsing": "İş tanımı işleniyor...",
+    "saved": "İş kaydedildi — analiz çalıştırılıyor...",
+    "parseBtn": "İşle ve Devam Et",
+    "skillsExtracted": "gerekli beceri çıkarıldı",
+    "enterURL": "Bir iş URL'si gir",
+    "minChars": "İş tanımından en az 50 karakter yapıştır",
+    "parseSuccess": "İş tanımı işlendi!",
+    "parseFailed": "İş işlenemedi"
+  },
+
+  "error": {
+    "somethingWrong": "Bir şeyler ters gitti",
+    "unexpectedError": "Beklenmedik bir hata oluştu. Sayfayı yenilemek için lütfen yeniden dene.",
+    "refresh": "Sayfayı yenile",
+    "loading": "HireLens yükleniyor..."
+  },
+
+  "verdicts": {
+    "strong": "güçlü",
+    "moderate": "orta",
+    "weak": "zayıf",
+    "rejected": "reddedildi"
+  },
+
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "da": "Dansk",
+    "de": "Deutsch",
+    "tr": "Türkçe"
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "brand": "HireLens",
+  "tagline": "AI-drevet rekrutteringsscreening",
+
+  "nav": {
+    "dashboard": "Oversigt",
+    "analyze": "Analyser",
+    "compare": "Sammenlign",
+    "tracker": "Tracker",
+    "history": "Historik",
+    "signOut": "Log ud",
+    "signedInAs": "Logget ind som",
+    "lightMode": "Skift til lys tilstand",
+    "darkMode": "Skift til mørk tilstand"
+  },
+
+  "auth": {
+    "signIn": "Log ind",
+    "signInHeading": "Log ind på din konto",
+    "signingIn": "Logger ind...",
+    "signUp": "Opret gratis",
+    "signUpHeading": "Opret din gratis konto",
+    "creatingAccount": "Opretter konto...",
+    "createAccount": "Opret konto",
+    "continueWithGoogle": "Fortsæt med Google",
+    "orContinueEmail": "eller fortsæt med e-mail",
+    "orSignUpEmail": "eller tilmeld dig med e-mail",
+    "email": "E-mail",
+    "emailPlaceholder": "dig@eksempel.dk",
+    "password": "Adgangskode",
+    "passwordPlaceholder": "••••••••",
+    "passwordMinPlaceholder": "Min. 8 tegn",
+    "confirmPassword": "Bekræft adgangskode",
+    "confirmPasswordPlaceholder": "Gentag adgangskode",
+    "noAccount": "Ingen konto?",
+    "alreadyAccount": "Har du allerede en konto?",
+    "perk1": "AI-drevet CV-scoring på sekunder",
+    "perk2": "ATS-kompatibilitetstjek",
+    "perk3": "Generator til interviewspørgsmål",
+    "loginFailed": "Log ind mislykkedes",
+    "googleFailed": "Google-log ind mislykkedes",
+    "passwordMismatch": "Adgangskoderne stemmer ikke overens",
+    "passwordTooShort": "Adgangskoden skal være mindst 8 tegn",
+    "accountCreated": "Konto oprettet! Tjek din e-mail for at bekræfte.",
+    "registerFailed": "Registrering mislykkedes"
+  },
+
+  "dashboard": {
+    "welcomeBack": "Velkommen tilbage, <grad>{{name}}</grad> 👋",
+    "subtitle": "Her er dit rekrutteringsaktivitetsoverblik.",
+    "newAnalysis": "Ny analyse",
+    "analysesRun": "Udførte analyser",
+    "applications": "Ansøgninger",
+    "interviews": "Interviews",
+    "avgScore": "Gns. score",
+    "quickActions": "Hurtige handlinger",
+    "qaAnalyzeTitle": "Ny analyse",
+    "qaAnalyzeDesc": "Upload dit CV og et job for at få AI-scoring med det samme",
+    "qaCompareTitle": "Sammenlign CV'er",
+    "qaCompareDesc": "Sammenlign to versioner side om side",
+    "qaTrackTitle": "Spor ansøgninger",
+    "qaTrackDesc": "Administrer og opdater dine ansøgningsstatusser",
+    "recentAnalyses": "Seneste analyser",
+    "viewAll": "Se alle",
+    "noAnalyses": "Ingen analyser endnu",
+    "runFirst": "Kør din første analyse",
+    "noCVTitle": "Intet CV uploadet endnu",
+    "noCVDesc": "Upload et CV for at starte analyser og sammenligninger.",
+    "noCVAction": "Upload nu",
+    "lastAnalysisToday": "Seneste analyse: i dag",
+    "lastAnalysisYesterday": "Seneste analyse: i går",
+    "lastAnalysisDaysAgo": "Seneste analyse: for {{count}} dage siden"
+  },
+
+  "analyze": {
+    "heading": "Ny",
+    "headingGradient": "Analyse",
+    "subtitle": "Upload dit CV og tilføj et job for at få scoring med det samme af AI.",
+    "step1Label": "Upload CV",
+    "step1Desc": "Dit CV eller curriculum vitae",
+    "step2Label": "Tilføj job",
+    "step2Desc": "Indsæt en jobbeskrivelse eller URL",
+    "step3Label": "Analyserer",
+    "step3Desc": "AI-scoring i gang",
+    "analyzingHeading": "Analyserer dit CV…",
+    "analyzingSubtitle": "Vores AI kører en fuld kompatibilitetstjek. Dette tager ca. 15–30 sekunder.",
+    "task1": "Analyserer CV mod jobkrav",
+    "task2": "Kører 10 ATS-kompatibilitetstjek",
+    "task3": "Beregner vægtet matchscore",
+    "task4": "Genererer interviewspørgsmål",
+    "complete": "Analyse fuldført!",
+    "failed": "Analyse mislykkedes"
+  },
+
+  "analysisResult": {
+    "backToHistory": "Tilbage til historik",
+    "heading": "Analyseresultat",
+    "savedToTracker": "Gemt i tracker",
+    "saveToTracker": "Gem i tracker",
+    "tabScore": "Score",
+    "tabATS": "ATS-rapport",
+    "tabInterview": "Interviewforberedelse",
+    "tabCoverLetter": "Ansøgningsbrev",
+    "loadFailed": "Kunne ikke indlæse analysen"
+  },
+
+  "history": {
+    "heading": "Analyse",
+    "headingGradient": "Historik",
+    "totalOne": "{{count}} analyse i alt",
+    "totalMany": "{{count}} analyser i alt",
+    "searchPlaceholder": "Søg i analyser…",
+    "loading": "Indlæser historik…",
+    "noMatching": "Ingen matchende analyser",
+    "noAnalyses": "Ingen analyser endnu",
+    "tryDifferent": "Prøv et andet søgeord.",
+    "runFirst": "Kør din første analyse for at se resultater her.",
+    "runFirstBtn": "Kør første analyse",
+    "loadFailed": "Kunne ikke indlæse historik",
+    "unknownRole": "Ukendt stilling @ Ukendt virksomhed"
+  },
+
+  "applications": {
+    "heading": "Ansøgnings",
+    "headingGradient": "Tracker",
+    "subtitle": "Spor statusen for hvert job, du har søgt.",
+    "statsTotal": "Samlet sporet",
+    "statsResponseRate": "Svarprocent",
+    "statsAvgScore": "Gns. matchscore",
+    "statsInterviews": "Interviews + Tilbud",
+    "filterAll": "Alle ({{count}})",
+    "loading": "Indlæser ansøgninger…",
+    "emptyAll": "Ingen ansøgninger endnu",
+    "emptyFiltered": "Ingen ansøgninger med status \"{{filter}}\"",
+    "emptyAllDesc": "Kør en analyse og gem et job for at spore det her.",
+    "emptyFilterDesc": "Prøv et andet statusfilter.",
+    "runFirst": "Kør første analyse",
+    "untitledRole": "Unavngivet stilling",
+    "unknownCompany": "Ukendt virksomhed",
+    "added": "Tilføjet {{date}}",
+    "viewAnalysis": "Se analyse",
+    "remove": "Fjern",
+    "confirmRemove": "Fjern denne ansøgning?",
+    "removed": "Ansøgning fjernet",
+    "loadFailed": "Kunne ikke indlæse ansøgninger",
+    "updateFailed": "Opdatering mislykkedes",
+    "deleteFailed": "Sletning mislykkedes",
+    "status": {
+      "saved": "gemt",
+      "applied": "ansøgt",
+      "interview": "interview",
+      "offer": "tilbud",
+      "rejected": "afvist",
+      "ghosted": "ignoreret"
+    }
+  },
+
+  "compare": {
+    "heading": "Sammenlign CV-versioner",
+    "subtitle": "Se, hvordan dit CV forbedrede sig mellem versioner til det samme job.",
+    "backToSelection": "← Tilbage til valg",
+    "selectHeading": "Vælg CV'er og job",
+    "uploadNew": "Upload nyt CV",
+    "cv1Label": "CV Version 1 (basis)",
+    "cv2Label": "CV Version 2 (forbedret)",
+    "jobLabel": "Måljob",
+    "selectCV": "Vælg CV...",
+    "selectJob": "Vælg job...",
+    "comparing": "Sammenligner...",
+    "compareCVs": "Sammenlign CV'er",
+    "selectBoth": "Vælg begge CV-versioner og et job",
+    "selectDifferent": "Vælg to forskellige CV'er",
+    "comparisonFailed": "Sammenligning mislykkedes",
+    "newCVUploaded": "Nyt CV uploadet — vælg det nedenfor",
+    "scoreComparison": "Scoresammenligning",
+    "v1": "Version 1",
+    "v2": "Version 2",
+    "change": "Ændring",
+    "points": "point",
+    "skillChanges": "Kompetenceændringer",
+    "newSkills": "Nye kompetencer i V2",
+    "stillMissing": "Stadig manglende",
+    "summary": "Opsummering",
+    "remainingImprovements": "Resterende forbedringer",
+    "needTwoCVs": "Upload mindst 2 CV-versioner for at sammenligne",
+    "needTwoCVsDesc": "Gå til Analyser → Upload CV for at tilføje dine CV-versioner.",
+    "goUploadCV": "Upload et CV"
+  },
+
+  "score": {
+    "matchScore": "Matchscore",
+    "strong": "Stærkt match",
+    "moderate": "Moderat match",
+    "weak": "Svagt match",
+    "notAMatch": "Ikke et match",
+    "matchedSkills": "Matchede kompetencer",
+    "missingSkills": "Manglende kompetencer",
+    "skillMatch": "Kompetencematch (40%)",
+    "experienceRelevance": "Erfaringsrelevans (30%)",
+    "educationFit": "Uddannelsesmatch (15%)",
+    "keywordCoverage": "Nøgleordsdækning (15%)",
+    "whyScore": "Hvorfor denne score",
+    "recommendations": "Anbefalinger"
+  },
+
+  "ats": {
+    "heading": "ATS-kompatibilitetsrapport",
+    "critical": "kritisk",
+    "warning": "Advarsel",
+    "info": "Info",
+    "criticalCount": "kritiske",
+    "warningsCount": "advarsler",
+    "passedCount": "bestået",
+    "issuesFound": "Fundne problemer",
+    "howToFix": "Sådan løser du det",
+    "passedChecks": "Beståede tjek"
+  },
+
+  "interview": {
+    "heading": "Top 10 interviewspørgsmål",
+    "description": "Genereret baseret på dine kompetencegab og jobkravene. Klik på et spørgsmål for at se et foreslået svar.",
+    "whyAsk": "Hvorfor de spørger om dette",
+    "answerFramework": "Stærkt svarramme",
+    "categories": {
+      "technical": "teknisk",
+      "behavioral": "adfærdsmæssig",
+      "situational": "situationel"
+    },
+    "difficulty": {
+      "easy": "let",
+      "medium": "mellem",
+      "hard": "svær"
+    }
+  },
+
+  "coverLetter": {
+    "heading": "Generator til ansøgningsbrev",
+    "copied": "Kopieret!",
+    "copy": "Kopiér",
+    "description": "Generer et skræddersyet ansøgningsbrev baseret på dit CV og denne jobbeskrivelse.",
+    "generating": "Genererer...",
+    "generate": "Generer ansøgningsbrev",
+    "subjectLine": "Emne",
+    "keyHighlights": "Brugte nøglepunkter",
+    "coverLetter": "Ansøgningsbrev",
+    "regenerate": "Gengenerer",
+    "generated": "Ansøgningsbrev genereret!",
+    "failed": "Generering mislykkedes"
+  },
+
+  "cvUpload": {
+    "heading": "Trin 1: Upload dit CV",
+    "uploading": "Uploader og behandler CV...",
+    "parsedSuccess": "Behandlet korrekt",
+    "dropPrompt": "Træk og slip dit CV, eller klik for at gennemse",
+    "dropActive": "Slip dit CV her",
+    "requirement": "Kun PDF, maks. 10MB",
+    "parsedTitle": "CV behandlet korrekt",
+    "parsedSummary": "Fandt {{skills}} kompetencer, {{experience}} erfaringsposter",
+    "pdfOnly": "Kun PDF-filer understøttes",
+    "uploadSuccess": "CV uploadet og behandlet!",
+    "uploadFailed": "Upload mislykkedes"
+  },
+
+  "jobInput": {
+    "heading": "Trin 2: Tilføj jobbeskrivelse",
+    "pasteURL": "Indsæt URL",
+    "pasteText": "Indsæt tekst",
+    "urlLabel": "URL til jobopslag",
+    "urlPlaceholder": "https://linkedin.com/jobs/view/...",
+    "urlHelper": "Virker med LinkedIn, Indeed, Greenhouse, Lever og de fleste jobportaler.",
+    "textLabel": "Jobbeskrivelsestekst",
+    "textPlaceholder": "Indsæt den fulde jobbeskrivelse her...",
+    "parsing": "Behandler jobbeskrivelse...",
+    "saved": "Job gemt — kører analyse...",
+    "parseBtn": "Behandl og fortsæt",
+    "skillsExtracted": "påkrævede kompetencer udtrukket",
+    "enterURL": "Indtast en job-URL",
+    "minChars": "Indsæt mindst 50 tegn af jobbeskrivelsen",
+    "parseSuccess": "Jobbeskrivelse behandlet!",
+    "parseFailed": "Fejl ved behandling af job"
+  },
+
+  "error": {
+    "somethingWrong": "Noget gik galt",
+    "unexpectedError": "Der opstod en uventet fejl. Opdater siden for at prøve igen.",
+    "refresh": "Opdater side",
+    "loading": "Indlæser HireLens..."
+  },
+
+  "verdicts": {
+    "strong": "stærk",
+    "moderate": "moderat",
+    "weak": "svag",
+    "rejected": "afvist"
+  },
+
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "da": "Dansk",
+    "de": "Deutsch",
+    "tr": "Türkçe"
+  }
+}

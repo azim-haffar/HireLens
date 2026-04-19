@@ -1,0 +1,306 @@
+{
+  "brand": "HireLens",
+  "tagline": "AI-powered recruitment screening",
+
+  "nav": {
+    "dashboard": "Dashboard",
+    "analyze": "Analyze",
+    "compare": "Compare",
+    "tracker": "Tracker",
+    "history": "History",
+    "signOut": "Sign out",
+    "signedInAs": "Signed in as",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode"
+  },
+
+  "auth": {
+    "signIn": "Sign in",
+    "signInHeading": "Sign in to your account",
+    "signingIn": "Signing in...",
+    "signUp": "Sign up free",
+    "signUpHeading": "Create your free account",
+    "creatingAccount": "Creating account...",
+    "createAccount": "Create account",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueEmail": "or continue with email",
+    "orSignUpEmail": "or sign up with email",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordMinPlaceholder": "Min. 8 characters",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat password",
+    "noAccount": "No account?",
+    "alreadyAccount": "Already have an account?",
+    "perk1": "AI-powered CV scoring in seconds",
+    "perk2": "ATS compatibility checks",
+    "perk3": "Interview question generator",
+    "loginFailed": "Login failed",
+    "googleFailed": "Google sign-in failed",
+    "passwordMismatch": "Passwords do not match",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "accountCreated": "Account created! Check your email to confirm.",
+    "registerFailed": "Registration failed"
+  },
+
+  "dashboard": {
+    "welcomeBack": "Welcome back, <grad>{{name}}</grad> 👋",
+    "subtitle": "Here's your recruitment activity at a glance.",
+    "newAnalysis": "New Analysis",
+    "analysesRun": "Analyses run",
+    "applications": "Applications",
+    "interviews": "Interviews",
+    "avgScore": "Avg score",
+    "quickActions": "Quick Actions",
+    "qaAnalyzeTitle": "New Analysis",
+    "qaAnalyzeDesc": "Upload your CV and a job to get AI-scored instantly",
+    "qaCompareTitle": "Compare CVs",
+    "qaCompareDesc": "Compare two versions side by side",
+    "qaTrackTitle": "Track Applications",
+    "qaTrackDesc": "Manage and update your application statuses",
+    "recentAnalyses": "Recent Analyses",
+    "viewAll": "View all",
+    "noAnalyses": "No analyses yet",
+    "runFirst": "Run your first analysis",
+    "noCVTitle": "No CV uploaded yet",
+    "noCVDesc": "Upload a CV to start running analyses and comparisons.",
+    "noCVAction": "Upload now",
+    "lastAnalysisToday": "Last analysis: today",
+    "lastAnalysisYesterday": "Last analysis: yesterday",
+    "lastAnalysisDaysAgo": "Last analysis: {{count}} days ago"
+  },
+
+  "analyze": {
+    "heading": "New",
+    "headingGradient": "Analysis",
+    "subtitle": "Upload your CV and add a job to get scored instantly by AI.",
+    "step1Label": "Upload CV",
+    "step1Desc": "Your resume or curriculum vitae",
+    "step2Label": "Add Job",
+    "step2Desc": "Paste a job description or URL",
+    "step3Label": "Analyzing",
+    "step3Desc": "AI scoring in progress",
+    "analyzingHeading": "Analyzing your CV…",
+    "analyzingSubtitle": "Our AI is running a full compatibility check. This takes about 15–30 seconds.",
+    "task1": "Parsing CV against job requirements",
+    "task2": "Running 10 ATS compatibility checks",
+    "task3": "Computing weighted match score",
+    "task4": "Generating interview questions",
+    "complete": "Analysis complete!",
+    "failed": "Analysis failed"
+  },
+
+  "analysisResult": {
+    "backToHistory": "Back to history",
+    "heading": "Analysis Result",
+    "savedToTracker": "Saved to tracker",
+    "saveToTracker": "Save to tracker",
+    "tabScore": "Score",
+    "tabATS": "ATS Report",
+    "tabInterview": "Interview Prep",
+    "tabCoverLetter": "Cover Letter",
+    "loadFailed": "Could not load analysis"
+  },
+
+  "history": {
+    "heading": "Analysis",
+    "headingGradient": "History",
+    "totalOne": "{{count}} analysis total",
+    "totalMany": "{{count}} analyses total",
+    "searchPlaceholder": "Search analyses…",
+    "loading": "Loading history…",
+    "noMatching": "No matching analyses",
+    "noAnalyses": "No analyses yet",
+    "tryDifferent": "Try a different search term.",
+    "runFirst": "Run your first analysis to see results here.",
+    "runFirstBtn": "Run first analysis",
+    "loadFailed": "Failed to load history",
+    "unknownRole": "Unknown Role @ Unknown Company"
+  },
+
+  "applications": {
+    "heading": "Application",
+    "headingGradient": "Tracker",
+    "subtitle": "Track the status of every role you've applied to.",
+    "statsTotal": "Total tracked",
+    "statsResponseRate": "Response rate",
+    "statsAvgScore": "Avg match score",
+    "statsInterviews": "Interviews + Offers",
+    "filterAll": "All ({{count}})",
+    "loading": "Loading applications…",
+    "emptyAll": "No applications yet",
+    "emptyFiltered": "No \"{{filter}}\" applications",
+    "emptyAllDesc": "Run an analysis and save a role to track it here.",
+    "emptyFilterDesc": "Try a different status filter.",
+    "runFirst": "Run first analysis",
+    "untitledRole": "Untitled role",
+    "unknownCompany": "Unknown Company",
+    "added": "Added {{date}}",
+    "viewAnalysis": "View analysis",
+    "remove": "Remove",
+    "confirmRemove": "Remove this application?",
+    "removed": "Application removed",
+    "loadFailed": "Failed to load applications",
+    "updateFailed": "Update failed",
+    "deleteFailed": "Delete failed",
+    "status": {
+      "saved": "saved",
+      "applied": "applied",
+      "interview": "interview",
+      "offer": "offer",
+      "rejected": "rejected",
+      "ghosted": "ghosted"
+    }
+  },
+
+  "compare": {
+    "heading": "Compare CV Versions",
+    "subtitle": "See how your CV improved between versions for the same job.",
+    "backToSelection": "← Back to selection",
+    "selectHeading": "Select CVs and job",
+    "uploadNew": "Upload new CV",
+    "cv1Label": "CV Version 1 (baseline)",
+    "cv2Label": "CV Version 2 (improved)",
+    "jobLabel": "Target Job",
+    "selectCV": "Select CV...",
+    "selectJob": "Select job...",
+    "comparing": "Comparing...",
+    "compareCVs": "Compare CVs",
+    "noJobs": "No jobs saved yet — paste a job description in Analyze first.",
+    "selectBoth": "Select both CV versions and a job",
+    "selectDifferent": "Select two different CVs",
+    "comparisonFailed": "Comparison failed",
+    "newCVUploaded": "New CV uploaded — select it below",
+    "scoreComparison": "Score Comparison",
+    "v1": "Version 1",
+    "v2": "Version 2",
+    "change": "Change",
+    "points": "points",
+    "skillChanges": "Skill Changes",
+    "newSkills": "New skills matched in V2",
+    "stillMissing": "Still missing",
+    "summary": "Summary",
+    "remainingImprovements": "Remaining improvements",
+    "needTwoCVs": "Upload at least 2 CV versions to compare",
+    "needTwoCVsDesc": "Go to Analyze → Upload CV to add your CV versions, then come back here to compare them.",
+    "goUploadCV": "Upload a CV"
+  },
+
+  "score": {
+    "matchScore": "Match Score",
+    "strong": "Strong Match",
+    "moderate": "Moderate Match",
+    "weak": "Weak Match",
+    "notAMatch": "Not a Match",
+    "matchedSkills": "Matched skills",
+    "missingSkills": "Missing skills",
+    "skillMatch": "Skill match (40%)",
+    "experienceRelevance": "Experience relevance (30%)",
+    "educationFit": "Education fit (15%)",
+    "keywordCoverage": "Keyword coverage (15%)",
+    "whyScore": "Why this score",
+    "recommendations": "Recommendations"
+  },
+
+  "ats": {
+    "heading": "ATS Compatibility Report",
+    "critical": "critical",
+    "warning": "Warning",
+    "info": "Info",
+    "criticalCount": "critical",
+    "warningsCount": "warnings",
+    "passedCount": "passed",
+    "issuesFound": "Issues found",
+    "howToFix": "How to fix",
+    "passedChecks": "Passed checks"
+  },
+
+  "interview": {
+    "heading": "Top 10 Interview Questions",
+    "description": "Generated based on your skill gaps and the job requirements. Click any question to see a suggested answer.",
+    "whyAsk": "Why they ask this",
+    "answerFramework": "Strong answer framework",
+    "categories": {
+      "technical": "technical",
+      "behavioral": "behavioral",
+      "situational": "situational"
+    },
+    "difficulty": {
+      "easy": "easy",
+      "medium": "medium",
+      "hard": "hard"
+    }
+  },
+
+  "coverLetter": {
+    "heading": "Cover Letter Generator",
+    "copied": "Copied!",
+    "copy": "Copy",
+    "description": "Generate a tailored cover letter based on your CV and this job description.",
+    "generating": "Generating...",
+    "generate": "Generate cover letter",
+    "subjectLine": "Subject line",
+    "keyHighlights": "Key highlights used",
+    "coverLetter": "Cover letter",
+    "regenerate": "Regenerate",
+    "generated": "Cover letter generated!",
+    "failed": "Generation failed"
+  },
+
+  "cvUpload": {
+    "heading": "Step 1: Upload your CV",
+    "uploading": "Uploading and parsing CV...",
+    "parsedSuccess": "Parsed successfully",
+    "dropPrompt": "Drag & drop your CV, or click to browse",
+    "dropActive": "Drop your CV here",
+    "requirement": "PDF only, max 10MB",
+    "parsedTitle": "CV parsed successfully",
+    "parsedSummary": "Found {{skills}} skills, {{experience}} experience entries",
+    "pdfOnly": "Only PDF files are supported",
+    "uploadSuccess": "CV uploaded and parsed!",
+    "uploadFailed": "Upload failed"
+  },
+
+  "jobInput": {
+    "heading": "Step 2: Add job description",
+    "pasteURL": "Paste URL",
+    "pasteText": "Paste text",
+    "urlLabel": "Job posting URL",
+    "urlPlaceholder": "https://linkedin.com/jobs/view/...",
+    "urlHelper": "Works with LinkedIn, Indeed, Greenhouse, Lever, and most job boards.",
+    "textLabel": "Job description text",
+    "textPlaceholder": "Paste the full job description here...",
+    "parsing": "Parsing job description...",
+    "saved": "Job saved — running analysis...",
+    "parseBtn": "Parse & Continue",
+    "skillsExtracted": "required skills extracted",
+    "enterURL": "Enter a job URL",
+    "minChars": "Paste at least 50 characters of job description",
+    "parseSuccess": "Job description parsed!",
+    "parseFailed": "Failed to process job"
+  },
+
+  "error": {
+    "somethingWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred. Please refresh the page to try again.",
+    "refresh": "Refresh page",
+    "loading": "Loading HireLens..."
+  },
+
+  "verdicts": {
+    "strong": "strong",
+    "moderate": "moderate",
+    "weak": "weak",
+    "rejected": "rejected"
+  },
+
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "da": "Dansk",
+    "de": "Deutsch",
+    "tr": "Türkçe"
+  }
+}

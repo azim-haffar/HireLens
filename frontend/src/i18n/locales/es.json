@@ -1,0 +1,305 @@
+{
+  "brand": "HireLens",
+  "tagline": "Selección de personal potenciada por IA",
+
+  "nav": {
+    "dashboard": "Inicio",
+    "analyze": "Analizar",
+    "compare": "Comparar",
+    "tracker": "Seguimiento",
+    "history": "Historial",
+    "signOut": "Cerrar sesión",
+    "signedInAs": "Conectado como",
+    "lightMode": "Cambiar a modo claro",
+    "darkMode": "Cambiar a modo oscuro"
+  },
+
+  "auth": {
+    "signIn": "Iniciar sesión",
+    "signInHeading": "Inicia sesión en tu cuenta",
+    "signingIn": "Iniciando sesión...",
+    "signUp": "Regístrate gratis",
+    "signUpHeading": "Crea tu cuenta gratuita",
+    "creatingAccount": "Creando cuenta...",
+    "createAccount": "Crear cuenta",
+    "continueWithGoogle": "Continuar con Google",
+    "orContinueEmail": "o continúa con correo electrónico",
+    "orSignUpEmail": "o regístrate con correo electrónico",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "password": "Contraseña",
+    "passwordPlaceholder": "••••••••",
+    "passwordMinPlaceholder": "Mín. 8 caracteres",
+    "confirmPassword": "Confirmar contraseña",
+    "confirmPasswordPlaceholder": "Repite la contraseña",
+    "noAccount": "¿No tienes cuenta?",
+    "alreadyAccount": "¿Ya tienes una cuenta?",
+    "perk1": "Puntuación de CV con IA en segundos",
+    "perk2": "Verificación de compatibilidad ATS",
+    "perk3": "Generador de preguntas de entrevista",
+    "loginFailed": "Error al iniciar sesión",
+    "googleFailed": "Error al iniciar sesión con Google",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "passwordTooShort": "La contraseña debe tener al menos 8 caracteres",
+    "accountCreated": "¡Cuenta creada! Revisa tu correo para confirmar.",
+    "registerFailed": "Error en el registro"
+  },
+
+  "dashboard": {
+    "welcomeBack": "Bienvenido, <grad>{{name}}</grad> 👋",
+    "subtitle": "Aquí está tu actividad de reclutamiento de un vistazo.",
+    "newAnalysis": "Nuevo análisis",
+    "analysesRun": "Análisis realizados",
+    "applications": "Solicitudes",
+    "interviews": "Entrevistas",
+    "avgScore": "Puntuación media",
+    "quickActions": "Acciones rápidas",
+    "qaAnalyzeTitle": "Nuevo análisis",
+    "qaAnalyzeDesc": "Sube tu CV y un trabajo para puntuarlo con IA al instante",
+    "qaCompareTitle": "Comparar CVs",
+    "qaCompareDesc": "Compara dos versiones lado a lado",
+    "qaTrackTitle": "Seguir solicitudes",
+    "qaTrackDesc": "Gestiona y actualiza el estado de tus solicitudes",
+    "recentAnalyses": "Análisis recientes",
+    "viewAll": "Ver todos",
+    "noAnalyses": "Sin análisis todavía",
+    "runFirst": "Ejecuta tu primer análisis",
+    "noCVTitle": "Aún no has subido un CV",
+    "noCVDesc": "Sube un CV para comenzar a ejecutar análisis y comparaciones.",
+    "noCVAction": "Subir ahora",
+    "lastAnalysisToday": "Último análisis: hoy",
+    "lastAnalysisYesterday": "Último análisis: ayer",
+    "lastAnalysisDaysAgo": "Último análisis: hace {{count}} días"
+  },
+
+  "analyze": {
+    "heading": "Nuevo",
+    "headingGradient": "Análisis",
+    "subtitle": "Sube tu CV y añade un trabajo para ser puntuado al instante por IA.",
+    "step1Label": "Subir CV",
+    "step1Desc": "Tu currículum vitae",
+    "step2Label": "Añadir trabajo",
+    "step2Desc": "Pega una descripción de trabajo o URL",
+    "step3Label": "Analizando",
+    "step3Desc": "Puntuación IA en progreso",
+    "analyzingHeading": "Analizando tu CV…",
+    "analyzingSubtitle": "Nuestra IA está ejecutando una verificación completa. Esto tarda unos 15–30 segundos.",
+    "task1": "Analizando el CV frente a los requisitos del trabajo",
+    "task2": "Ejecutando 10 verificaciones de compatibilidad ATS",
+    "task3": "Calculando puntuación de coincidencia ponderada",
+    "task4": "Generando preguntas de entrevista",
+    "complete": "¡Análisis completado!",
+    "failed": "Error en el análisis"
+  },
+
+  "analysisResult": {
+    "backToHistory": "Volver al historial",
+    "heading": "Resultado del análisis",
+    "savedToTracker": "Guardado en seguimiento",
+    "saveToTracker": "Guardar en seguimiento",
+    "tabScore": "Puntuación",
+    "tabATS": "Informe ATS",
+    "tabInterview": "Preparación entrevista",
+    "tabCoverLetter": "Carta de presentación",
+    "loadFailed": "No se pudo cargar el análisis"
+  },
+
+  "history": {
+    "heading": "Historial de",
+    "headingGradient": "Análisis",
+    "totalOne": "{{count}} análisis en total",
+    "totalMany": "{{count}} análisis en total",
+    "searchPlaceholder": "Buscar análisis…",
+    "loading": "Cargando historial…",
+    "noMatching": "Sin análisis coincidentes",
+    "noAnalyses": "Sin análisis todavía",
+    "tryDifferent": "Prueba con otro término de búsqueda.",
+    "runFirst": "Ejecuta tu primer análisis para ver resultados aquí.",
+    "runFirstBtn": "Ejecutar primer análisis",
+    "loadFailed": "Error al cargar el historial",
+    "unknownRole": "Puesto desconocido @ Empresa desconocida"
+  },
+
+  "applications": {
+    "heading": "Seguimiento de",
+    "headingGradient": "Solicitudes",
+    "subtitle": "Sigue el estado de cada puesto al que has aplicado.",
+    "statsTotal": "Total seguidos",
+    "statsResponseRate": "Tasa de respuesta",
+    "statsAvgScore": "Puntuación media",
+    "statsInterviews": "Entrevistas + Ofertas",
+    "filterAll": "Todos ({{count}})",
+    "loading": "Cargando solicitudes…",
+    "emptyAll": "Sin solicitudes todavía",
+    "emptyFiltered": "Sin solicitudes en estado \"{{filter}}\"",
+    "emptyAllDesc": "Ejecuta un análisis y guarda un puesto para seguirlo aquí.",
+    "emptyFilterDesc": "Prueba con otro filtro de estado.",
+    "runFirst": "Ejecutar primer análisis",
+    "untitledRole": "Puesto sin título",
+    "unknownCompany": "Empresa desconocida",
+    "added": "Añadido el {{date}}",
+    "viewAnalysis": "Ver análisis",
+    "remove": "Eliminar",
+    "confirmRemove": "¿Eliminar esta solicitud?",
+    "removed": "Solicitud eliminada",
+    "loadFailed": "Error al cargar las solicitudes",
+    "updateFailed": "Error al actualizar",
+    "deleteFailed": "Error al eliminar",
+    "status": {
+      "saved": "guardado",
+      "applied": "aplicado",
+      "interview": "entrevista",
+      "offer": "oferta",
+      "rejected": "rechazado",
+      "ghosted": "ignorado"
+    }
+  },
+
+  "compare": {
+    "heading": "Comparar versiones de CV",
+    "subtitle": "Observa cómo mejoró tu CV entre versiones para el mismo trabajo.",
+    "backToSelection": "← Volver a la selección",
+    "selectHeading": "Selecciona CVs y trabajo",
+    "uploadNew": "Subir nuevo CV",
+    "cv1Label": "CV Versión 1 (base)",
+    "cv2Label": "CV Versión 2 (mejorado)",
+    "jobLabel": "Trabajo objetivo",
+    "selectCV": "Selecciona CV...",
+    "selectJob": "Selecciona trabajo...",
+    "comparing": "Comparando...",
+    "compareCVs": "Comparar CVs",
+    "selectBoth": "Selecciona ambas versiones de CV y un trabajo",
+    "selectDifferent": "Selecciona dos CVs diferentes",
+    "comparisonFailed": "Error en la comparación",
+    "newCVUploaded": "Nuevo CV subido — selecciónalo abajo",
+    "scoreComparison": "Comparación de puntuaciones",
+    "v1": "Versión 1",
+    "v2": "Versión 2",
+    "change": "Cambio",
+    "points": "puntos",
+    "skillChanges": "Cambios en habilidades",
+    "newSkills": "Nuevas habilidades en V2",
+    "stillMissing": "Aún faltan",
+    "summary": "Resumen",
+    "remainingImprovements": "Mejoras pendientes",
+    "needTwoCVs": "Sube al menos 2 versiones de CV para comparar",
+    "needTwoCVsDesc": "Ve a Analizar → Subir CV para añadir tus versiones de CV.",
+    "goUploadCV": "Subir un CV"
+  },
+
+  "score": {
+    "matchScore": "Puntuación de coincidencia",
+    "strong": "Coincidencia fuerte",
+    "moderate": "Coincidencia moderada",
+    "weak": "Coincidencia débil",
+    "notAMatch": "No coincide",
+    "matchedSkills": "Habilidades coincidentes",
+    "missingSkills": "Habilidades faltantes",
+    "skillMatch": "Coincidencia de habilidades (40%)",
+    "experienceRelevance": "Relevancia de experiencia (30%)",
+    "educationFit": "Adecuación educativa (15%)",
+    "keywordCoverage": "Cobertura de palabras clave (15%)",
+    "whyScore": "Por qué esta puntuación",
+    "recommendations": "Recomendaciones"
+  },
+
+  "ats": {
+    "heading": "Informe de compatibilidad ATS",
+    "critical": "crítico",
+    "warning": "Aviso",
+    "info": "Info",
+    "criticalCount": "críticos",
+    "warningsCount": "avisos",
+    "passedCount": "aprobados",
+    "issuesFound": "Problemas encontrados",
+    "howToFix": "Cómo solucionarlo",
+    "passedChecks": "Verificaciones aprobadas"
+  },
+
+  "interview": {
+    "heading": "Top 10 preguntas de entrevista",
+    "description": "Generadas según tus brechas de habilidades y los requisitos del puesto. Haz clic en cualquier pregunta para ver una respuesta sugerida.",
+    "whyAsk": "Por qué lo preguntan",
+    "answerFramework": "Marco de respuesta sólida",
+    "categories": {
+      "technical": "técnico",
+      "behavioral": "conductual",
+      "situational": "situacional"
+    },
+    "difficulty": {
+      "easy": "fácil",
+      "medium": "medio",
+      "hard": "difícil"
+    }
+  },
+
+  "coverLetter": {
+    "heading": "Generador de carta de presentación",
+    "copied": "¡Copiado!",
+    "copy": "Copiar",
+    "description": "Genera una carta de presentación personalizada basada en tu CV y esta descripción de trabajo.",
+    "generating": "Generando...",
+    "generate": "Generar carta de presentación",
+    "subjectLine": "Asunto",
+    "keyHighlights": "Puntos clave utilizados",
+    "coverLetter": "Carta de presentación",
+    "regenerate": "Regenerar",
+    "generated": "¡Carta de presentación generada!",
+    "failed": "Error en la generación"
+  },
+
+  "cvUpload": {
+    "heading": "Paso 1: Sube tu CV",
+    "uploading": "Subiendo y procesando CV...",
+    "parsedSuccess": "Procesado correctamente",
+    "dropPrompt": "Arrastra tu CV aquí, o haz clic para buscar",
+    "dropActive": "Suelta tu CV aquí",
+    "requirement": "Solo PDF, máx. 10MB",
+    "parsedTitle": "CV procesado correctamente",
+    "parsedSummary": "Se encontraron {{skills}} habilidades, {{experience}} entradas de experiencia",
+    "pdfOnly": "Solo se admiten archivos PDF",
+    "uploadSuccess": "¡CV subido y procesado!",
+    "uploadFailed": "Error al subir"
+  },
+
+  "jobInput": {
+    "heading": "Paso 2: Añadir descripción de trabajo",
+    "pasteURL": "Pegar URL",
+    "pasteText": "Pegar texto",
+    "urlLabel": "URL de la oferta de trabajo",
+    "urlPlaceholder": "https://linkedin.com/jobs/view/...",
+    "urlHelper": "Compatible con LinkedIn, Indeed, Greenhouse, Lever y la mayoría de portales de empleo.",
+    "textLabel": "Texto de la descripción del trabajo",
+    "textPlaceholder": "Pega aquí la descripción completa del trabajo...",
+    "parsing": "Procesando descripción del trabajo...",
+    "saved": "Trabajo guardado — ejecutando análisis...",
+    "parseBtn": "Procesar y continuar",
+    "skillsExtracted": "habilidades requeridas extraídas",
+    "enterURL": "Introduce una URL de trabajo",
+    "minChars": "Pega al menos 50 caracteres de la descripción",
+    "parseSuccess": "¡Descripción del trabajo procesada!",
+    "parseFailed": "Error al procesar el trabajo"
+  },
+
+  "error": {
+    "somethingWrong": "Algo salió mal",
+    "unexpectedError": "Ocurrió un error inesperado. Por favor, recarga la página.",
+    "refresh": "Recargar página",
+    "loading": "Cargando HireLens..."
+  },
+
+  "verdicts": {
+    "strong": "fuerte",
+    "moderate": "moderado",
+    "weak": "débil",
+    "rejected": "rechazado"
+  },
+
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "da": "Dansk",
+    "de": "Deutsch",
+    "tr": "Türkçe"
+  }
+}
