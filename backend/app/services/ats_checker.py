@@ -1,4 +1,4 @@
-from app.services.gemini import call_gemini
+from app.services.groq_client import call_groq
 
 
 async def check_ats(cv_data: dict, job_data: dict) -> dict:
@@ -49,4 +49,4 @@ Return ONLY valid JSON:
   "overall_assessment": "2-3 sentence ATS readiness summary"
 }}"""
 
-    return await call_gemini(prompt)
+    return await call_groq(prompt)

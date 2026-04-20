@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 from fastapi import HTTPException
-from app.services.gemini import call_gemini
+from app.services.groq_client import call_groq
 
 logger = logging.getLogger(__name__)
 
@@ -167,7 +167,7 @@ def scrape_job_url(url: str) -> tuple[str, dict]:
     return soup.get_text(separator="\n", strip=True)[:6000], meta_hints
 
 
-def _clean_gemini_value(val) -> str | None:
+def _clean_ai_value(val) -> str | None:
     """Coerce Gemini string 'null'/'none'/'n/a' to Python None."""
     if val is None:
         return None
@@ -225,11 +225,11 @@ Return this exact JSON structure:
   "benefits": ["benefit1"]
 }}"""
 
-    parsed = await call_gemini(prompt)
+    parsed = await call_groq(prompt)
 
     # Sanitise string "null" values Gemini sometimes returns
     for field in ("title", "company", "location", "salary_range", "education_requirement"):
-        parsed[field] = _clean_gemini_value(parsed.get(field))
+        parsed[field] = _clean_ai_value(parsed.get(field))
 
     # Apply meta hints as fallback if Gemini still returned nothing useful
     if not parsed.get("company") and meta_hints.get("company"):

@@ -55,7 +55,7 @@ def test_security_headers_present():
             "SUPABASE_URL": "https://test.supabase.co",
             "SUPABASE_ANON_KEY": "test",
             "SUPABASE_SERVICE_KEY": "test",
-            "GEMINI_API_KEY": "test",
+            "GROQ_API_KEY": "test",
             "SECRET_KEY": "a" * 32,
         }):
             from app.main import app
@@ -149,32 +149,32 @@ async def test_delete_application_returns_404_for_nonexistent():
 
 
 # ---------------------------------------------------------------------------
-# 5. Gemini JSON error — invalid AI response must surface as HTTP 502
+# 5. Groq JSON error — invalid AI response must surface as HTTP 502
 # ---------------------------------------------------------------------------
 
-def test_gemini_bad_json_raises_502():
-    from app.services.gemini import _extract_json
+def test_groq_bad_json_raises_502():
+    from app.services.groq_client import _extract_json
     with pytest.raises(HTTPException) as exc:
         _extract_json("this is definitely not valid json {{{")
     assert exc.value.status_code == 502
     assert "invalid response" in exc.value.detail.lower()
 
 
-def test_gemini_empty_string_raises_502():
-    from app.services.gemini import _extract_json
+def test_groq_empty_string_raises_502():
+    from app.services.groq_client import _extract_json
     with pytest.raises(HTTPException) as exc:
         _extract_json("")
     assert exc.value.status_code == 502
 
 
-def test_gemini_valid_json_parses_correctly():
-    from app.services.gemini import _extract_json
+def test_groq_valid_json_parses_correctly():
+    from app.services.groq_client import _extract_json
     result = _extract_json('{"score": 85, "verdict": "strong"}')
     assert result["score"] == 85
     assert result["verdict"] == "strong"
 
 
-def test_gemini_strips_markdown_fences():
-    from app.services.gemini import _extract_json
+def test_groq_strips_markdown_fences():
+    from app.services.groq_client import _extract_json
     result = _extract_json('```json\n{"score": 75}\n```')
     assert result["score"] == 75

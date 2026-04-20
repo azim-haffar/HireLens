@@ -21,18 +21,30 @@ def get_groq_client():
 
 def _extract_json(text: str) -> dict | list:
     text = text.strip()
+    # Strip markdown code fences
     text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.MULTILINE)
     text = re.sub(r"\s*```\s*$", "", text, flags=re.MULTILINE)
     text = text.strip()
+    # Remove trailing commas
     text = re.sub(r",\s*([}\]])", r"\1", text)
     try:
         return json.loads(text)
-    except json.JSONDecodeError as e:
-        logger.error("Groq JSON parse failed: %s | raw snippet: %.200s", e, text)
-        raise HTTPException(status_code=502, detail="AI service returned invalid response")
+    except json.JSONDecodeError:
+        pass
+    # Try extracting the first JSON object or array from the text
+    for pattern in (r"\{[\s\S]*\}", r"\[[\s\S]*\]"):
+        match = re.search(pattern, text)
+        if match:
+            candidate = re.sub(r",\s*([}\]])", r"\1", match.group())
+            try:
+                return json.loads(candidate)
+            except json.JSONDecodeError:
+                pass
+    logger.error("Groq JSON parse failed | raw snippet: %.200s", text)
+    raise HTTPException(status_code=502, detail="AI service returned invalid response")
 
 
-async def call_gemini(prompt: str) -> dict | list:
+async def call_groq(prompt: str) -> dict | list:
     client = get_groq_client()
     logger.info("Groq request starting (prompt length=%d)", len(prompt))
 

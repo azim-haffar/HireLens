@@ -2,7 +2,7 @@ import io
 import logging
 import pdfplumber
 from fastapi import UploadFile, HTTPException
-from app.services.gemini import call_gemini
+from app.services.groq_client import call_groq
 
 logger = logging.getLogger(__name__)
 
@@ -83,6 +83,6 @@ Return this exact JSON structure:
   "raw_text": ""
 }}"""
 
-    parsed = await call_gemini(prompt)
+    parsed = await call_groq(prompt)
     parsed["raw_text"] = raw_text[:5000]
     return parsed

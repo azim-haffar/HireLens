@@ -1,4 +1,4 @@
-from app.services.gemini import call_gemini
+from app.services.groq_client import call_groq
 
 
 async def generate_interview_questions(cv_data: dict, job_data: dict, score_data: dict) -> list:
@@ -34,4 +34,4 @@ Return ONLY valid JSON array of exactly 10 objects:
   }}
 ]"""
 
-    return await call_gemini(prompt)
+    return await call_groq(prompt)

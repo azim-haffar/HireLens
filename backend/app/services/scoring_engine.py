@@ -1,5 +1,5 @@
 import logging
-from app.services.gemini import call_gemini
+from app.services.groq_client import call_groq
 
 logger = logging.getLogger(__name__)
 
@@ -77,4 +77,4 @@ Return ONLY valid JSON:
 
 Verdict thresholds: strong=80+, moderate=60-79, weak=40-59, rejected=<40"""
 
-    return await call_gemini(prompt)
+    return await call_groq(prompt)

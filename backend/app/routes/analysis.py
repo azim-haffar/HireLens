@@ -117,7 +117,7 @@ async def compare_cvs(
         score_cv_against_job(cv_v2, job_data),
     )
 
-    from app.services.gemini import call_gemini
+    from app.services.groq_client import call_groq
     summary_prompt = f"""Compare these two CV scores for the same job and summarize improvements.
 V1 Score: {score_v1.get('overall_score')}, verdict: {score_v1.get('verdict')}
 V2 Score: {score_v2.get('overall_score')}, verdict: {score_v2.get('verdict')}
@@ -129,7 +129,7 @@ Return ONLY valid JSON:
   "improvement_areas": ["area1", "area2"],
   "summary": "2-3 sentence comparison summary"
 }}"""
-    comparison = await call_gemini(summary_prompt)
+    comparison = await call_groq(summary_prompt)
 
     return {
         "v1_score": score_v1,

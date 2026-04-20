@@ -1,4 +1,4 @@
-from app.services.gemini import call_gemini
+from app.services.groq_client import call_groq
 
 
 async def generate_cover_letter(cv_data: dict, job_data: dict, score_data: dict) -> dict:
@@ -39,4 +39,4 @@ Return ONLY valid JSON:
   "key_highlights": ["highlight 1", "highlight 2", "highlight 3"]
 }}"""
 
-    return await call_gemini(prompt)
+    return await call_groq(prompt)
