@@ -311,6 +311,17 @@
     "rejected": "reddedildi"
   },
 
+  "chat": {
+    "title": "HireLens AI",
+    "subtitle": "Kişisel kariyer koçun",
+    "greeting": "Merhaba! CV'ni ve iş tanımını okudum. Her şeyi sorabilirsin — skorunu nasıl artıracağın, maddeleri nasıl yeniden yazacağın veya mülakata nasıl hazırlanacağın hakkında.",
+    "placeholder": "CV'n veya bu iş hakkında bir şey sor…",
+    "suggest1": "Eşleşme skorumu nasıl artırabilirim?",
+    "suggest2": "Hangi becerileri öğrenmeliyim?",
+    "suggest3": "En iyi deneyim maddeми yeniden yaz",
+    "error": "Bir şeyler ters gitti. Lütfen tekrar dene."
+  },
+
   "languages": {
     "en": "English",
     "es": "Español",

@@ -6,6 +6,7 @@ import ScoreCard from '../components/ScoreCard'
 import ATSReport from '../components/ATSReport'
 import InterviewQuestions from '../components/InterviewQuestions'
 import CoverLetter from '../components/CoverLetter'
+import ChatPanel from '../components/ChatPanel'
 import toast from 'react-hot-toast'
 import { ArrowLeft, Bookmark, Loader2, Sparkles } from 'lucide-react'
 import clsx from 'clsx'
@@ -132,6 +133,8 @@ export default function AnalysisResult() {
         {activeTab === 'interview'    && <InterviewQuestions questions={questions} />}
         {activeTab === 'cover_letter' && <CoverLetter analysisId={id} existing={analysis.cover_letter} />}
       </div>
+
+      <ChatPanel analysisId={id} />
     </div>
   )
 }

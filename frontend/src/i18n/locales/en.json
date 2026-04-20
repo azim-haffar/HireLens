@@ -312,6 +312,17 @@
     "rejected": "rejected"
   },
 
+  "chat": {
+    "title": "HireLens AI",
+    "subtitle": "Your personal career coach",
+    "greeting": "Hi! I've read your CV and the job description. Ask me anything — how to improve your score, rewrite bullet points, or prep for interviews.",
+    "placeholder": "Ask anything about your CV or this job…",
+    "suggest1": "How can I improve my match score?",
+    "suggest2": "What skills should I learn next?",
+    "suggest3": "Rewrite my top experience bullet point",
+    "error": "Something went wrong. Please try again."
+  },
+
   "languages": {
     "en": "English",
     "es": "Español",

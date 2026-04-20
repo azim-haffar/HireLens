@@ -311,6 +311,17 @@
     "rejected": "abgelehnt"
   },
 
+  "chat": {
+    "title": "HireLens AI",
+    "subtitle": "Dein persönlicher Karriere-Coach",
+    "greeting": "Hallo! Ich habe deinen Lebenslauf und die Stellenbeschreibung gelesen. Frag mich alles — wie du deinen Score verbessern, Bullet Points umschreiben oder dich auf Interviews vorbereiten kannst.",
+    "placeholder": "Frag etwas zu deinem CV oder dieser Stelle…",
+    "suggest1": "Wie kann ich meinen Score verbessern?",
+    "suggest2": "Welche Fähigkeiten sollte ich lernen?",
+    "suggest3": "Schreib meinen besten Erfahrungspunkt um",
+    "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+  },
+
   "languages": {
     "en": "English",
     "es": "Español",

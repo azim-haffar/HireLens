@@ -77,3 +77,38 @@ export const coverLetterApi = {
   generate: (analysis_id) =>
     request('/api/v1/cover-letter/', { method: 'POST', body: JSON.stringify({ analysis_id }) }),
 }
+
+// Chat
+export const chatApi = {
+  stream: async (analysisId, messages, onChunk) => {
+    const headers = await getAuthHeaders()
+    const res = await fetch(`${API_URL}/api/v1/chat/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...headers },
+      body: JSON.stringify({ analysis_id: analysisId, messages }),
+    })
+    if (!res.ok) throw new Error('Chat request failed')
+
+    const reader = res.body.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split('\n')
+      buffer = lines.pop()
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue
+        const data = line.slice(6)
+        if (data === '[DONE]') return
+        try {
+          const { content, error } = JSON.parse(data)
+          if (error) throw new Error(error)
+          if (content) onChunk(content)
+        } catch {}
+      }
+    }
+  },
+}

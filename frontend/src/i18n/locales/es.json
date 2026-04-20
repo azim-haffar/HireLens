@@ -311,6 +311,17 @@
     "rejected": "rechazado"
   },
 
+  "chat": {
+    "title": "HireLens AI",
+    "subtitle": "Tu coach personal de carrera",
+    "greeting": "¡Hola! He leído tu CV y la descripción del trabajo. Pregúntame lo que quieras — cómo mejorar tu puntuación, reescribir puntos o prepararte para entrevistas.",
+    "placeholder": "Pregunta sobre tu CV o este trabajo…",
+    "suggest1": "¿Cómo puedo mejorar mi puntuación?",
+    "suggest2": "¿Qué habilidades debería aprender?",
+    "suggest3": "Reescribe mi mejor punto de experiencia",
+    "error": "Algo salió mal. Inténtalo de nuevo."
+  },
+
   "languages": {
     "en": "English",
     "es": "Español",

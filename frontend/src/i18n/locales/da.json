@@ -311,6 +311,17 @@
     "rejected": "afvist"
   },
 
+  "chat": {
+    "title": "HireLens AI",
+    "subtitle": "Din personlige karrierecoach",
+    "greeting": "Hej! Jeg har læst dit CV og jobopslaget. Spørg mig om alt — hvordan du forbedrer din score, omskriver punkter eller forbereder dig til interviews.",
+    "placeholder": "Spørg om dit CV eller dette job…",
+    "suggest1": "Hvordan forbedrer jeg min score?",
+    "suggest2": "Hvilke færdigheder bør jeg lære?",
+    "suggest3": "Omskriv mit bedste erfaringspunkt",
+    "error": "Noget gik galt. Prøv igen."
+  },
+
   "languages": {
     "en": "English",
     "es": "Español",

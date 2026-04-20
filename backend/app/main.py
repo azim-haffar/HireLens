@@ -7,7 +7,7 @@ from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from app.config import get_settings
 from app.limiter import limiter
-from app.routes import cv, job, analysis, applications, cover_letter
+from app.routes import cv, job, analysis, applications, cover_letter, chat
 
 logger = logging.getLogger(__name__)
 settings = get_settings()
@@ -66,6 +66,7 @@ app.include_router(job.router)
 app.include_router(analysis.router)
 app.include_router(applications.router)
 app.include_router(cover_letter.router)
+app.include_router(chat.router)
 
 
 @app.get("/health")
