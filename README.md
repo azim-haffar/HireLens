@@ -15,6 +15,37 @@ HireLens parses your CV, scrapes any job posting, and delivers an instant ATS co
 
 ---
 
+## Screenshots
+
+### Match Score — 92/100 Strong Match
+![Score Card](docs/screenshots/score-card.png)
+
+### ATS Compatibility Report
+![ATS Report](docs/screenshots/ats-report.png)
+
+### Interview Prep Questions
+![Interview Prep](docs/screenshots/interview-prep.png)
+
+### Cover Letter Generator
+![Cover Letter](docs/screenshots/cover-letter.png)
+
+### Dashboard
+![Dashboard](docs/screenshots/dashboard.png)
+
+### AI Analysis in Progress
+![Analyzing](docs/screenshots/analyzing.png)
+
+### Job Input
+![Job Input](docs/screenshots/job-input.png)
+
+### Compare CV Versions
+![Compare](docs/screenshots/compare.png)
+
+### Analysis History
+![History](docs/screenshots/history.png)
+
+---
+
 ## Features
 
 | | Feature | Description |
@@ -28,6 +59,10 @@ HireLens parses your CV, scrapes any job posting, and delivers an instant ATS co
 | 🎤 | **Interview Prep** | 10 role-specific questions (technical / behavioural / situational) with answer frameworks |
 | 📊 | **Application Tracker** | Track every application through saved → applied → interview → offer → rejected → ghosted |
 | ✉️ | **Cover Letter Generator** | One-click tailored cover letter with subject line and highlighted key achievements |
+| 📈 | **Score Trend Chart** | Dashboard chart showing your match score improvement over time |
+| 📧 | **Email Notifications** | Status change emails via Resend when application moves to interview/offer/rejected |
+| 🌗 | **Dark Mode** | Persistent dark/light mode synced across devices via Supabase user metadata |
+| 🌍 | **Multilingual** | UI available in English, German, Spanish, Danish, and Turkish |
 
 ---
 
@@ -35,7 +70,7 @@ HireLens parses your CV, scrapes any job posting, and delivers an instant ATS co
 
 | Layer | Technology |
 |---|---|
-| **Frontend** | React 18, Vite, Tailwind CSS, react-i18next (5 languages), Lucide icons |
+| **Frontend** | React 18, Vite, Tailwind CSS, react-i18next (5 languages), Lucide icons, Recharts |
 | **Backend** | Python 3.11, FastAPI, Pydantic v2, pdfplumber, BeautifulSoup4, SlowAPI |
 | **AI** | Google Gemini 1.5 Flash — CV parsing, ATS analysis, scoring, Q&A generation, cover letter |
 | **Database / Auth** | Supabase (PostgreSQL + Row-Level Security + Google OAuth) |
@@ -86,7 +121,8 @@ HireLens/
 │   │   │   ├── ats_checker.py   # 10-rule ATS compatibility engine
 │   │   │   ├── scoring_engine.py# Weighted 0-100 match scorer
 │   │   │   ├── interview_gen.py # Interview question generator
-│   │   │   └── cover_letter.py  # Cover letter generator
+│   │   │   ├── cover_letter.py  # Cover letter generator
+│   │   │   └── email.py         # Resend email notifications
 │   │   └── utils/helpers.py     # JWT auth dependency
 │   ├── alembic/                 # Database migration scripts
 │   │   └── versions/0001_initial_schema.py
@@ -99,26 +135,27 @@ HireLens/
 │   │   ├── App.jsx              # Route layout + keepalive
 │   │   ├── context/
 │   │   │   ├── AuthContext.jsx  # Supabase auth state + Google OAuth
-│   │   │   └── ThemeContext.jsx # Dark/light mode
+│   │   │   └── ThemeContext.jsx # Dark/light mode sync
 │   │   ├── lib/
 │   │   │   ├── supabase.js      # Supabase browser client
-│   │   │   └── api.js           # Typed API helpers (cvApi, jobApi, analysisApi…)
+│   │   │   └── api.js           # Typed API helpers
 │   │   ├── pages/
-│   │   │   ├── Dashboard.jsx    # Stats + recent analyses
+│   │   │   ├── Dashboard.jsx    # Stats + score trend + recent analyses
 │   │   │   ├── Analyze.jsx      # 3-step wizard (upload → job → result)
 │   │   │   ├── AnalysisResult.jsx # Score / ATS / Interview / Cover Letter tabs
 │   │   │   ├── Compare.jsx      # CV version comparison
 │   │   │   ├── Applications.jsx # Application tracker with stats bar
 │   │   │   └── History.jsx      # Searchable analysis history
 │   │   ├── components/          # Navbar, ScoreCard, ATSReport, InterviewQuestions,
-│   │   │                        # CoverLetterTab, CVUpload, JobInput, ErrorBoundary
+│   │   │                        # CoverLetterTab, CVUpload, JobInput, ErrorBoundary,
+│   │   │                        # ScoreTrendChart, Onboarding
 │   │   ├── i18n/locales/        # en, es, da, de, tr translations
 │   │   └── utils/keepalive.js   # Backend ping to prevent Render cold starts
 │   ├── public/favicon.svg
 │   ├── package.json
-│   ├── vite.config.js
-│   └── Dockerfile
+│   └── vite.config.js
 ├── docs/
+│   ├── screenshots/             # README screenshots
 │   └── SQLAlchemy_vs_Supabase.md
 ├── supabase_schema.sql          # Run once in Supabase SQL editor
 ├── docker-compose.yml
@@ -140,7 +177,7 @@ HireLens/
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/Lightnin1/HireLens.git
+git clone https://github.com/azim-haffar/HireLens.git
 cd HireLens
 ```
 
@@ -154,6 +191,9 @@ GEMINI_API_KEY=<your-gemini-api-key>
 SECRET_KEY=<random-32-char-string>
 FRONTEND_URL=http://localhost:3000
 ENVIRONMENT=development
+DATABASE_URL=postgresql://postgres:<password>@db.<ref>.supabase.co:5432/postgres
+RESEND_API_KEY=<optional-for-email-notifications>
+SENTRY_DSN=<optional-for-error-tracking>
 ```
 
 Create `frontend/.env`:
@@ -194,6 +234,13 @@ npm install
 npm run dev
 ```
 
+### 4. Run Alembic migrations (optional — for SQLAlchemy layer)
+
+```bash
+cd backend
+alembic upgrade head
+```
+
 ---
 
 ## API Endpoints
@@ -230,9 +277,11 @@ All routes require `Authorization: Bearer <supabase_access_token>`.
 | `SUPABASE_ANON_KEY` | ✅ | Public anon key |
 | `SUPABASE_SERVICE_KEY` | ✅ | Service role key (server-side only) |
 | `GEMINI_API_KEY` | ✅ | Google Gemini API key |
-| `SECRET_KEY` | ✅ | JWT signing secret (≥ 32 chars in production) |
+| `SECRET_KEY` | ✅ | JWT signing secret (32+ chars in production) |
 | `FRONTEND_URL` | ✅ | CORS allowed origin |
 | `ENVIRONMENT` | ✅ | `development` or `production` |
+| `DATABASE_URL` | ✅ | PostgreSQL connection string for SQLAlchemy |
+| `RESEND_API_KEY` | ❌ | Email notifications via Resend |
 | `SENTRY_DSN` | ❌ | Sentry error tracking DSN |
 
 ### Frontend
@@ -242,23 +291,6 @@ All routes require `Authorization: Bearer <supabase_access_token>`.
 | `VITE_SUPABASE_URL` | ✅ | Same as backend |
 | `VITE_SUPABASE_ANON_KEY` | ✅ | Same as backend |
 | `VITE_API_URL` | ✅ | Backend base URL |
-
----
-
-## Screenshots
-
-> _Live at [https://hire-lens-topaz.vercel.app](https://hire-lens-topaz.vercel.app)_
-
-| Screen | Description |
-|---|---|
-| **Dashboard** | Stat cards (analyses run, avg score, interviews) + recent analyses + quick actions |
-| **New Analysis** | 3-step wizard: CV upload → job description → AI analysis in progress |
-| **Score Card** | Circular match score, skill breakdown bars, matched vs missing skills |
-| **ATS Report** | 10 checks with critical / warning / pass badges and expandable fix guides |
-| **Interview Prep** | 10 accordion questions colour-coded by type and difficulty |
-| **CV Comparison** | Score delta, new skills gained, still-missing skills, summary |
-| **Application Tracker** | Stats bar + status badges + inline notes + applied date picker |
-| **Cover Letter** | Generated letter with subject line, key highlights, one-click copy |
 
 ---
 
