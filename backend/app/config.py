@@ -34,7 +34,7 @@ class Settings(BaseSettings):
     supabase_url: str
     supabase_anon_key: str
     supabase_service_key: str
-    gemini_api_key: str
+    groq_api_key: str
     secret_key: str = "dev-secret-key-change-in-production"
     frontend_url: str = "http://localhost:5173"
     environment: str = "development"
