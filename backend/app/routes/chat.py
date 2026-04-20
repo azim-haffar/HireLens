@@ -8,8 +8,11 @@ from app.utils.helpers import require_user
 from app.database import get_supabase_service
 from app.services.groq_client import get_groq_client, _is_capacity_error
 
-_PRIMARY_MODEL  = "llama-3.3-70b-versatile"
-_FALLBACK_MODEL = "llama3-8b-8192"
+_CHAT_MODELS = [
+    "llama-3.3-70b-versatile",
+    "llama3-8b-8192",
+    "llama-3.1-8b-instant",
+]
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/chat", tags=["chat"])
@@ -112,20 +115,20 @@ async def chat(body: ChatRequest, user: dict = Depends(require_user)):
             )
 
         stream = None
-        for model in (_PRIMARY_MODEL, _FALLBACK_MODEL):
+        for model in _CHAT_MODELS:
             try:
                 stream = await asyncio.to_thread(_sync_stream, model)
                 break
             except Exception as e:
                 if _is_capacity_error(e):
-                    logger.warning("Chat capacity error on %s, trying %s", model, _FALLBACK_MODEL)
+                    logger.warning("Chat capacity error on %s, trying next", model)
                     continue
                 logger.error("Chat stream error: %s", e)
                 yield f"data: {json.dumps({'error': 'AI service error'})}\n\n"
                 yield "data: [DONE]\n\n"
                 return
         if stream is None:
-            yield f"data: {json.dumps({'error': 'AI service is busy — please try again shortly'})}\n\n"
+            yield f"data: {json.dumps({'error': 'Daily AI limit reached — please try again in a few hours'})}\n\n"
             yield "data: [DONE]\n\n"
             return
 

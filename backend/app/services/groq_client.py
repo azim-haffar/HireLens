@@ -10,10 +10,13 @@ logger = logging.getLogger(__name__)
 
 _client = None
 
-# Primary tried first; fallback on 429/413 capacity errors.
-# gemma2-9b-it has 15k TPM (vs 6k for the 70b/8b models) on the free tier.
-_PRIMARY_MODEL  = "llama-3.3-70b-versatile"
-_FALLBACK_MODEL = "llama3-8b-8192"
+# Tried in order on capacity/rate-limit errors.
+# llama-3.1-8b-instant has a separate 500k TPD bucket vs 100k for the 70b.
+_MODELS = [
+    ("llama-3.3-70b-versatile", 8192),   # best quality
+    ("llama3-8b-8192",          4096),   # higher TPM
+    ("llama-3.1-8b-instant",    2048),   # 500k TPD separate bucket
+]
 
 
 def get_groq_client():
@@ -47,7 +50,6 @@ def _extract_json(text: str) -> dict | list:
 
 
 def _is_capacity_error(exc: Exception) -> bool:
-    """True for errors that warrant trying the next model."""
     msg = str(exc)
     return (
         "429" in msg
@@ -55,6 +57,17 @@ def _is_capacity_error(exc: Exception) -> bool:
         or "rate_limit_exceeded" in msg
         or "model_decommissioned" in msg
     )
+
+
+def _truncate_messages(messages: list, max_chars: int = 12000) -> list:
+    """Trim the user prompt to avoid 413 errors on smaller models."""
+    result = []
+    for m in messages:
+        if m["role"] == "user" and len(m["content"]) > max_chars:
+            result.append({**m, "content": m["content"][:max_chars] + "\n\n[truncated for length]"})
+        else:
+            result.append(m)
+    return result
 
 
 def _make_call(model: str, messages: list, temperature: float, max_tokens: int):
@@ -68,31 +81,31 @@ def _make_call(model: str, messages: list, temperature: float, max_tokens: int):
 
 
 async def _call_with_fallback(messages: list, temperature: float, max_tokens: int) -> str:
-    # Use smaller max_tokens on fallback to stay within the 15k TPM window
-    fallback_max_tokens = min(max_tokens, 4096)
-    configs = [
-        (_PRIMARY_MODEL,  max_tokens),
-        (_FALLBACK_MODEL, fallback_max_tokens),
-    ]
-    for model, tokens in configs:
+    for i, (model, model_max_tokens) in enumerate(_MODELS):
+        tokens = min(max_tokens, model_max_tokens)
+        # Truncate prompt on fallback models to stay within their TPM limits
+        msgs = _truncate_messages(messages) if i > 0 else messages
         try:
             response = await asyncio.wait_for(
-                asyncio.to_thread(_make_call, model, messages, temperature, tokens),
+                asyncio.to_thread(_make_call, model, msgs, temperature, tokens),
                 timeout=60.0,
             )
-            if model != _PRIMARY_MODEL:
-                logger.info("Used fallback model %s (max_tokens=%d)", model, tokens)
+            if i > 0:
+                logger.info("Used fallback model %s (attempt %d)", model, i + 1)
             return response.choices[0].message.content
         except asyncio.TimeoutError:
             logger.error("Groq API timed out (model=%s)", model)
             raise HTTPException(status_code=504, detail="AI service timeout — please try again")
         except Exception as e:
             if _is_capacity_error(e):
-                logger.warning("Capacity error on model %s, trying next: %s", model, e)
+                logger.warning("Capacity error on model %s: %s", model, e)
                 continue
             logger.error("Groq API error (model=%s): %s", model, e)
             raise HTTPException(status_code=502, detail="AI service error — please try again")
-    raise HTTPException(status_code=429, detail="AI service is busy — please try again in a few minutes")
+    raise HTTPException(
+        status_code=429,
+        detail="Daily AI limit reached — please try again in a few hours",
+    )
 
 
 async def call_groq(prompt: str) -> dict | list:
@@ -104,8 +117,3 @@ async def call_groq(prompt: str) -> dict | list:
     )
     logger.info("Groq request completed")
     return _extract_json(content)
-
-
-def get_stream_model() -> str:
-    """Return the model name to use for streaming chat (honours fallback at call time)."""
-    return _PRIMARY_MODEL
