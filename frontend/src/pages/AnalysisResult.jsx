@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { flushSync } from 'react-dom'
 import { analysisApi, appApi } from '../lib/api'
 import ScoreCard from '../components/ScoreCard'
 import ATSReport from '../components/ATSReport'
 import InterviewQuestions from '../components/InterviewQuestions'
 import CoverLetter from '../components/CoverLetter'
 import toast from 'react-hot-toast'
-import { ArrowLeft, Bookmark, Loader2, Sparkles } from 'lucide-react'
+import { ArrowLeft, Bookmark, Loader2, Sparkles, Download } from 'lucide-react'
 import clsx from 'clsx'
 
 export default function AnalysisResult() {
@@ -18,6 +19,7 @@ export default function AnalysisResult() {
   const [activeTab, setActiveTab] = useState('score')
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [printing, setPrinting] = useState(false)
 
   const TABS = [
     { key: 'score',        label: t('analysisResult.tabScore') },
@@ -44,6 +46,12 @@ export default function AnalysisResult() {
     } finally {
       setSaving(false)
     }
+  }
+
+  const handleDownloadPDF = () => {
+    flushSync(() => setPrinting(true))
+    window.print()
+    setPrinting(false)
   }
 
   if (loading) {
@@ -76,10 +84,24 @@ export default function AnalysisResult() {
   const ats       = analysis.ats_report || {}
   const questions = analysis.interview_questions || []
 
+  const jobLabel = [analysis.job_title, analysis.job_company]
+    .filter(x => x && x !== 'null')
+    .join(' @ ')
+
   return (
     <div className="space-y-6 max-w-4xl mx-auto animate-fade-in-up">
+      {/* Print-only header */}
+      <div className="hidden print:block mb-6">
+        <p className="text-2xl font-bold text-gray-900">HireLens — Analysis Report</p>
+        {jobLabel && <p className="text-gray-500 mt-1">{jobLabel}</p>}
+        <p className="text-sm text-gray-400 mt-0.5">
+          {new Date(analysis.created_at).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
+        </p>
+        <hr className="mt-4 border-gray-200" />
+      </div>
+
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 print:hidden">
         <div>
           <Link
             to="/history"
@@ -95,20 +117,30 @@ export default function AnalysisResult() {
             {new Date(analysis.created_at).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
           </p>
         </div>
-        <button
-          onClick={handleSaveApplication}
-          disabled={saving || saved}
-          className={clsx('flex items-center gap-2 shrink-0', saved ? 'btn-secondary' : 'btn-primary')}
-        >
-          {saving
-            ? <Loader2 className="w-4 h-4 animate-spin" />
-            : <Bookmark className={clsx('w-4 h-4', saved && 'fill-current')} />}
-          {saved ? t('analysisResult.savedToTracker') : t('analysisResult.saveToTracker')}
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={handleDownloadPDF}
+            className="btn-secondary flex items-center gap-2 text-sm"
+            title={t('analysisResult.downloadPDF')}
+          >
+            <Download className="w-4 h-4" />
+            <span className="hidden sm:inline">{t('analysisResult.downloadPDF')}</span>
+          </button>
+          <button
+            onClick={handleSaveApplication}
+            disabled={saving || saved}
+            className={clsx('flex items-center gap-2', saved ? 'btn-secondary' : 'btn-primary')}
+          >
+            {saving
+              ? <Loader2 className="w-4 h-4 animate-spin" />
+              : <Bookmark className={clsx('w-4 h-4', saved && 'fill-current')} />}
+            {saved ? t('analysisResult.savedToTracker') : t('analysisResult.saveToTracker')}
+          </button>
+        </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-0.5 bg-gray-100/80 dark:bg-gray-800/80 rounded-2xl p-1.5 w-fit">
+      <div className="flex gap-0.5 bg-gray-100/80 dark:bg-gray-800/80 rounded-2xl p-1.5 w-fit print:hidden">
         {TABS.map(({ key, label }) => (
           <button
             key={key}
@@ -125,14 +157,21 @@ export default function AnalysisResult() {
         ))}
       </div>
 
-      {/* Tab panels */}
-      <div className="animate-fade-in">
-        {activeTab === 'score'        && <ScoreCard score={score} />}
-        {activeTab === 'ats'          && <ATSReport report={ats} />}
-        {activeTab === 'interview'    && <InterviewQuestions questions={questions} />}
-        {activeTab === 'cover_letter' && <CoverLetter analysisId={id} existing={analysis.cover_letter} />}
-      </div>
-
+      {/* Tab panels — single active tab normally, all when printing */}
+      {printing ? (
+        <div className="space-y-8">
+          <ScoreCard score={score} />
+          <div className="print-break"><ATSReport report={ats} /></div>
+          <div className="print-break"><InterviewQuestions questions={questions} /></div>
+        </div>
+      ) : (
+        <div className="animate-fade-in">
+          {activeTab === 'score'        && <ScoreCard score={score} />}
+          {activeTab === 'ats'          && <ATSReport report={ats} />}
+          {activeTab === 'interview'    && <InterviewQuestions questions={questions} />}
+          {activeTab === 'cover_letter' && <CoverLetter analysisId={id} existing={analysis.cover_letter} />}
+        </div>
+      )}
     </div>
   )
 }

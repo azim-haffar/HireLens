@@ -10,8 +10,8 @@
     "history": "Historial",
     "signOut": "Cerrar sesión",
     "signedInAs": "Conectado como",
-    "lightMode": "Cambiar a modo claro",
-    "darkMode": "Cambiar a modo oscuro"
+    "lightMode": "Modo claro",
+    "darkMode": "Modo oscuro"
   },
 
   "auth": {
@@ -63,7 +63,7 @@
 
   "dashboard": {
     "welcomeBack": "Bienvenido, <grad>{{name}}</grad> 👋",
-    "subtitle": "Aquí está tu actividad de reclutamiento de un vistazo.",
+    "subtitle": "Tu actividad de reclutamiento de un vistazo.",
     "newAnalysis": "Nuevo análisis",
     "analysesRun": "Análisis realizados",
     "applications": "Solicitudes",
@@ -81,28 +81,30 @@
     "noAnalyses": "Sin análisis todavía",
     "runFirst": "Ejecuta tu primer análisis",
     "noCVTitle": "Aún no has subido un CV",
-    "noCVDesc": "Sube un CV para comenzar a ejecutar análisis y comparaciones.",
+    "noCVDesc": "Sube un CV para comenzar a ejecutar análisis.",
     "noCVAction": "Subir ahora",
     "lastAnalysisToday": "Último análisis: hoy",
     "lastAnalysisYesterday": "Último análisis: ayer",
-    "lastAnalysisDaysAgo": "Último análisis: hace {{count}} días"
+    "lastAnalysisDaysAgo": "Último análisis: hace {{count}} días",
+    "scoreTrend": "Tendencia de puntuación",
+    "scoreTrendDesc": "Tus puntuaciones de coincidencia a lo largo del tiempo"
   },
 
   "analyze": {
     "heading": "Nuevo",
     "headingGradient": "Análisis",
-    "subtitle": "Sube tu CV y añade un trabajo para ser puntuado al instante por IA.",
+    "subtitle": "Sube tu CV y una descripción de trabajo para obtener una puntuación IA instantánea.",
     "step1Label": "Subir CV",
-    "step1Desc": "Tu currículum vitae",
+    "step1Desc": "Tu currículum o CV",
     "step2Label": "Añadir trabajo",
     "step2Desc": "Pega una descripción de trabajo o URL",
     "step3Label": "Analizando",
     "step3Desc": "Puntuación IA en progreso",
     "analyzingHeading": "Analizando tu CV…",
-    "analyzingSubtitle": "Nuestra IA está ejecutando una verificación completa. Esto tarda unos 15–30 segundos.",
+    "analyzingSubtitle": "Ejecutando una verificación completa de compatibilidad. Tarda unos 15–30 segundos.",
     "task1": "Analizando el CV frente a los requisitos del trabajo",
-    "task2": "Ejecutando 10 verificaciones de compatibilidad ATS",
-    "task3": "Calculando puntuación de coincidencia ponderada",
+    "task2": "Ejecutando verificaciones de compatibilidad ATS",
+    "task3": "Calculando puntuación de coincidencia",
     "task4": "Generando preguntas de entrevista",
     "complete": "¡Análisis completado!",
     "failed": "Error en el análisis"
@@ -113,6 +115,7 @@
     "heading": "Resultado del análisis",
     "savedToTracker": "Guardado en seguimiento",
     "saveToTracker": "Guardar en seguimiento",
+    "downloadPDF": "Descargar PDF",
     "tabScore": "Puntuación",
     "tabATS": "Informe ATS",
     "tabInterview": "Preparación entrevista",
@@ -250,14 +253,14 @@
   },
 
   "coverLetter": {
-    "heading": "Generador de carta de presentación",
+    "heading": "Carta de presentación",
     "copied": "¡Copiado!",
     "copy": "Copiar",
-    "description": "Genera una carta de presentación personalizada basada en tu CV y esta descripción de trabajo.",
+    "description": "Genera una carta de presentación personalizada basada en tu CV y este trabajo.",
     "generating": "Generando...",
     "generate": "Generar carta de presentación",
     "subjectLine": "Asunto",
-    "keyHighlights": "Puntos clave utilizados",
+    "keyHighlights": "Puntos clave",
     "coverLetter": "Carta de presentación",
     "regenerate": "Regenerar",
     "generated": "¡Carta de presentación generada!",
@@ -314,12 +317,31 @@
   "chat": {
     "title": "HireLens AI",
     "subtitle": "Tu coach personal de carrera",
-    "greeting": "¡Hola! He leído tu CV y la descripción del trabajo. Pregúntame lo que quieras — cómo mejorar tu puntuación, reescribir puntos o prepararte para entrevistas.",
+    "greeting": "¡Hola! Soy tu coach de HireLens AI. Abre un análisis para obtener consejos específicos sobre tu CV, o pregúntame cualquier cosa sobre búsqueda de empleo, CVs o preparación de entrevistas.",
+    "greetingContext": "¡Hola! He leído tu CV y la descripción del trabajo. Pregúntame lo que quieras — cómo mejorar tu puntuación, reescribir puntos o prepararte para entrevistas.",
     "placeholder": "Pregunta sobre tu CV o este trabajo…",
     "suggest1": "¿Cómo puedo mejorar mi puntuación?",
     "suggest2": "¿Qué habilidades debería aprender?",
     "suggest3": "Reescribe mi mejor punto de experiencia",
     "error": "Algo salió mal. Inténtalo de nuevo."
+  },
+
+  "onboarding": {
+    "step1Title": "Bienvenido a HireLens",
+    "step1Desc": "Tu coach de carrera con IA. Obtén puntuaciones de CV, informes ATS y preparación de entrevistas al instante.",
+    "step2Title": "Cómo funciona",
+    "feature1": "Sube tu CV",
+    "feature1Desc": "Analizamos tu CV y extraemos tus habilidades, experiencia y cualificaciones.",
+    "feature2": "Analiza frente a trabajos",
+    "feature2Desc": "Obtén una puntuación IA, informe ATS y preguntas de entrevista.",
+    "feature3": "Sigue tus solicitudes",
+    "feature3Desc": "Monitoriza cada puesto desde guardado hasta oferta en un solo lugar.",
+    "step3Title": "¿Listo para empezar?",
+    "step3Desc": "Ejecuta tu primer análisis en menos de 30 segundos.",
+    "getStarted": "Ejecutar primer análisis",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "skip": "Omitir"
   },
 
   "languages": {

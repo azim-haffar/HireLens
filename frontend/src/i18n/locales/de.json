@@ -10,8 +10,8 @@
     "history": "Verlauf",
     "signOut": "Abmelden",
     "signedInAs": "Angemeldet als",
-    "lightMode": "Zu hellem Modus wechseln",
-    "darkMode": "Zu dunklem Modus wechseln"
+    "lightMode": "Heller Modus",
+    "darkMode": "Dunkler Modus"
   },
 
   "auth": {
@@ -63,7 +63,7 @@
 
   "dashboard": {
     "welcomeBack": "Willkommen zurück, <grad>{{name}}</grad> 👋",
-    "subtitle": "Hier ist deine Rekrutierungsaktivität auf einen Blick.",
+    "subtitle": "Deine Rekrutierungsaktivität auf einen Blick.",
     "newAnalysis": "Neue Analyse",
     "analysesRun": "Analysen durchgeführt",
     "applications": "Bewerbungen",
@@ -81,28 +81,30 @@
     "noAnalyses": "Noch keine Analysen",
     "runFirst": "Erste Analyse starten",
     "noCVTitle": "Noch kein Lebenslauf hochgeladen",
-    "noCVDesc": "Lade einen Lebenslauf hoch, um Analysen und Vergleiche zu starten.",
+    "noCVDesc": "Lade einen Lebenslauf hoch, um Analysen zu starten.",
     "noCVAction": "Jetzt hochladen",
     "lastAnalysisToday": "Letzte Analyse: heute",
     "lastAnalysisYesterday": "Letzte Analyse: gestern",
-    "lastAnalysisDaysAgo": "Letzte Analyse: vor {{count}} Tagen"
+    "lastAnalysisDaysAgo": "Letzte Analyse: vor {{count}} Tagen",
+    "scoreTrend": "Score-Verlauf",
+    "scoreTrendDesc": "Deine Match-Scores im Zeitverlauf"
   },
 
   "analyze": {
     "heading": "Neue",
     "headingGradient": "Analyse",
-    "subtitle": "Lade deinen Lebenslauf hoch und füge einen Job hinzu, um sofort von der KI bewertet zu werden.",
+    "subtitle": "Lade deinen Lebenslauf und eine Jobbeschreibung hoch, um sofort eine KI-Bewertung zu erhalten.",
     "step1Label": "Lebenslauf hochladen",
-    "step1Desc": "Dein Lebenslauf oder Curriculum Vitae",
+    "step1Desc": "Dein Lebenslauf oder CV",
     "step2Label": "Job hinzufügen",
     "step2Desc": "Jobbeschreibung oder URL einfügen",
     "step3Label": "Wird analysiert",
     "step3Desc": "KI-Bewertung läuft",
     "analyzingHeading": "Lebenslauf wird analysiert…",
-    "analyzingSubtitle": "Unsere KI führt eine vollständige Kompatibilitätsprüfung durch. Dies dauert ca. 15–30 Sekunden.",
+    "analyzingSubtitle": "Vollständige Kompatibilitätsprüfung läuft. Dauert ca. 15–30 Sekunden.",
     "task1": "Lebenslauf gegen Jobanforderungen prüfen",
-    "task2": "10 ATS-Kompatibilitätsprüfungen durchführen",
-    "task3": "Gewichteten Übereinstimmungsscore berechnen",
+    "task2": "ATS-Kompatibilitätsprüfungen durchführen",
+    "task3": "Übereinstimmungsscore berechnen",
     "task4": "Interviewfragen generieren",
     "complete": "Analyse abgeschlossen!",
     "failed": "Analyse fehlgeschlagen"
@@ -113,6 +115,7 @@
     "heading": "Analyseergebnis",
     "savedToTracker": "Im Tracker gespeichert",
     "saveToTracker": "Im Tracker speichern",
+    "downloadPDF": "PDF herunterladen",
     "tabScore": "Bewertung",
     "tabATS": "ATS-Bericht",
     "tabInterview": "Interview-Vorbereitung",
@@ -250,14 +253,14 @@
   },
 
   "coverLetter": {
-    "heading": "Anschreiben-Generator",
+    "heading": "Anschreiben",
     "copied": "Kopiert!",
     "copy": "Kopieren",
-    "description": "Erstelle ein maßgeschneidertes Anschreiben basierend auf deinem Lebenslauf und dieser Jobbeschreibung.",
+    "description": "Erstelle ein maßgeschneidertes Anschreiben basierend auf deinem Lebenslauf und diesem Job.",
     "generating": "Wird generiert...",
     "generate": "Anschreiben generieren",
     "subjectLine": "Betreffzeile",
-    "keyHighlights": "Verwendete Kernpunkte",
+    "keyHighlights": "Kernpunkte",
     "coverLetter": "Anschreiben",
     "regenerate": "Neu generieren",
     "generated": "Anschreiben generiert!",
@@ -314,12 +317,31 @@
   "chat": {
     "title": "HireLens AI",
     "subtitle": "Dein persönlicher Karriere-Coach",
-    "greeting": "Hallo! Ich habe deinen Lebenslauf und die Stellenbeschreibung gelesen. Frag mich alles — wie du deinen Score verbessern, Bullet Points umschreiben oder dich auf Interviews vorbereiten kannst.",
+    "greeting": "Hallo! Ich bin dein HireLens AI-Coach. Öffne eine Analyse für spezifische CV-Tipps oder frag mich alles rund um Jobsuche, Lebensläufe oder Interviewvorbereitung.",
+    "greetingContext": "Hallo! Ich habe deinen Lebenslauf und die Stellenbeschreibung gelesen. Frag mich alles — wie du deinen Score verbessern, Bullet Points umschreiben oder dich auf Interviews vorbereiten kannst.",
     "placeholder": "Frag etwas zu deinem CV oder dieser Stelle…",
     "suggest1": "Wie kann ich meinen Score verbessern?",
     "suggest2": "Welche Fähigkeiten sollte ich lernen?",
     "suggest3": "Schreib meinen besten Erfahrungspunkt um",
     "error": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+  },
+
+  "onboarding": {
+    "step1Title": "Willkommen bei HireLens",
+    "step1Desc": "Dein KI-gestützter Karriere-Coach. Erhalte sofortige CV-Scores, ATS-Berichte und Interview-Vorbereitung.",
+    "step2Title": "So funktioniert es",
+    "feature1": "Lebenslauf hochladen",
+    "feature1Desc": "Wir analysieren deinen Lebenslauf und extrahieren Kompetenzen, Erfahrung und Qualifikationen.",
+    "feature2": "Jobs analysieren",
+    "feature2Desc": "Erhalte einen KI-Match-Score, ATS-Bericht und Interviewfragen.",
+    "feature3": "Bewerbungen verfolgen",
+    "feature3Desc": "Behalte jede Stelle von gespeichert bis Angebot an einem Ort im Blick.",
+    "step3Title": "Bereit loszulegen?",
+    "step3Desc": "Starte deine erste Analyse in unter 30 Sekunden.",
+    "getStarted": "Erste Analyse starten",
+    "next": "Weiter",
+    "back": "Zurück",
+    "skip": "Überspringen"
   },
 
   "languages": {

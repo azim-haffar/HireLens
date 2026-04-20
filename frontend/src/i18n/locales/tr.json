@@ -10,8 +10,8 @@
     "history": "Geçmiş",
     "signOut": "Çıkış yap",
     "signedInAs": "Oturum açıldı:",
-    "lightMode": "Aydınlık moda geç",
-    "darkMode": "Karanlık moda geç"
+    "lightMode": "Aydınlık mod",
+    "darkMode": "Karanlık mod"
   },
 
   "auth": {
@@ -63,7 +63,7 @@
 
   "dashboard": {
     "welcomeBack": "Tekrar hoş geldin, <grad>{{name}}</grad> 👋",
-    "subtitle": "İşe alım aktivitene tek bakışta göz at.",
+    "subtitle": "İşe alım aktiviten tek bakışta.",
     "newAnalysis": "Yeni Analiz",
     "analysesRun": "Yapılan analizler",
     "applications": "Başvurular",
@@ -81,28 +81,30 @@
     "noAnalyses": "Henüz analiz yok",
     "runFirst": "İlk analizini başlat",
     "noCVTitle": "Henüz CV yüklenmedi",
-    "noCVDesc": "Analiz ve karşılaştırma başlatmak için bir CV yükle.",
+    "noCVDesc": "Analiz başlatmak için bir CV yükle.",
     "noCVAction": "Şimdi yükle",
     "lastAnalysisToday": "Son analiz: bugün",
     "lastAnalysisYesterday": "Son analiz: dün",
-    "lastAnalysisDaysAgo": "Son analiz: {{count}} gün önce"
+    "lastAnalysisDaysAgo": "Son analiz: {{count}} gün önce",
+    "scoreTrend": "Puan Trendi",
+    "scoreTrendDesc": "Zaman içindeki eşleşme puanların"
   },
 
   "analyze": {
     "heading": "Yeni",
     "headingGradient": "Analiz",
-    "subtitle": "CV'ni ve bir iş ilanını yükle, yapay zeka ile anında puan al.",
+    "subtitle": "CV'ni ve bir iş tanımını yükle, yapay zekayla anında puan al.",
     "step1Label": "CV Yükle",
-    "step1Desc": "Özgeçmişin veya CV'n",
+    "step1Desc": "CV'n veya özgeçmişin",
     "step2Label": "İş Ekle",
     "step2Desc": "İş tanımı veya URL yapıştır",
     "step3Label": "Analiz Ediliyor",
     "step3Desc": "Yapay zeka puanlaması devam ediyor",
     "analyzingHeading": "CV'n analiz ediliyor…",
-    "analyzingSubtitle": "Yapay zekamız tam bir uyumluluk kontrolü yapıyor. Bu yaklaşık 15–30 saniye sürer.",
+    "analyzingSubtitle": "Tam uyumluluk kontrolü yapılıyor. Yaklaşık 15–30 saniye sürer.",
     "task1": "CV iş gereksinimlerine karşı analiz ediliyor",
-    "task2": "10 ATS uyumluluk kontrolü çalıştırılıyor",
-    "task3": "Ağırlıklı eşleşme puanı hesaplanıyor",
+    "task2": "ATS uyumluluk kontrolleri çalıştırılıyor",
+    "task3": "Eşleşme puanı hesaplanıyor",
     "task4": "Mülakat soruları oluşturuluyor",
     "complete": "Analiz tamamlandı!",
     "failed": "Analiz başarısız"
@@ -113,6 +115,7 @@
     "heading": "Analiz Sonucu",
     "savedToTracker": "Takipçiye kaydedildi",
     "saveToTracker": "Takipçiye kaydet",
+    "downloadPDF": "PDF İndir",
     "tabScore": "Puan",
     "tabATS": "ATS Raporu",
     "tabInterview": "Mülakat Hazırlığı",
@@ -250,14 +253,14 @@
   },
 
   "coverLetter": {
-    "heading": "Ön Yazı Oluşturucu",
+    "heading": "Ön Yazı",
     "copied": "Kopyalandı!",
     "copy": "Kopyala",
     "description": "CV'n ve bu iş tanımına göre özelleştirilmiş bir ön yazı oluştur.",
     "generating": "Oluşturuluyor...",
     "generate": "Ön yazı oluştur",
     "subjectLine": "Konu satırı",
-    "keyHighlights": "Kullanılan önemli noktalar",
+    "keyHighlights": "Önemli noktalar",
     "coverLetter": "Ön yazı",
     "regenerate": "Yeniden oluştur",
     "generated": "Ön yazı oluşturuldu!",
@@ -314,12 +317,31 @@
   "chat": {
     "title": "HireLens AI",
     "subtitle": "Kişisel kariyer koçun",
-    "greeting": "Merhaba! CV'ni ve iş tanımını okudum. Her şeyi sorabilirsin — skorunu nasıl artıracağın, maddeleri nasıl yeniden yazacağın veya mülakata nasıl hazırlanacağın hakkında.",
+    "greeting": "Merhaba! Ben HireLens AI koçunum. CV'ne özel tavsiye için bir analiz aç ya da iş arama, CV veya mülakat hazırlığı hakkında her şeyi sorabilirsin.",
+    "greetingContext": "Merhaba! CV'ni ve iş tanımını okudum. Her şeyi sorabilirsin — skorunu nasıl artıracağın, maddeleri nasıl yeniden yazacağın veya mülakata nasıl hazırlanacağın hakkında.",
     "placeholder": "CV'n veya bu iş hakkında bir şey sor…",
     "suggest1": "Eşleşme skorumu nasıl artırabilirim?",
     "suggest2": "Hangi becerileri öğrenmeliyim?",
-    "suggest3": "En iyi deneyim maddeми yeniden yaz",
+    "suggest3": "En iyi deneyim maddesini yeniden yaz",
     "error": "Bir şeyler ters gitti. Lütfen tekrar dene."
+  },
+
+  "onboarding": {
+    "step1Title": "HireLens'e Hoş Geldin",
+    "step1Desc": "Yapay zeka destekli kariyer koçun. Anında CV puanları, ATS raporları ve mülakat hazırlığı al.",
+    "step2Title": "Nasıl çalışır",
+    "feature1": "CV'ni yükle",
+    "feature1Desc": "CV'ni analiz edip becerilerini, deneyimini ve niteliklerini çıkarıyoruz.",
+    "feature2": "İşlere karşı analiz et",
+    "feature2Desc": "Yapay zeka eşleşme puanı, ATS raporu ve mülakat soruları al.",
+    "feature3": "Başvuruları takip et",
+    "feature3Desc": "Her pozisyonu kaydedilenden teklife kadar tek bir yerde takip et.",
+    "step3Title": "Başlamaya hazır mısın?",
+    "step3Desc": "İlk analizini 30 saniyeden az sürede çalıştır.",
+    "getStarted": "İlk analizi başlat",
+    "next": "İleri",
+    "back": "Geri",
+    "skip": "Atla"
   },
 
   "languages": {

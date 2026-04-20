@@ -5,6 +5,8 @@ import { useTranslation, Trans } from 'react-i18next'
 import { analysisApi, appApi, cvApi } from '../lib/api'
 import { Search, GitCompare, Briefcase, TrendingUp, FileText, ArrowRight, Plus, Sparkles, Upload } from 'lucide-react'
 import clsx from 'clsx'
+import ScoreTrendChart from '../components/ScoreTrendChart'
+import Onboarding from '../components/Onboarding'
 
 const VERDICT_STYLES = {
   strong:   'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
@@ -20,10 +22,18 @@ export default function Dashboard() {
   const [applications, setApplications] = useState([])
   const [cvCount, setCvCount] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [showOnboarding, setShowOnboarding] = useState(false)
 
   const fetchData = () =>
     Promise.all([analysisApi.list(), appApi.list(), cvApi.list()])
-      .then(([a, b, c]) => { setAnalyses(a); setApplications(b); setCvCount(c.length) })
+      .then(([a, b, c]) => {
+        setAnalyses(a)
+        setApplications(b)
+        setCvCount(c.length)
+        if (a.length === 0 && !localStorage.getItem('onboarding_done')) {
+          setShowOnboarding(true)
+        }
+      })
       .catch(console.error)
       .finally(() => setLoading(false))
 
@@ -64,6 +74,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8 animate-fade-in-up">
+      {showOnboarding && <Onboarding onDismiss={() => setShowOnboarding(false)} />}
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
@@ -131,6 +142,9 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
+
+      {/* Score trend chart */}
+      <ScoreTrendChart analyses={analyses} />
 
       {/* Recent analyses */}
       <div className="card overflow-hidden">

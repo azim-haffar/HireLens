@@ -1,29 +1,38 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/AuthContext'
 import { Zap } from 'lucide-react'
 
 export default function AuthCallback() {
   const navigate = useNavigate()
+  const { user, loading } = useAuth()
+  const [exchangeDone, setExchangeDone] = useState(false)
+  const [exchangeFailed, setExchangeFailed] = useState(false)
 
+  // Step 1: exchange the code once
   useEffect(() => {
-    // Subscribe first so we navigate only after AuthContext has the session
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        navigate('/dashboard', { replace: true })
-      }
-    })
-
     supabase.auth.exchangeCodeForSession(window.location.href)
       .then(({ error }) => {
         if (error) {
           console.error('OAuth callback error:', error)
-          navigate('/login', { replace: true })
+          setExchangeFailed(true)
+        } else {
+          setExchangeDone(true)
         }
       })
+  }, [])
 
-    return () => subscription.unsubscribe()
-  }, [navigate])
+  // Step 2: navigate only after exchange AND AuthContext have both settled
+  useEffect(() => {
+    if (exchangeFailed) {
+      navigate('/login', { replace: true })
+      return
+    }
+    if (exchangeDone && !loading) {
+      navigate(user ? '/dashboard' : '/login', { replace: true })
+    }
+  }, [exchangeDone, exchangeFailed, loading, user, navigate])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">

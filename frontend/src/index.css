@@ -134,6 +134,16 @@
   }
 }
 
+/* ── Print / PDF export ──────────────────────────────────────────────────── */
+@media print {
+  nav, .no-print { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .card { box-shadow: none !important; border-color: #e5e7eb !important; background: white !important; }
+  .text-gradient { -webkit-text-fill-color: #5566f8 !important; }
+  .print-break { page-break-before: always; }
+  main { padding: 0 !important; max-width: 100% !important; }
+}
+
 /* Score ring animation */
 @keyframes progress {
   from { stroke-dashoffset: 283; }

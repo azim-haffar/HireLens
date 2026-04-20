@@ -78,7 +78,7 @@ export default function ChatPanel({ analysisId }) {
   ]
 
   return (
-    <>
+    <div className="no-print">
       {/* Floating button */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
         {/* Tooltip label */}
@@ -213,6 +213,6 @@ export default function ChatPanel({ analysisId }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

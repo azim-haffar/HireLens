@@ -39,6 +39,8 @@ class Settings(BaseSettings):
     frontend_url: str = "http://localhost:5173"
     environment: str = "development"
     sentry_dsn: str = ""
+    resend_api_key: str = ""
+    resend_from_email: str = "onboarding@resend.dev"
 
     model_config = {"env_file": ".env", "case_sensitive": False}
 

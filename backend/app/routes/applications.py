@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from app.models.application import ApplicationCreate, ApplicationUpdate
 from app.database import get_supabase_service
 from app.utils.helpers import require_user
+from app.services.email import send_status_email
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/applications", tags=["Applications"])
@@ -103,7 +104,18 @@ async def update_application(
         raise HTTPException(status_code=404, detail="Application not found")
 
     logger.info("Application updated id=%s fields=%s user=%s", app_id, list(update_data.keys()), user["id"])
-    return result.data[0]
+    updated = result.data[0]
+
+    if body.status is not None:
+        import asyncio
+        asyncio.create_task(send_status_email(
+            user_email=user["email"],
+            status=body.status,
+            job_title=updated.get("job_title"),
+            company=updated.get("company"),
+        ))
+
+    return updated
 
 
 @router.delete("/{app_id}")

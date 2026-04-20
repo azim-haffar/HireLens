@@ -10,8 +10,8 @@
     "history": "Historik",
     "signOut": "Log ud",
     "signedInAs": "Logget ind som",
-    "lightMode": "Skift til lys tilstand",
-    "darkMode": "Skift til mørk tilstand"
+    "lightMode": "Lys tilstand",
+    "darkMode": "Mørk tilstand"
   },
 
   "auth": {
@@ -63,7 +63,7 @@
 
   "dashboard": {
     "welcomeBack": "Velkommen tilbage, <grad>{{name}}</grad> 👋",
-    "subtitle": "Her er dit rekrutteringsaktivitetsoverblik.",
+    "subtitle": "Dit rekrutteringsoverblik på ét blik.",
     "newAnalysis": "Ny analyse",
     "analysesRun": "Udførte analyser",
     "applications": "Ansøgninger",
@@ -81,28 +81,30 @@
     "noAnalyses": "Ingen analyser endnu",
     "runFirst": "Kør din første analyse",
     "noCVTitle": "Intet CV uploadet endnu",
-    "noCVDesc": "Upload et CV for at starte analyser og sammenligninger.",
+    "noCVDesc": "Upload et CV for at starte analyser.",
     "noCVAction": "Upload nu",
     "lastAnalysisToday": "Seneste analyse: i dag",
     "lastAnalysisYesterday": "Seneste analyse: i går",
-    "lastAnalysisDaysAgo": "Seneste analyse: for {{count}} dage siden"
+    "lastAnalysisDaysAgo": "Seneste analyse: for {{count}} dage siden",
+    "scoreTrend": "Score-tendens",
+    "scoreTrendDesc": "Dine matchscores over tid"
   },
 
   "analyze": {
     "heading": "Ny",
     "headingGradient": "Analyse",
-    "subtitle": "Upload dit CV og tilføj et job for at få scoring med det samme af AI.",
+    "subtitle": "Upload dit CV og en jobbeskrivelse for at få en øjeblikkelig AI-score.",
     "step1Label": "Upload CV",
-    "step1Desc": "Dit CV eller curriculum vitae",
+    "step1Desc": "Dit CV",
     "step2Label": "Tilføj job",
     "step2Desc": "Indsæt en jobbeskrivelse eller URL",
     "step3Label": "Analyserer",
     "step3Desc": "AI-scoring i gang",
     "analyzingHeading": "Analyserer dit CV…",
-    "analyzingSubtitle": "Vores AI kører en fuld kompatibilitetstjek. Dette tager ca. 15–30 sekunder.",
+    "analyzingSubtitle": "Kører en fuld kompatibilitetstjek. Tager ca. 15–30 sekunder.",
     "task1": "Analyserer CV mod jobkrav",
-    "task2": "Kører 10 ATS-kompatibilitetstjek",
-    "task3": "Beregner vægtet matchscore",
+    "task2": "Kører ATS-kompatibilitetstjek",
+    "task3": "Beregner matchscore",
     "task4": "Genererer interviewspørgsmål",
     "complete": "Analyse fuldført!",
     "failed": "Analyse mislykkedes"
@@ -113,6 +115,7 @@
     "heading": "Analyseresultat",
     "savedToTracker": "Gemt i tracker",
     "saveToTracker": "Gem i tracker",
+    "downloadPDF": "Download PDF",
     "tabScore": "Score",
     "tabATS": "ATS-rapport",
     "tabInterview": "Interviewforberedelse",
@@ -250,14 +253,14 @@
   },
 
   "coverLetter": {
-    "heading": "Generator til ansøgningsbrev",
+    "heading": "Ansøgningsbrev",
     "copied": "Kopieret!",
     "copy": "Kopiér",
-    "description": "Generer et skræddersyet ansøgningsbrev baseret på dit CV og denne jobbeskrivelse.",
+    "description": "Generer et skræddersyet ansøgningsbrev baseret på dit CV og dette job.",
     "generating": "Genererer...",
     "generate": "Generer ansøgningsbrev",
     "subjectLine": "Emne",
-    "keyHighlights": "Brugte nøglepunkter",
+    "keyHighlights": "Nøglepunkter",
     "coverLetter": "Ansøgningsbrev",
     "regenerate": "Gengenerer",
     "generated": "Ansøgningsbrev genereret!",
@@ -314,12 +317,31 @@
   "chat": {
     "title": "HireLens AI",
     "subtitle": "Din personlige karrierecoach",
-    "greeting": "Hej! Jeg har læst dit CV og jobopslaget. Spørg mig om alt — hvordan du forbedrer din score, omskriver punkter eller forbereder dig til interviews.",
+    "greeting": "Hej! Jeg er din HireLens AI-coach. Åbn en analyse for specifik CV-rådgivning, eller spørg mig om alt inden for jobsøgning, CV'er eller interviewforberedelse.",
+    "greetingContext": "Hej! Jeg har læst dit CV og jobopslaget. Spørg mig om alt — hvordan du forbedrer din score, omskriver punkter eller forbereder dig til interviews.",
     "placeholder": "Spørg om dit CV eller dette job…",
     "suggest1": "Hvordan forbedrer jeg min score?",
     "suggest2": "Hvilke færdigheder bør jeg lære?",
     "suggest3": "Omskriv mit bedste erfaringspunkt",
     "error": "Noget gik galt. Prøv igen."
+  },
+
+  "onboarding": {
+    "step1Title": "Velkommen til HireLens",
+    "step1Desc": "Din AI-drevne karrierecoach. Få øjeblikkelige CV-scores, ATS-rapporter og interviewforberedelse.",
+    "step2Title": "Sådan fungerer det",
+    "feature1": "Upload dit CV",
+    "feature1Desc": "Vi analyserer dit CV og udtrækker dine kompetencer, erfaringer og kvalifikationer.",
+    "feature2": "Analysér mod jobs",
+    "feature2Desc": "Få en AI-matchscore, ATS-rapport og interviewspørgsmål.",
+    "feature3": "Spor ansøgninger",
+    "feature3Desc": "Hold øje med hvert job fra gemt til tilbud på ét sted.",
+    "step3Title": "Klar til at starte?",
+    "step3Desc": "Kør din første analyse på under 30 sekunder.",
+    "getStarted": "Kør første analyse",
+    "next": "Næste",
+    "back": "Tilbage",
+    "skip": "Spring over"
   },
 
   "languages": {
