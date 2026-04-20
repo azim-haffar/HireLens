@@ -39,7 +39,7 @@ async def call_gemini(prompt: str) -> dict | list:
 
     def _sync_call():
         return client.models.generate_content(
-            model="gemini-1.5-flash",
+            model="gemini-2.0-flash-lite",
             contents=prompt,
             config=types.GenerateContentConfig(
                 temperature=0.2,
