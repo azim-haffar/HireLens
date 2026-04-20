@@ -6,11 +6,10 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from app.utils.helpers import require_user
 from app.database import get_supabase_service
-from app.services.groq_client import get_groq_client
-from groq import RateLimitError
+from app.services.groq_client import get_groq_client, _is_capacity_error
 
 _PRIMARY_MODEL  = "llama-3.3-70b-versatile"
-_FALLBACK_MODEL = "llama-3.1-8b-instant"
+_FALLBACK_MODEL = "gemma2-9b-it"
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/chat", tags=["chat"])
@@ -112,21 +111,21 @@ async def chat(body: ChatRequest, user: dict = Depends(require_user)):
                 stream=True,
             )
 
-        model = _PRIMARY_MODEL
-        try:
-            stream = await asyncio.to_thread(_sync_stream, model)
-        except RateLimitError:
-            logger.warning("Chat rate limit on %s, falling back to %s", model, _FALLBACK_MODEL)
+        stream = None
+        for model in (_PRIMARY_MODEL, _FALLBACK_MODEL):
             try:
-                stream = await asyncio.to_thread(_sync_stream, _FALLBACK_MODEL)
+                stream = await asyncio.to_thread(_sync_stream, model)
+                break
             except Exception as e:
-                logger.error("Chat fallback error: %s", e)
-                yield f"data: {json.dumps({'error': 'AI service is busy — please try again shortly'})}\n\n"
+                if _is_capacity_error(e):
+                    logger.warning("Chat capacity error on %s, trying %s", model, _FALLBACK_MODEL)
+                    continue
+                logger.error("Chat stream error: %s", e)
+                yield f"data: {json.dumps({'error': 'AI service error'})}\n\n"
                 yield "data: [DONE]\n\n"
                 return
-        except Exception as e:
-            logger.error("Chat stream error: %s", e)
-            yield f"data: {json.dumps({'error': 'AI service error'})}\n\n"
+        if stream is None:
+            yield f"data: {json.dumps({'error': 'AI service is busy — please try again shortly'})}\n\n"
             yield "data: [DONE]\n\n"
             return
 

@@ -2,7 +2,7 @@ import asyncio
 import json
 import logging
 import re
-from groq import Groq, RateLimitError
+from groq import Groq
 from fastapi import HTTPException
 from app.config import get_settings
 
@@ -10,9 +10,10 @@ logger = logging.getLogger(__name__)
 
 _client = None
 
-# Primary model tried first; fallback used on 429 rate-limit errors.
+# Primary tried first; fallback on 429/413 capacity errors.
+# gemma2-9b-it has 15k TPM (vs 6k for the 70b/8b models) on the free tier.
 _PRIMARY_MODEL  = "llama-3.3-70b-versatile"
-_FALLBACK_MODEL = "llama-3.1-8b-instant"
+_FALLBACK_MODEL = "gemma2-9b-it"
 
 
 def get_groq_client():
@@ -45,6 +46,12 @@ def _extract_json(text: str) -> dict | list:
     raise HTTPException(status_code=502, detail="AI service returned invalid response")
 
 
+def _is_capacity_error(exc: Exception) -> bool:
+    """True for 429 rate-limit and 413 request-too-large errors."""
+    msg = str(exc)
+    return "429" in msg or "413" in msg or "rate_limit_exceeded" in msg
+
+
 def _make_call(model: str, messages: list, temperature: float, max_tokens: int):
     client = get_groq_client()
     return client.chat.completions.create(
@@ -56,22 +63,28 @@ def _make_call(model: str, messages: list, temperature: float, max_tokens: int):
 
 
 async def _call_with_fallback(messages: list, temperature: float, max_tokens: int) -> str:
-    for model in (_PRIMARY_MODEL, _FALLBACK_MODEL):
+    # Use smaller max_tokens on fallback to stay within the 15k TPM window
+    fallback_max_tokens = min(max_tokens, 4096)
+    configs = [
+        (_PRIMARY_MODEL,  max_tokens),
+        (_FALLBACK_MODEL, fallback_max_tokens),
+    ]
+    for model, tokens in configs:
         try:
             response = await asyncio.wait_for(
-                asyncio.to_thread(_make_call, model, messages, temperature, max_tokens),
+                asyncio.to_thread(_make_call, model, messages, temperature, tokens),
                 timeout=60.0,
             )
             if model != _PRIMARY_MODEL:
-                logger.info("Used fallback model %s", model)
+                logger.info("Used fallback model %s (max_tokens=%d)", model, tokens)
             return response.choices[0].message.content
-        except RateLimitError:
-            logger.warning("Rate limit on model %s, trying next", model)
-            continue
         except asyncio.TimeoutError:
             logger.error("Groq API timed out (model=%s)", model)
             raise HTTPException(status_code=504, detail="AI service timeout — please try again")
         except Exception as e:
+            if _is_capacity_error(e):
+                logger.warning("Capacity error on model %s, trying next: %s", model, e)
+                continue
             logger.error("Groq API error (model=%s): %s", model, e)
             raise HTTPException(status_code=502, detail="AI service error — please try again")
     raise HTTPException(status_code=429, detail="AI service is busy — please try again in a few minutes")
