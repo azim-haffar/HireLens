@@ -7,6 +7,10 @@ from pydantic import BaseModel
 from app.utils.helpers import require_user
 from app.database import get_supabase_service
 from app.services.groq_client import get_groq_client
+from groq import RateLimitError
+
+_PRIMARY_MODEL  = "llama-3.3-70b-versatile"
+_FALLBACK_MODEL = "llama-3.1-8b-instant"
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/chat", tags=["chat"])
@@ -99,24 +103,40 @@ async def chat(body: ChatRequest, user: dict = Depends(require_user)):
     async def stream_response():
         client = get_groq_client()
 
-        def _sync_stream():
+        def _sync_stream(model):
             return client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
+                model=model,
                 messages=messages,
                 temperature=0.4,
                 max_tokens=512,
                 stream=True,
             )
 
+        model = _PRIMARY_MODEL
         try:
-            stream = await asyncio.to_thread(_sync_stream)
+            stream = await asyncio.to_thread(_sync_stream, model)
+        except RateLimitError:
+            logger.warning("Chat rate limit on %s, falling back to %s", model, _FALLBACK_MODEL)
+            try:
+                stream = await asyncio.to_thread(_sync_stream, _FALLBACK_MODEL)
+            except Exception as e:
+                logger.error("Chat fallback error: %s", e)
+                yield f"data: {json.dumps({'error': 'AI service is busy — please try again shortly'})}\n\n"
+                yield "data: [DONE]\n\n"
+                return
+        except Exception as e:
+            logger.error("Chat stream error: %s", e)
+            yield f"data: {json.dumps({'error': 'AI service error'})}\n\n"
+            yield "data: [DONE]\n\n"
+            return
+
+        try:
             for chunk in stream:
                 content = chunk.choices[0].delta.content
                 if content:
                     yield f"data: {json.dumps({'content': content})}\n\n"
         except Exception as e:
-            logger.error("Chat stream error: %s", e)
-            yield f"data: {json.dumps({'error': 'AI service error'})}\n\n"
+            logger.error("Chat stream chunk error: %s", e)
         finally:
             yield "data: [DONE]\n\n"
 
