@@ -13,7 +13,7 @@ _client = None
 # Primary tried first; fallback on 429/413 capacity errors.
 # gemma2-9b-it has 15k TPM (vs 6k for the 70b/8b models) on the free tier.
 _PRIMARY_MODEL  = "llama-3.3-70b-versatile"
-_FALLBACK_MODEL = "gemma2-9b-it"
+_FALLBACK_MODEL = "llama3-8b-8192"
 
 
 def get_groq_client():
@@ -47,9 +47,14 @@ def _extract_json(text: str) -> dict | list:
 
 
 def _is_capacity_error(exc: Exception) -> bool:
-    """True for 429 rate-limit and 413 request-too-large errors."""
+    """True for errors that warrant trying the next model."""
     msg = str(exc)
-    return "429" in msg or "413" in msg or "rate_limit_exceeded" in msg
+    return (
+        "429" in msg
+        or "413" in msg
+        or "rate_limit_exceeded" in msg
+        or "model_decommissioned" in msg
+    )
 
 
 def _make_call(model: str, messages: list, temperature: float, max_tokens: int):

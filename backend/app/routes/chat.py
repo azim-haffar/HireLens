@@ -9,7 +9,7 @@ from app.database import get_supabase_service
 from app.services.groq_client import get_groq_client, _is_capacity_error
 
 _PRIMARY_MODEL  = "llama-3.3-70b-versatile"
-_FALLBACK_MODEL = "gemma2-9b-it"
+_FALLBACK_MODEL = "llama3-8b-8192"
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/chat", tags=["chat"])
