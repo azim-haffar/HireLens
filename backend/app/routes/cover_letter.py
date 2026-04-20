@@ -58,16 +58,11 @@ async def create_cover_letter(
         score_data=analysis.data.get("score_result", {}),
     )
 
-    # Cache cover letter back to analysis record
-    update = (
-        db.table("analyses")
-        .update({"cover_letter": result})
-        .eq("id", body.analysis_id)
-        .execute()
-    )
-    if not update.data:
-        logger.error("Failed to cache cover letter for analysis=%s", body.analysis_id)
-        raise HTTPException(status_code=500, detail="Cover letter generated but could not be saved")
+    # Cache cover letter back to analysis record (fire-and-forget — don't fail if caching fails)
+    try:
+        db.table("analyses").update({"cover_letter": result}).eq("id", body.analysis_id).execute()
+        logger.info("Cover letter cached analysis=%s user=%s", body.analysis_id, user["id"])
+    except Exception as e:
+        logger.warning("Cover letter cache failed analysis=%s: %s", body.analysis_id, e)
 
-    logger.info("Cover letter saved analysis=%s user=%s", body.analysis_id, user["id"])
     return result
