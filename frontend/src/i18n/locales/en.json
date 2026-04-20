@@ -315,7 +315,8 @@
   "chat": {
     "title": "HireLens AI",
     "subtitle": "Your personal career coach",
-    "greeting": "Hi! I've read your CV and the job description. Ask me anything — how to improve your score, rewrite bullet points, or prep for interviews.",
+    "greeting": "Hi! I'm your HireLens AI coach. On an analysis page I have full context about your CV and job. Ask me anything — improving your score, rewriting bullet points, or interview prep.",
+    "greetingContext": "Hi! I've read your CV and the job description. Ask me anything — how to improve your score, rewrite bullet points, or prep for interviews.",
     "placeholder": "Ask anything about your CV or this job…",
     "suggest1": "How can I improve my match score?",
     "suggest2": "What skills should I learn next?",

@@ -18,7 +18,7 @@ class ChatMessage(BaseModel):
 
 
 class ChatRequest(BaseModel):
-    analysis_id: str
+    analysis_id: str | None = None
     messages: list[ChatMessage]
 
 
@@ -69,29 +69,29 @@ Your role:
 async def chat(body: ChatRequest, user: dict = Depends(require_user)):
     db = get_supabase_service()
 
-    # Fetch analysis
-    analysis_res = (
-        db.table("analyses")
-        .select("cv_id, job_id, score_result, ats_report")
-        .eq("id", body.analysis_id)
-        .eq("user_id", user["id"])
-        .single()
-        .execute()
-    )
-    if not analysis_res.data:
-        raise HTTPException(status_code=404, detail="Analysis not found")
-    analysis = analysis_res.data
-
-    # Fetch CV and job in parallel
-    cv_res = db.table("cvs").select("parsed_data").eq("id", analysis["cv_id"]).single().execute()
-    job_res = db.table("jobs").select("title, company, parsed_data").eq("id", analysis["job_id"]).single().execute()
-
-    cv = cv_res.data or {}
-    job = job_res.data or {}
-    score = analysis.get("score_result") or {}
-    ats = analysis.get("ats_report") or {}
-
-    system_prompt = _build_system_prompt(cv, job, score, ats)
+    if body.analysis_id:
+        analysis_res = (
+            db.table("analyses")
+            .select("cv_id, job_id, score_result, ats_report")
+            .eq("id", body.analysis_id)
+            .eq("user_id", user["id"])
+            .single()
+            .execute()
+        )
+        analysis = analysis_res.data or {}
+        cv_res = db.table("cvs").select("parsed_data").eq("id", analysis.get("cv_id", "")).single().execute()
+        job_res = db.table("jobs").select("title, company, parsed_data").eq("id", analysis.get("job_id", "")).single().execute()
+        cv = cv_res.data or {}
+        job = job_res.data or {}
+        score = analysis.get("score_result") or {}
+        ats = analysis.get("ats_report") or {}
+        system_prompt = _build_system_prompt(cv, job, score, ats)
+    else:
+        system_prompt = (
+            "You are HireLens AI, a professional career coaching assistant. "
+            "Help users with CV advice, job searching, interview preparation, and career development. "
+            "Be concise, specific, and actionable. Keep responses under 200 words."
+        )
 
     messages = [{"role": "system", "content": system_prompt}]
     messages += [{"role": m.role, "content": m.content} for m in body.messages]

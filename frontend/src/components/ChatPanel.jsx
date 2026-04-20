@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { MessageCircle, X, Send, Loader2, Bot, User } from 'lucide-react'
+import { X, Send, Loader2, Bot, User, Sparkles } from 'lucide-react'
 import { chatApi } from '../lib/api'
 import clsx from 'clsx'
 
@@ -15,7 +15,8 @@ export default function ChatPanel({ analysisId }) {
 
   useEffect(() => {
     if (open && messages.length === 0) {
-      setMessages([{ role: 'assistant', content: t('chat.greeting') }])
+      const greeting = analysisId ? t('chat.greetingContext') : t('chat.greeting')
+      setMessages([{ role: 'assistant', content: greeting }])
     }
     if (open) setTimeout(() => inputRef.current?.focus(), 100)
   }, [open])
@@ -79,20 +80,44 @@ export default function ChatPanel({ analysisId }) {
   return (
     <>
       {/* Floating button */}
-      <button
-        onClick={() => setOpen(o => !o)}
-        className={clsx(
-          'fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300',
-          'bg-gradient-to-br from-brand-500 to-violet-600 hover:scale-110 hover:shadow-glow-brand',
-          open && 'scale-95'
-        )}
-        aria-label="Open AI chat"
-      >
-        {open
-          ? <X className="w-6 h-6 text-white" />
-          : <MessageCircle className="w-6 h-6 text-white" />
-        }
-      </button>
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        {/* Tooltip label */}
+        <div className={clsx(
+          'flex items-center gap-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg transition-all duration-300',
+          !open ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'
+        )}>
+          <Sparkles className="w-3 h-3" />
+          Ask AI
+        </div>
+
+        <div className="relative">
+          {/* Pulse rings — only when closed */}
+          {!open && (
+            <>
+              <span className="absolute inset-0 rounded-full bg-brand-500 opacity-30 animate-ping" />
+              <span className="absolute inset-[-4px] rounded-full border border-brand-400/40 animate-pulse" />
+            </>
+          )}
+
+          <button
+            onClick={() => setOpen(o => !o)}
+            className={clsx(
+              'relative w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-all duration-300',
+              'bg-gradient-to-br from-brand-500 via-violet-500 to-violet-600',
+              'hover:scale-110 hover:shadow-glow-brand active:scale-95',
+              open ? 'rotate-0' : 'rotate-0'
+            )}
+            aria-label="Open AI chat"
+          >
+            <div className={clsx('absolute transition-all duration-300', open ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-75')}>
+              <X className="w-5 h-5 text-white" />
+            </div>
+            <div className={clsx('absolute transition-all duration-300', !open ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75')}>
+              <Sparkles className="w-5 h-5 text-white" />
+            </div>
+          </button>
+        </div>
+      </div>
 
       {/* Chat panel */}
       <div className={clsx(
