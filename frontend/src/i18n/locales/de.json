@@ -219,7 +219,17 @@
     "educationFit": "Bildungseignung (15%)",
     "keywordCoverage": "Schlüsselwortabdeckung (15%)",
     "whyScore": "Warum dieser Score",
-    "recommendations": "Empfehlungen"
+    "recommendations": "Empfehlungen",
+    "howCalculated": "Wie dieser Score berechnet wurde",
+    "skillMatchShort": "Kompetenzen",
+    "expShort": "Erfahrung",
+    "eduShort": "Bildung",
+    "kwShort": "Schlüsselwörter",
+    "calcComponent": "Komponente",
+    "calcScore": "Score",
+    "calcWeight": "Gewicht",
+    "calcPts": "Pkt",
+    "calcTotal": "Gesamt"
   },
 
   "ats": {

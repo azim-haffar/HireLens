@@ -219,7 +219,17 @@
     "educationFit": "Uddannelsesmatch (15%)",
     "keywordCoverage": "Nøgleordsdækning (15%)",
     "whyScore": "Hvorfor denne score",
-    "recommendations": "Anbefalinger"
+    "recommendations": "Anbefalinger",
+    "howCalculated": "Hvordan denne score blev beregnet",
+    "skillMatchShort": "Kompetencer",
+    "expShort": "Erfaring",
+    "eduShort": "Uddannelse",
+    "kwShort": "Nøgleord",
+    "calcComponent": "Komponent",
+    "calcScore": "Score",
+    "calcWeight": "Vægt",
+    "calcPts": "Pts",
+    "calcTotal": "Total"
   },
 
   "ats": {

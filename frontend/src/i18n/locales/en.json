@@ -220,7 +220,17 @@
     "educationFit": "Education fit (15%)",
     "keywordCoverage": "Keyword coverage (15%)",
     "whyScore": "Why this score",
-    "recommendations": "Recommendations"
+    "recommendations": "Recommendations",
+    "howCalculated": "How this score was calculated",
+    "skillMatchShort": "Skill match",
+    "expShort": "Experience",
+    "eduShort": "Education fit",
+    "kwShort": "Keyword coverage",
+    "calcComponent": "Component",
+    "calcScore": "Score",
+    "calcWeight": "Weight",
+    "calcPts": "Pts",
+    "calcTotal": "Total"
   },
 
   "ats": {

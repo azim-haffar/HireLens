@@ -219,7 +219,17 @@
     "educationFit": "Eğitim uyumu (15%)",
     "keywordCoverage": "Anahtar kelime kapsamı (15%)",
     "whyScore": "Bu puan neden",
-    "recommendations": "Öneriler"
+    "recommendations": "Öneriler",
+    "howCalculated": "Bu puan nasıl hesaplandı",
+    "skillMatchShort": "Beceriler",
+    "expShort": "Deneyim",
+    "eduShort": "Eğitim",
+    "kwShort": "Anahtar kelimeler",
+    "calcComponent": "Bileşen",
+    "calcScore": "Puan",
+    "calcWeight": "Ağırlık",
+    "calcPts": "Puan",
+    "calcTotal": "Toplam"
   },
 
   "ats": {

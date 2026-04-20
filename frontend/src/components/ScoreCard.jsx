@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import clsx from 'clsx'
 import { useTranslation } from 'react-i18next'
+import { ChevronDown } from 'lucide-react'
 
 const VERDICT_CONFIG = {
   strong:   { color: 'text-emerald-600',  bg: 'bg-emerald-50 dark:bg-emerald-900/20',  border: 'border-emerald-200 dark:border-emerald-800',  ring: '#10b981', key: 'score.strong' },
@@ -43,6 +45,90 @@ function DimBar({ label, score }) {
           }}
         />
       </div>
+    </div>
+  )
+}
+
+function ScoreBreakdown({ score, t }) {
+  const [open, setOpen] = useState(false)
+
+  const components = [
+    { labelKey: 'score.skillMatch',          raw: 'score.skillMatchShort',   value: score.skill_match_score,  weight: 0.40, label: t('score.skillMatchShort') },
+    { labelKey: 'score.experienceRelevance', raw: 'score.expShort',          value: score.experience_score,   weight: 0.30, label: t('score.expShort') },
+    { labelKey: 'score.educationFit',        raw: 'score.eduShort',          value: score.education_score,    weight: 0.15, label: t('score.eduShort') },
+    { labelKey: 'score.keywordCoverage',     raw: 'score.kwShort',           value: score.keyword_score,      weight: 0.15, label: t('score.kwShort') },
+  ]
+
+  const valid = components.every(c => c.value != null)
+  if (!valid) return null
+
+  const contributions = components.map(c => ({
+    ...c,
+    contribution: Math.round(c.value * c.weight * 10) / 10,
+    maxContribution: c.weight * 100,
+  }))
+  const total = contributions.reduce((s, c) => s + c.contribution, 0)
+
+  return (
+    <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="flex items-center justify-between w-full text-left group"
+      >
+        <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+          {t('score.howCalculated')}
+        </p>
+        <ChevronDown className={clsx(
+          'w-4 h-4 text-gray-400 dark:text-gray-500 transition-transform duration-200',
+          open && 'rotate-180'
+        )} />
+      </button>
+
+      {open && (
+        <div className="mt-3 space-y-2 animate-fade-in">
+          {/* Formula header */}
+          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-3 items-center text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide px-1 pb-1 border-b border-gray-100 dark:border-gray-700">
+            <span>{t('score.calcComponent')}</span>
+            <span className="text-right">{t('score.calcScore')}</span>
+            <span className="text-right">{t('score.calcWeight')}</span>
+            <span className="text-right">{t('score.calcPts')}</span>
+          </div>
+
+          {contributions.map((c, i) => (
+            <div key={i} className="space-y-1">
+              <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-3 items-center text-xs px-1">
+                <span className="text-gray-700 dark:text-gray-300 font-medium truncate">{c.label}</span>
+                <span className="text-gray-500 dark:text-gray-400 tabular-nums text-right">{c.value}</span>
+                <span className="text-gray-400 dark:text-gray-500 tabular-nums text-right">×{Math.round(c.weight * 100)}%</span>
+                <span className="font-semibold text-gray-800 dark:text-gray-200 tabular-nums text-right">
+                  {c.contribution}
+                </span>
+              </div>
+              {/* Contribution bar — shows proportion of max possible pts for this component */}
+              <div className="h-1.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden mx-1">
+                <div
+                  className="h-full rounded-full transition-all duration-700"
+                  style={{
+                    width: `${(c.contribution / c.maxContribution) * 100}%`,
+                    backgroundColor: c.value >= 80 ? '#22c55e' : c.value >= 60 ? '#eab308' : c.value >= 40 ? '#f97316' : '#ef4444',
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+
+          {/* Total row */}
+          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-3 items-center text-xs px-1 pt-2 border-t border-gray-100 dark:border-gray-700">
+            <span className="text-gray-500 dark:text-gray-400 uppercase text-[10px] font-semibold tracking-wide">{t('score.calcTotal')}</span>
+            <span />
+            <span />
+            <span className="font-bold text-base text-gray-900 dark:text-gray-100 tabular-nums text-right">
+              {score.overall_score}
+              <span className="text-xs font-normal text-gray-400 dark:text-gray-500">/100</span>
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -102,8 +188,10 @@ export default function ScoreCard({ score }) {
         <DimBar label={t('score.keywordCoverage')} score={score.keyword_score} />
       </div>
 
+      <ScoreBreakdown score={score} t={t} />
+
       {score.reasons?.length > 0 && (
-        <div className="space-y-2">
+        <div className="space-y-2 mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
           <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">{t('score.whyScore')}</p>
           <ul className="space-y-1.5">
             {score.reasons.map((r, i) => (

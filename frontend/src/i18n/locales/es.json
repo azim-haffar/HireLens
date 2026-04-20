@@ -219,7 +219,17 @@
     "educationFit": "Adecuación educativa (15%)",
     "keywordCoverage": "Cobertura de palabras clave (15%)",
     "whyScore": "Por qué esta puntuación",
-    "recommendations": "Recomendaciones"
+    "recommendations": "Recomendaciones",
+    "howCalculated": "Cómo se calculó esta puntuación",
+    "skillMatchShort": "Habilidades",
+    "expShort": "Experiencia",
+    "eduShort": "Educación",
+    "kwShort": "Palabras clave",
+    "calcComponent": "Componente",
+    "calcScore": "Puntuación",
+    "calcWeight": "Peso",
+    "calcPts": "Pts",
+    "calcTotal": "Total"
   },
 
   "ats": {
