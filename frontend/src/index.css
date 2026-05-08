@@ -1,0 +1,252 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Keyframes ─────────────────────────────────────────────────── */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.75); }
+  70%  { transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(59,130,246,0.35)); }
+  50%       { filter: drop-shadow(0 0 14px rgba(139,92,246,0.65)); }
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes slideInFromLeft {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.5; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes drawRing {
+  from { stroke-dashoffset: var(--target-offset, 0); opacity: 0; }
+  to   { stroke-dashoffset: 0; opacity: 1; }
+}
+
+@keyframes floatA {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33%       { transform: translateY(-18px) translateX(8px); }
+  66%       { transform: translateY(10px) translateX(-6px); }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  33%       { transform: translateY(12px) translateX(-12px); }
+  66%       { transform: translateY(-8px) translateX(10px); }
+}
+
+@keyframes arrowSlide {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes progressIndeterminate {
+  from { width: 0%; }
+  to   { width: 82%; }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes ping {
+  0%        { transform: scale(1); opacity: 1; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+
+@keyframes roastPulse {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(249,115,22,0.55)); transform: scale(1); }
+  50%       { filter: drop-shadow(0 0 22px rgba(239,68,68,0.85)); transform: scale(1.08); }
+}
+
+@keyframes msgFade {
+  0%   { opacity: 0; transform: translateY(6px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  85%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+
+@layer base {
+  body {
+    @apply text-gray-100;
+    background: #050810;
+    background-image:
+      radial-gradient(ellipse at 15% 40%, rgba(59,130,246,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 10%, rgba(139,92,246,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(59,130,246,0.04) 0%, transparent 45%);
+    background-attachment: fixed;
+  }
+
+  /* smooth expand animation for <details> open content */
+  details[open] summary ~ * {
+    animation: fadeSlideUp 0.22s ease both;
+  }
+}
+
+/* ── Component utilities ───────────────────────────────────────── */
+
+@layer components {
+
+  /* Page mount animation */
+  .animate-page {
+    animation: fadeSlideUp 0.38s ease both;
+  }
+
+  /* Staggered list items — set --delay on each element */
+  .stagger-item {
+    animation: fadeSlideUp 0.35s ease both;
+    animation-delay: var(--delay, 0s);
+  }
+
+  .pop-in {
+    animation: popIn 0.28s ease both;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* Glass morphism card */
+  .glass-card {
+    @apply rounded-2xl;
+    background: rgba(255,255,255,0.035);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 4px 24px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  /* Primary gradient button */
+  .btn-primary {
+    @apply relative overflow-hidden inline-flex items-center justify-center
+           font-semibold text-white rounded-lg text-sm
+           transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+    box-shadow: 0 2px 14px rgba(59,130,246,0.28);
+  }
+  .btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 22px rgba(59,130,246,0.45);
+  }
+  .btn-primary:active:not(:disabled) { transform: translateY(0); }
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 rounded-lg pointer-events-none;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.25) 0%, transparent 65%);
+    opacity: 0;
+    transform: scale(0);
+  }
+  .btn-primary:active::after {
+    animation: ripple 0.45s ease-out forwards;
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply relative overflow-hidden inline-flex items-center justify-center
+           font-semibold rounded-lg text-sm
+           transition-all duration-200;
+    border: 1px solid rgba(59,130,246,0.45);
+    color: #60a5fa;
+    background: rgba(59,130,246,0.06);
+  }
+  .btn-outline:hover {
+    background: rgba(59,130,246,0.14);
+    border-color: rgba(59,130,246,0.75);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(59,130,246,0.2);
+  }
+
+  /* Animated gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 45%, #60a5fa 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 5s ease infinite;
+  }
+
+  /* Score gauge glow */
+  .score-glow {
+    animation: pulseGlow 3.5s ease-in-out infinite;
+  }
+
+  /* Sidebar active nav item */
+  .nav-active {
+    border-left: 2px solid #3b82f6;
+    background: rgba(59,130,246,0.1);
+    color: #93c5fd;
+    box-shadow: inset 0 0 24px rgba(59,130,246,0.05);
+  }
+
+  /* Tab underline slide-in */
+  .tab-underline {
+    position: relative;
+    padding-bottom: 0.625rem;
+  }
+  .tab-underline.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    animation: slideInFromLeft 0.25s ease both;
+  }
+
+  /* 3D tilt on hover (feature cards) */
+  .card-3d {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    transform-style: preserve-3d;
+  }
+  .card-3d:hover {
+    transform: perspective(900px) rotateX(3deg) rotateY(-4deg) translateY(-6px);
+    box-shadow: 0 20px 44px rgba(0,0,0,0.5), 0 0 28px rgba(59,130,246,0.12);
+  }
+
+  /* Skill pill with hover glow */
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.22);
+    color: rgb(147,197,253);
+    transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .skill-pill:hover {
+    background: rgba(59,130,246,0.2);
+    border-color: rgba(59,130,246,0.5);
+    box-shadow: 0 0 10px rgba(59,130,246,0.3);
+  }
+}
