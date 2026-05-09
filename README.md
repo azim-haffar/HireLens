@@ -1,6 +1,6 @@
 # HireLens
 
-> AI-powered CV analysis platform — instant match scoring, ATS auditing, interview preparation, cover letter generation, and job application tracking.
+> Full-Stack AI Recruitment Platform — instant match scoring, ATS auditing, interview preparation, cover letter generation, and job application tracking.
 
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
