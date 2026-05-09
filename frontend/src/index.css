@@ -101,6 +101,7 @@
       radial-gradient(ellipse at 85% 10%, rgba(139,92,246,0.06) 0%, transparent 50%),
       radial-gradient(ellipse at 60% 80%, rgba(59,130,246,0.04) 0%, transparent 45%);
     background-attachment: fixed;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   /* smooth expand animation for <details> open content */
@@ -108,6 +109,65 @@
     animation: fadeSlideUp 0.22s ease both;
   }
 }
+
+/* ── Light mode ─────────────────────────────────────────────────── */
+
+html:not(.dark) body {
+  background-color: #f1f5f9;
+  background-image:
+    radial-gradient(ellipse at 15% 40%, rgba(59,130,246,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 10%, rgba(139,92,246,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(59,130,246,0.05) 0%, transparent 45%);
+  color: #0f172a;
+}
+
+/* Sidebar */
+html:not(.dark) aside {
+  background: rgba(255,255,255,0.85) !important;
+  border-right-color: rgba(0,0,0,0.08) !important;
+}
+
+/* Glass cards */
+html:not(.dark) .glass-card {
+  background: rgba(255,255,255,0.75) !important;
+  border-color: rgba(0,0,0,0.07) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+}
+
+/* Text colour overrides — flip grays for light backgrounds */
+html:not(.dark) .text-gray-100 { color: #111827; }
+html:not(.dark) .text-gray-200 { color: #1f2937; }
+html:not(.dark) .text-gray-300 { color: #374151; }
+html:not(.dark) .text-gray-400 { color: #4b5563; }
+html:not(.dark) .text-gray-500 { color: #6b7280; }
+html:not(.dark) .text-gray-600 { color: #9ca3af; }
+
+/* Keep white text on coloured buttons */
+html:not(.dark) .btn-primary { color: #fff !important; }
+
+/* Outline button */
+html:not(.dark) .btn-outline {
+  color: #2563eb;
+  background: rgba(37,99,235,0.07);
+  border-color: rgba(37,99,235,0.4);
+}
+
+/* Skill pills */
+html:not(.dark) .skill-pill {
+  background: rgba(37,99,235,0.09);
+  border-color: rgba(37,99,235,0.22);
+  color: #1d4ed8;
+}
+
+/* Inputs / selects */
+html:not(.dark) select,
+html:not(.dark) input,
+html:not(.dark) textarea {
+  background: rgba(0,0,0,0.04) !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  color: #0f172a !important;
+}
+html:not(.dark) ::placeholder { color: #94a3b8 !important; }
 
 /* ── Component utilities ───────────────────────────────────────── */
 
