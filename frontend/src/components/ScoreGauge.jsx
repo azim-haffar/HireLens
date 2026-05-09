@@ -33,7 +33,7 @@ export default function ScoreGauge({ score, label, size = 'md' }) {
           <circle
             cx={svgSize / 2} cy={svgSize / 2} r={radius}
             fill="none" strokeWidth={strokeWidth}
-            stroke="rgba(255,255,255,0.07)"
+            stroke="var(--progress-track)"
           />
           {/* Animated fill */}
           <circle

@@ -34,8 +34,8 @@ function ApplicationCard({ app, onDelete, onMove, accentRgb, accentHex }) {
         transform: isDragging ? 'scale(1.02)' : CSS.Transform.toString(transform),
         transition: [transition, 'background 0.2s, border-color 0.2s, box-shadow 0.2s'].filter(Boolean).join(', '),
         opacity: isDragging ? 0 : 1,
-        background: hovered ? `rgba(${accentRgb},0.07)` : 'rgba(255,255,255,0.04)',
-        border: `1px solid ${hovered ? `rgba(${accentRgb},0.35)` : 'rgba(255,255,255,0.07)'}`,
+        background: hovered ? `rgba(${accentRgb},0.07)` : 'var(--bg-card)',
+        border: `1px solid ${hovered ? `rgba(${accentRgb},0.35)` : 'var(--border-subtle)'}`,
         boxShadow: hovered ? `0 4px 18px rgba(${accentRgb},0.18)` : 'none',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
@@ -75,14 +75,14 @@ function ApplicationCard({ app, onDelete, onMove, accentRgb, accentHex }) {
               key={s}
               onClick={() => onMove(app.id, s)}
               className="text-xs px-1.5 py-0.5 rounded-md font-medium transition-all duration-150"
-              style={{ background: 'rgba(255,255,255,0.05)', color: 'rgb(107,114,128)' }}
+              style={{ background: 'var(--bg-card-subtle)', color: 'var(--text-placeholder)' }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = `rgba(${m.rgb},0.15)`
                 e.currentTarget.style.color = m.hex
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
-                e.currentTarget.style.color = 'rgb(107,114,128)'
+                e.currentTarget.style.background = 'var(--bg-card-subtle)'
+                e.currentTarget.style.color = 'var(--text-placeholder)'
               }}
             >
               → {t(`tracker.${s}`)}
@@ -96,9 +96,9 @@ function ApplicationCard({ app, onDelete, onMove, accentRgb, accentHex }) {
 
 /* ── Input style ────────────────────────────────────────────────── */
 const inputStyle = {
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  color: 'rgb(209,213,219)',
+  background: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
+  color: 'var(--text-input)',
   outline: 'none',
 }
 
@@ -196,10 +196,10 @@ export default function TrackerPage() {
         <div
           className="rounded-2xl p-5 mb-6 mt-4"
           style={{
-            background: 'rgba(255,255,255,0.04)',
+            background: 'var(--bg-card)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255,255,255,0.09)',
+            border: '1px solid var(--border-subtle)',
           }}
         >
           <p className="text-sm font-semibold text-gray-300 mb-3">{t('tracker.newApplication')}</p>
@@ -217,7 +217,7 @@ export default function TrackerPage() {
                 className="rounded-xl px-3 py-2.5 text-sm placeholder-gray-600 transition-all duration-200"
                 style={inputStyle}
                 onFocus={(e) => e.target.style.borderColor = 'rgba(59,130,246,0.5)'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                onBlur={(e) => e.target.style.borderColor = 'var(--border-input)'}
               />
             ))}
           </div>
@@ -254,7 +254,7 @@ export default function TrackerPage() {
                   minHeight: '500px',
                   background: isOver
                     ? `rgba(${meta.rgb},0.07)`
-                    : 'rgba(255,255,255,0.03)',
+                    : 'var(--bg-card)',
                   backdropFilter: 'blur(12px)',
                   WebkitBackdropFilter: 'blur(12px)',
                   borderTop: `3px solid ${meta.hex}`,

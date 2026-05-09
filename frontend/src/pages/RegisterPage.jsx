@@ -5,13 +5,13 @@ import { useAuth } from '../hooks/useAuth'
 import { CheckCircle } from 'lucide-react'
 
 const inputStyle = {
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  color: 'rgb(209,213,219)',
+  background: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
+  color: 'var(--text-input)',
   outline: 'none',
 }
 const inputFocus = 'rgba(59,130,246,0.5)'
-const inputBlur  = 'rgba(255,255,255,0.08)'
+const inputBlur  = 'var(--border-input)'
 
 export default function RegisterPage() {
   const { t } = useTranslation()
@@ -103,17 +103,17 @@ export default function RegisterPage() {
           </form>
 
           <div className="my-4 flex items-center gap-2 text-xs text-gray-600">
-            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+            <div className="flex-1 h-px" style={{ background: 'var(--border-subtle)' }} />
             {t('auth.orContinueWith')}
-            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+            <div className="flex-1 h-px" style={{ background: 'var(--border-subtle)' }} />
           </div>
 
           <button
             onClick={signInWithGoogle}
             className="w-full py-2.5 rounded-xl text-sm font-medium text-gray-300 transition-all hover:text-white"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
-            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
-            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
+            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-card-hover)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'var(--bg-card)'}
           >
             {t('auth.google')}
           </button>

@@ -22,9 +22,9 @@ const Q_TYPE_COLOR = {
 }
 
 const inputStyle = {
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  color: 'rgb(209,213,219)',
+  background: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
+  color: 'var(--text-input)',
   outline: 'none',
 }
 
@@ -156,7 +156,7 @@ export default function AnalysisPage() {
             {jobs.length === 0 ? (
               <p
                 className="text-sm text-gray-500 rounded-xl px-3 py-2"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+                style={{ background: 'var(--bg-card-subtle)', border: '1px solid var(--border-subtle)' }}
               >
                 {t('analysis.noJobsSaved')}{' '}
                 <Link to="/jobs" className="text-blue-400 hover:text-blue-300 transition-colors">{t('analysis.addOne')}</Link>
@@ -204,7 +204,7 @@ export default function AnalysisPage() {
           {/* Tab bar */}
           <div
             className="flex mb-6"
-            style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}
+            style={{ borderBottom: '1px solid var(--border-subtle)' }}
           >
             {TABS.map(({ key, label }) => (
               <button
@@ -243,7 +243,7 @@ export default function AnalysisPage() {
                         </div>
                         <div
                           className="h-1.5 rounded-full overflow-hidden"
-                          style={{ background: 'rgba(255,255,255,0.06)' }}
+                          style={{ background: 'var(--progress-track)' }}
                         >
                           <div
                             className="h-full rounded-full"
@@ -364,7 +364,7 @@ export default function AnalysisPage() {
                     </summary>
                     <div
                       className="mt-3 pt-3"
-                      style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+                      style={{ borderTop: '1px solid var(--border-subtle)' }}
                     >
                       <p className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-1.5">
                         {t('analysis.framework')}: {q.framework}
@@ -394,7 +394,7 @@ export default function AnalysisPage() {
                   </div>
                   <p
                     className="text-sm font-medium text-gray-300 mb-4 pb-4"
-                    style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+                    style={{ borderBottom: '1px solid var(--border-subtle)' }}
                   >
                     {t('analysis.subject')}: {coverLetter.subject}
                   </p>
@@ -445,8 +445,8 @@ export default function AnalysisPage() {
                         key={cv.cv_id}
                         className="rounded-xl p-4"
                         style={{
-                          background: 'rgba(255,255,255,0.03)',
-                          border: `2px solid ${comparison.winner === cv.name ? 'rgba(74,222,128,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                          background: 'var(--bg-card)',
+                          border: `2px solid ${comparison.winner === cv.name ? 'rgba(74,222,128,0.4)' : 'var(--border-subtle)'}`,
                         }}
                       >
                         <p className="font-medium text-gray-200 mb-2">{cv.name}</p>

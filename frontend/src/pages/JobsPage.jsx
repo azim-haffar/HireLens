@@ -8,14 +8,14 @@ const PLATFORMS = ['LinkedIn', 'Indeed', 'Greenhouse', 'Lever', 'Stepstone']
 
 /* ── Reusable focused-input style helpers ─────────────────────── */
 const baseInput = {
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.08)',
-  color: 'rgb(209,213,219)',
+  background: 'var(--bg-input)',
+  border: '1px solid var(--border-input)',
+  color: 'var(--text-input)',
   outline: 'none',
   transition: 'border-color 0.2s',
 }
 const focusBorder  = 'rgba(59,130,246,0.55)'
-const normalBorder = 'rgba(255,255,255,0.08)'
+const normalBorder = 'var(--border-input)'
 
 /* ── Run-analysis button with animated arrow ─────────────────── */
 function RunButton({ onClick }) {
@@ -124,10 +124,10 @@ export default function JobsPage() {
       <div
         className="rounded-2xl p-6 mb-5 space-y-5"
         style={{
-          background: 'rgba(255,255,255,0.04)',
+          background: 'var(--bg-card)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255,255,255,0.09)',
+          border: '1px solid var(--border-subtle)',
         }}
       >
         {/* Required skills */}
@@ -195,7 +195,7 @@ export default function JobsPage() {
         <button
           onClick={() => setResult(null)}
           className="w-full py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-gray-200 transition-colors"
-          style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+          style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
         >
           {t('job.addAnother')}
         </button>
@@ -226,16 +226,16 @@ export default function JobsPage() {
       <div
         className="rounded-2xl p-7"
         style={{
-          background: 'rgba(255,255,255,0.04)',
+          background: 'var(--bg-card)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255,255,255,0.09)',
+          border: '1px solid var(--border-subtle)',
         }}
       >
         {/* Pill toggle */}
         <div
           className="flex p-1 rounded-xl mb-6"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}
+          style={{ background: 'var(--bg-input)', border: '1px solid var(--border-subtle)' }}
         >
           {[
             { key: 'url',  label: t('job.urlLabel'),       icon: Link2 },
@@ -318,9 +318,9 @@ export default function JobsPage() {
                     key={p}
                     className="text-xs px-2 py-0.5 rounded-full"
                     style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      color: 'rgb(107,114,128)',
+                      background: 'var(--bg-card-subtle)',
+                      border: '1px solid var(--border-subtle)',
+                      color: 'var(--text-placeholder)',
                     }}
                   >
                     {p}

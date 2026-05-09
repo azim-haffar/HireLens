@@ -39,10 +39,10 @@ function StatCard({ value, label, icon: Icon, accentColor, accentGlow, delay, is
       className="stagger-item relative overflow-hidden rounded-2xl p-5 transition-all duration-300 cursor-default"
       style={{
         '--delay': delay,
-        background: hovered ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.04)',
+        background: hovered ? 'var(--bg-card-hover)' : 'var(--bg-card)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        border: '1px solid var(--border-subtle)',
         borderTop: `2px solid ${accentColor}`,
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
         boxShadow: hovered ? `0 12px 32px rgba(0,0,0,0.4), 0 0 20px ${accentGlow}` : 'none',
@@ -72,7 +72,7 @@ function StatCard({ value, label, icon: Icon, accentColor, accentGlow, delay, is
             <ScoreGauge score={value} size="md" />
           </div>
         ) : (
-          <div className="text-3xl font-black text-white mt-1">{display}</div>
+          <div className="text-3xl font-black mt-1" style={{ color: 'var(--text-input)' }}>{display}</div>
         )}
 
         <div className="text-sm text-gray-400">{label}</div>
@@ -90,10 +90,10 @@ function QuickCard({ to, icon: Icon, title, desc, delay }) {
       className="stagger-item relative overflow-hidden rounded-2xl p-6 block transition-all duration-300"
       style={{
         '--delay': delay,
-        background: 'rgba(255,255,255,0.04)',
+        background: 'var(--bg-card)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        border: `1px solid ${hovered ? 'rgba(59,130,246,0.45)' : 'rgba(255,255,255,0.08)'}`,
+        border: `1px solid ${hovered ? 'rgba(59,130,246,0.45)' : 'var(--border-subtle)'}`,
         transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
         boxShadow: hovered ? '0 8px 28px rgba(59,130,246,0.15)' : 'none',
       }}
@@ -205,7 +205,7 @@ export default function DashboardPage() {
     <div
       className="p-8 max-w-4xl mx-auto animate-page"
       style={{
-        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)',
+        backgroundImage: 'radial-gradient(circle, var(--dot-pattern) 1px, transparent 1px)',
         backgroundSize: '28px 28px',
       }}
     >
@@ -215,10 +215,10 @@ export default function DashboardPage() {
         <div
           className="absolute inset-0 rounded-2xl"
           style={{
-            background: 'linear-gradient(135deg, rgba(15,23,42,0.95) 0%, rgba(88,28,135,0.3) 40%, rgba(30,27,75,0.9) 70%, rgba(15,23,42,0.95) 100%)',
+            background: 'var(--hero-gradient)',
             backgroundSize: '300% 300%',
             animation: 'gradientShift 8s ease infinite',
-            border: '1px solid rgba(139,92,246,0.2)',
+            border: '1px solid var(--hero-border)',
           }}
         />
 
@@ -243,12 +243,12 @@ export default function DashboardPage() {
         ))}
 
         <div className="relative">
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-400/70 mb-2">{t('dashboard.title')}</p>
-          <h1 className="text-3xl font-black mb-1 text-white">
+          <p className="text-xs font-semibold uppercase tracking-widest text-blue-500 mb-2">{t('dashboard.title')}</p>
+          <h1 className="text-3xl font-black mb-1" style={{ color: 'var(--text-input)' }}>
             {t('dashboard.welcomeBack')}{username ? ', ' : ''}
             {username && <span className="gradient-text">{username}</span>}
           </h1>
-          <p className="text-sm" style={{ color: '#94a3b8' }}>Your job application command center — track progress, scores, and activity at a glance.</p>
+          <p className="text-sm" style={{ color: 'var(--text-placeholder)' }}>Your job application command center — track progress, scores, and activity at a glance.</p>
         </div>
       </div>
 
@@ -320,7 +320,7 @@ export default function DashboardPage() {
           </div>
           <div
             className="rounded-2xl overflow-hidden"
-            style={{ border: '1px solid rgba(255,255,255,0.07)' }}
+            style={{ border: '1px solid var(--border-subtle)' }}
           >
             {recent.map((a, i) => {
               const job = a.jobs?.parsed_data || {}
@@ -328,11 +328,11 @@ export default function DashboardPage() {
               return (
                 <div
                   key={a.id}
-                  className="flex items-center justify-between px-5 py-3.5 stagger-item transition-colors duration-150 hover:bg-white/[0.03]"
+                  className="flex items-center justify-between px-5 py-3.5 stagger-item transition-colors duration-150"
                   style={{
                     '--delay': `${0.35 + i * 0.07}s`,
-                    background: i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent',
-                    borderBottom: isLast ? 'none' : '1px solid rgba(255,255,255,0.05)',
+                    background: i % 2 === 0 ? 'var(--bg-card-subtle)' : 'transparent',
+                    borderBottom: isLast ? 'none' : '1px solid var(--border-subtle)',
                   }}
                 >
                   <div className="min-w-0 flex-1">

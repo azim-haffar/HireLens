@@ -36,15 +36,15 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ background: '#050810' }}>
+    <div className="min-h-screen" style={{ background: 'var(--bg-page)' }}>
       {/* Nav */}
       <nav
         className="px-6 py-4 flex items-center justify-between sticky top-0 z-10"
         style={{
-          background: 'rgba(5,8,16,0.8)',
+          background: 'var(--nav-bg)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          borderBottom: '1px solid var(--sidebar-border)',
         }}
       >
         <span className="text-xl font-bold gradient-text">HireLens</span>
@@ -88,7 +88,7 @@ export default function LandingPage() {
           >
             AI-Powered CV Analysis
           </div>
-          <h1 className="text-5xl font-black leading-tight mb-4 text-white">
+          <h1 className="text-5xl font-black leading-tight mb-4" style={{ color: 'var(--text-input)' }}>
             Land the job.<br />
             <span className="gradient-text">Not just an interview.</span>
           </h1>
@@ -148,13 +148,14 @@ export default function LandingPage() {
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder={t('auth.email')}
-              className="w-full rounded-xl px-3 py-2.5 text-sm text-gray-100 outline-none transition-all"
+              className="w-full rounded-xl px-3 py-2.5 text-sm outline-none transition-all"
               style={{
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: 'var(--bg-input)',
+                border: '1px solid var(--border-input)',
+                color: 'var(--text-input)',
               }}
               onFocus={(e) => e.target.style.borderColor = 'rgba(59,130,246,0.5)'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+              onBlur={(e) => e.target.style.borderColor = 'var(--border-input)'}
             />
             <input
               type="password"
@@ -162,13 +163,14 @@ export default function LandingPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder={t('auth.password')}
-              className="w-full rounded-xl px-3 py-2.5 text-sm text-gray-100 outline-none transition-all"
+              className="w-full rounded-xl px-3 py-2.5 text-sm outline-none transition-all"
               style={{
-                background: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: 'var(--bg-input)',
+                border: '1px solid var(--border-input)',
+                color: 'var(--text-input)',
               }}
               onFocus={(e) => e.target.style.borderColor = 'rgba(59,130,246,0.5)'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+              onBlur={(e) => e.target.style.borderColor = 'var(--border-input)'}
             />
             <button type="submit" disabled={loading} className="btn-primary w-full py-2.5 disabled:opacity-60">
               {loading ? t('common.loading') : authMode === 'signin' ? t('auth.signIn') : t('auth.signUp')}
@@ -176,20 +178,21 @@ export default function LandingPage() {
           </form>
 
           <div className="my-4 flex items-center gap-2 text-xs text-gray-600">
-            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+            <div className="flex-1 h-px" style={{ background: 'var(--border-subtle)' }} />
             {t('auth.orContinueWith')}
-            <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
+            <div className="flex-1 h-px" style={{ background: 'var(--border-subtle)' }} />
           </div>
 
           <button
             onClick={signInWithGoogle}
-            className="w-full py-2.5 rounded-xl text-sm font-medium text-gray-300 transition-all hover:text-white"
+            className="w-full py-2.5 rounded-xl text-sm font-medium transition-all"
             style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-subtle)',
+              color: 'var(--text-placeholder)',
             }}
-            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
-            onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
+            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-card-hover)'}
+            onMouseLeave={(e) => e.currentTarget.style.background = 'var(--bg-card)'}
           >
             {t('auth.google')}
           </button>
@@ -198,7 +201,7 @@ export default function LandingPage() {
 
       {/* Features */}
       <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-center mb-2 text-white">
+        <h2 className="text-3xl font-bold text-center mb-2" style={{ color: 'var(--text-input)' }}>
           Everything you need to get hired
         </h2>
         <p className="text-center text-gray-500 mb-12">Powered by Groq's blazing-fast AI inference</p>
@@ -227,7 +230,7 @@ export default function LandingPage() {
 
       <footer
         className="py-8 text-center text-sm text-gray-600"
-        style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+        style={{ borderTop: '1px solid var(--border-subtle)' }}
       >
         HireLens · Built with Groq AI · {new Date().getFullYear()}
       </footer>

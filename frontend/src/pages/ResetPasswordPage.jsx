@@ -51,13 +51,13 @@ export default function ResetPasswordPage() {
                 minLength={6}
                 className="w-full rounded-xl px-3 py-2.5 text-sm placeholder-gray-600"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  color: 'rgb(209,213,219)',
+                  background: 'var(--bg-input)',
+                  border: '1px solid var(--border-input)',
+                  color: 'var(--text-input)',
                   outline: 'none',
                 }}
                 onFocus={(e) => e.target.style.borderColor = 'rgba(59,130,246,0.5)'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                onBlur={(e) => e.target.style.borderColor = 'var(--border-input)'}
               />
             </div>
             <button type="submit" disabled={loading} className="btn-primary w-full py-2.5 disabled:opacity-60">

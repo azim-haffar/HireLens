@@ -103,17 +103,17 @@ export default function Layout() {
         className="shrink-0 flex flex-col"
         style={{
           width: '220px',
-          background: 'rgba(255,255,255,0.02)',
+          background: 'var(--sidebar-bg)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          borderRight: '1px solid rgba(255,255,255,0.06)',
+          borderRight: '1px solid var(--sidebar-border)',
         }}
       >
 
         {/* ── Brand ── */}
         <div
           className="flex items-center gap-3 px-4 py-4 shrink-0"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+          style={{ borderBottom: '1px solid var(--sidebar-border)' }}
         >
           <LogoMark />
           <span
@@ -179,7 +179,7 @@ export default function Layout() {
           <div
             className="sticky bottom-0 h-8 pointer-events-none"
             style={{
-              background: 'linear-gradient(to bottom, transparent, rgba(5,8,16,0.7))',
+              background: 'var(--nav-fade)',
               marginLeft: '-8px',
               marginRight: '-8px',
             }}
@@ -189,7 +189,7 @@ export default function Layout() {
         {/* ── Bottom section ── */}
         <div
           className="px-3 py-3 space-y-3 shrink-0"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+          style={{ borderTop: '1px solid var(--sidebar-border)' }}
         >
           {/* Language pills */}
           <div className="flex items-center gap-1 flex-wrap">
@@ -223,8 +223,8 @@ export default function Layout() {
               className="p-1.5 rounded-lg transition-all duration-200"
               style={{ color: '#94a3b8' }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
-                e.currentTarget.style.color = 'white'
+                e.currentTarget.style.background = 'var(--bg-card-subtle)'
+                e.currentTarget.style.color = 'inherit'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = 'transparent'
@@ -258,8 +258,8 @@ export default function Layout() {
             <div
               className="flex items-center gap-2.5 px-2.5 py-2 rounded-xl"
               style={{
-                background: 'rgba(255,255,255,0.04)',
-                border: '1px solid rgba(255,255,255,0.07)',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-subtle)',
               }}
             >
               <div

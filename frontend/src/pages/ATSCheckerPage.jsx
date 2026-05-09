@@ -49,7 +49,7 @@ function ATSGauge({ score, grade }) {
           </linearGradient>
         </defs>
         <circle cx={size/2} cy={size/2} r={radius}
-          fill="none" strokeWidth={sw} stroke="rgba(255,255,255,0.06)" />
+          fill="none" strokeWidth={sw} stroke="var(--progress-track)" />
         <circle cx={size/2} cy={size/2} r={radius}
           fill="none" strokeWidth={sw}
           stroke="url(#atsRingGrad)"
@@ -83,7 +83,7 @@ function ProgressBar({ active }) {
     setWidth(0)
   }, [active])
   return (
-    <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+    <div className="w-full h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--progress-track)' }}>
       <div
         className="h-full rounded-full"
         style={{
@@ -166,16 +166,16 @@ function CategorySection({ category, rules }) {
     <div
       className="rounded-2xl overflow-hidden"
       style={{
-        background: 'rgba(255,255,255,0.03)',
+        background: 'var(--bg-card)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        border: '1px solid rgba(255,255,255,0.07)',
+        border: '1px solid var(--border-subtle)',
       }}
     >
       <button
         className="w-full flex items-center justify-between px-5 py-4 transition-colors"
         style={{ background: 'transparent' }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.02)' }}
+        onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-card-subtle)' }}
         onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
         onClick={() => setOpen(o => !o)}
       >
@@ -348,10 +348,10 @@ export default function ATSCheckerPage() {
         <div
           className="rounded-2xl p-10 text-center"
           style={{
-            background: 'rgba(255,255,255,0.03)',
+            background: 'var(--bg-card)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255,255,255,0.07)',
+            border: '1px solid var(--border-subtle)',
           }}
         >
           <div className="flex flex-col items-center gap-6">
@@ -399,7 +399,7 @@ export default function ATSCheckerPage() {
                 ? 'rgba(59,130,246,0.07)'
                 : file
                 ? 'rgba(74,222,128,0.04)'
-                : 'rgba(255,255,255,0.03)',
+                : 'var(--bg-card)',
               border: dragging
                 ? '2px solid rgba(59,130,246,0.7)'
                 : file
@@ -415,7 +415,7 @@ export default function ATSCheckerPage() {
             onMouseLeave={(e) => {
               if (dragging) return
               e.currentTarget.style.borderColor = file ? 'rgba(74,222,128,0.5)' : 'rgba(59,130,246,0.3)'
-              e.currentTarget.style.background   = file ? 'rgba(74,222,128,0.04)' : 'rgba(255,255,255,0.03)'
+              e.currentTarget.style.background   = file ? 'rgba(74,222,128,0.04)' : 'var(--bg-card)'
             }}
           >
             <div
@@ -561,12 +561,12 @@ export default function ATSCheckerPage() {
                 onClick={reset}
                 className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
                 style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: 'rgb(209,213,219)',
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-subtle)',
+                  color: 'var(--text-input)',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.09)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--bg-card-hover)' }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--bg-card)' }}
               >
                 <RotateCcw size={14} />
                 {t('ats.recheck')}

@@ -21,7 +21,7 @@ function ProgressBar({ loading, done }) {
   return (
     <div
       className="w-full h-1 rounded-full overflow-hidden"
-      style={{ background: 'rgba(255,255,255,0.07)' }}
+      style={{ background: 'var(--progress-track)' }}
     >
       <div
         className="h-full rounded-full"
@@ -77,7 +77,7 @@ function TimelineItem({ primary, secondary, isLast }) {
         {!isLast && (
           <div
             className="flex-1 w-px mt-1"
-            style={{ background: 'rgba(255,255,255,0.07)', minHeight: '16px' }}
+            style={{ background: 'var(--border-subtle)', minHeight: '16px' }}
           />
         )}
       </div>
@@ -150,7 +150,7 @@ export default function UploadPage() {
     <div
       className="min-h-screen flex items-center justify-center px-4 py-12"
       style={{
-        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)',
+        backgroundImage: 'radial-gradient(circle, var(--dot-pattern) 1px, transparent 1px)',
         backgroundSize: '28px 28px',
       }}
     >
@@ -182,10 +182,10 @@ export default function UploadPage() {
         <div
           className="rounded-2xl p-7 mb-5 space-y-7"
           style={{
-            background: 'rgba(255,255,255,0.04)',
+            background: 'var(--bg-card)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255,255,255,0.09)',
+            border: '1px solid var(--border-subtle)',
           }}
         >
           {/* Skills */}
@@ -271,7 +271,7 @@ export default function UploadPage() {
           <button
             onClick={reset}
             className="w-full py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-gray-200 transition-colors"
-            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+            style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
           >
             {t('upload.uploadAnother')}
           </button>
@@ -285,7 +285,7 @@ export default function UploadPage() {
     <div
       className="min-h-screen flex items-center justify-center px-4"
       style={{
-        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)',
+        backgroundImage: 'radial-gradient(circle, var(--dot-pattern) 1px, transparent 1px)',
         backgroundSize: '28px 28px',
       }}
     >
@@ -330,12 +330,12 @@ export default function UploadPage() {
           style={{
             minHeight: '280px',
             cursor: loading ? 'default' : 'pointer',
-            background: dragging ? 'rgba(59,130,246,0.08)' : 'rgba(255,255,255,0.04)',
+            background: dragging ? 'rgba(59,130,246,0.08)' : 'var(--bg-card)',
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
             border: dragging
               ? '2px solid rgba(59,130,246,0.7)'
-              : '2px dashed rgba(255,255,255,0.1)',
+              : '2px dashed var(--border-input)',
             boxShadow: dragging ? '0 0 32px rgba(59,130,246,0.15) inset' : 'none',
           }}
         >
@@ -346,7 +346,7 @@ export default function UploadPage() {
               {selectedFile && (
                 <div
                   className="flex items-center gap-3 w-full rounded-xl px-4 py-3"
-                  style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
+                  style={{ background: 'var(--bg-input)', border: '1px solid var(--border-input)' }}
                 >
                   <div
                     className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"

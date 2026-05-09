@@ -63,10 +63,10 @@ function HistoryRow({ a, index }) {
       className="relative overflow-hidden rounded-2xl flex items-center stagger-item transition-all duration-200 cursor-default"
       style={{
         '--delay': `${index * 0.05}s`,
-        background: hovered ? `rgba(${rgb},0.06)` : 'rgba(255,255,255,0.04)',
+        background: hovered ? `rgba(${rgb},0.06)` : 'var(--bg-card)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        border: `1px solid ${hovered ? `rgba(${rgb},0.35)` : 'rgba(255,255,255,0.07)'}`,
+        border: `1px solid ${hovered ? `rgba(${rgb},0.35)` : 'var(--border-subtle)'}`,
         boxShadow: hovered ? `0 6px 24px rgba(${rgb},0.15)` : 'none',
         transform: hovered ? 'translateY(-2px)' : 'translateY(0)',
       }}
@@ -232,10 +232,10 @@ export default function HistoryPage() {
         <div
           className="rounded-2xl p-6 mb-7"
           style={{
-            background: 'rgba(255,255,255,0.04)',
+            background: 'var(--bg-card)',
             backdropFilter: 'blur(16px)',
             WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            border: '1px solid var(--border-subtle)',
           }}
         >
           {/* Chart header */}
@@ -266,7 +266,7 @@ export default function HistoryPage() {
               </defs>
               <CartesianGrid
                 strokeDasharray="3 3"
-                stroke="rgba(255,255,255,0.05)"
+                stroke="var(--border-subtle)"
                 vertical={false}
               />
               <XAxis
@@ -282,7 +282,7 @@ export default function HistoryPage() {
                 tickLine={false}
                 ticks={[0, 25, 50, 75, 100]}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'rgba(255,255,255,0.08)', strokeWidth: 1 }} />
+              <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'var(--border-subtle)', strokeWidth: 1 }} />
               <Area
                 type="monotone"
                 dataKey="score"
@@ -304,8 +304,8 @@ export default function HistoryPage() {
       <div
         className="flex items-center gap-2.5 rounded-xl px-4 py-2.5 mb-5 transition-all duration-200"
         style={{
-          background: 'rgba(255,255,255,0.04)',
-          border: `1px solid ${searchFocused ? 'rgba(59,130,246,0.5)' : 'rgba(255,255,255,0.07)'}`,
+          background: 'var(--bg-card)',
+          border: `1px solid ${searchFocused ? 'rgba(59,130,246,0.5)' : 'var(--border-subtle)'}`,
           boxShadow: searchFocused ? '0 0 0 3px rgba(59,130,246,0.1)' : 'none',
         }}
       >

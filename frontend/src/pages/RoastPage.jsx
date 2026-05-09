@@ -31,7 +31,7 @@ function RoastGauge({ score }) {
         </defs>
         {/* Track */}
         <circle cx={size/2} cy={size/2} r={radius}
-          fill="none" strokeWidth={sw} stroke="rgba(255,255,255,0.06)" />
+          fill="none" strokeWidth={sw} stroke="var(--progress-track)" />
         {/* Arc */}
         <circle cx={size/2} cy={size/2} r={radius}
           fill="none" strokeWidth={sw}
@@ -61,7 +61,7 @@ function ScoreBar({ score, delay = 0 }) {
     return () => clearTimeout(t)
   }, [score, delay])
   return (
-    <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+    <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--progress-track)' }}>
       <div
         className="h-full rounded-full"
         style={{
@@ -148,8 +148,7 @@ export default function RoastPage() {
     <div
       className="min-h-screen px-4 py-12 relative"
       style={{
-        background: '#0a0a0a',
-        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)',
+        backgroundImage: 'radial-gradient(circle, var(--dot-pattern) 1px, transparent 1px)',
         backgroundSize: '28px 28px',
       }}
     >
@@ -215,7 +214,7 @@ export default function RoastPage() {
               cursor: loading ? 'default' : 'pointer',
               backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
-              background: dragging ? 'rgba(249,115,22,0.06)' : 'rgba(255,255,255,0.03)',
+              background: dragging ? 'rgba(249,115,22,0.06)' : 'var(--bg-card)',
               border: dragging
                 ? '2px solid rgba(249,115,22,0.7)'
                 : '2px dashed rgba(249,115,22,0.3)',
@@ -229,7 +228,7 @@ export default function RoastPage() {
             onMouseLeave={(e) => {
               if (loading || dragging) return
               e.currentTarget.style.borderColor = 'rgba(249,115,22,0.3)'
-              e.currentTarget.style.background   = 'rgba(255,255,255,0.03)'
+              e.currentTarget.style.background   = 'var(--bg-card)'
             }}
           >
             {loading ? (
@@ -309,7 +308,7 @@ export default function RoastPage() {
             <div
               className="rounded-2xl p-8 text-center"
               style={{
-                background: 'rgba(255,255,255,0.03)',
+                background: 'var(--bg-card)',
                 backdropFilter: 'blur(16px)',
                 WebkitBackdropFilter: 'blur(16px)',
                 border: '1px solid rgba(249,115,22,0.2)',
@@ -329,10 +328,10 @@ export default function RoastPage() {
             <div
               className="rounded-2xl p-6"
               style={{
-                background: 'rgba(255,255,255,0.03)',
+                background: 'var(--bg-card)',
                 backdropFilter: 'blur(12px)',
                 WebkitBackdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.07)',
+                border: '1px solid var(--border-subtle)',
               }}
             >
               <h3 className="font-bold text-gray-200 mb-5 flex items-center gap-2">
@@ -349,8 +348,8 @@ export default function RoastPage() {
                     className="rounded-xl p-4 relative overflow-hidden stagger-item"
                     style={{
                       '--delay': `${i * 0.06}s`,
-                      background: 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(255,255,255,0.07)',
+                      background: 'var(--bg-card-subtle)',
+                      border: '1px solid var(--border-subtle)',
                       borderLeft: '3px solid rgba(249,115,22,0.6)',
                     }}
                   >
@@ -451,7 +450,7 @@ export default function RoastPage() {
                 <button
                   onClick={() => { setResult(null); setError('') }}
                   className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-gray-400 hover:text-gray-200 transition-colors"
-                  style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
+                  style={{ background: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
                 >
                   <RotateCcw size={13} />
                   {t('roast.tryAnother')}

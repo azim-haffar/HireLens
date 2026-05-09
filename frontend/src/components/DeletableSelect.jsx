@@ -47,9 +47,9 @@ export default function DeletableSelect({ value, onChange, onDelete, options, pl
         onClick={() => !disabled && setOpen((o) => !o)}
         className="w-full flex items-center justify-between rounded-xl px-3 py-2 text-sm text-left transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         style={{
-          background: 'rgba(255,255,255,0.05)',
-          border: `1px solid ${open ? 'rgba(59,130,246,0.5)' : 'rgba(255,255,255,0.08)'}`,
-          color: selected ? 'rgb(209,213,219)' : 'rgb(107,114,128)',
+          background: 'var(--bg-input)',
+          border: `1px solid ${open ? 'rgba(59,130,246,0.5)' : 'var(--border-input)'}`,
+          color: selected ? 'var(--text-input)' : 'var(--text-placeholder)',
           boxShadow: open ? '0 0 0 3px rgba(59,130,246,0.1)' : 'none',
           outline: 'none',
         }}
@@ -67,11 +67,11 @@ export default function DeletableSelect({ value, onChange, onDelete, options, pl
         <div
           className="absolute z-50 w-full mt-1 rounded-xl overflow-hidden"
           style={{
-            background: 'rgba(12,17,35,0.98)',
+            background: 'var(--bg-dropdown)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            boxShadow: '0 12px 40px rgba(0,0,0,0.6)',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
           }}
         >
           {options.length === 0 ? (
@@ -93,7 +93,7 @@ export default function DeletableSelect({ value, onChange, onDelete, options, pl
                       background: isSelected ? 'rgba(59,130,246,0.14)' : 'transparent',
                     }}
                     onMouseEnter={(e) => {
-                      if (!isSelected) e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
+                      if (!isSelected) e.currentTarget.style.background = 'var(--bg-card-subtle)'
                     }}
                     onMouseLeave={(e) => {
                       if (!isSelected) e.currentTarget.style.background = 'transparent'
@@ -103,7 +103,7 @@ export default function DeletableSelect({ value, onChange, onDelete, options, pl
                     {/* Label */}
                     <span
                       className="flex-1 text-sm truncate"
-                      style={{ color: isSelected ? 'rgb(147,197,253)' : 'rgb(209,213,219)' }}
+                      style={{ color: isSelected ? 'rgb(147,197,253)' : 'var(--text-input)' }}
                     >
                       {opt.label}
                     </span>
