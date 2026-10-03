@@ -24,7 +24,7 @@ def _keyword_match(cv: ParsedCV, job: JobData) -> ATSRule:
         rule="Keyword Match",
         passed=passed,
         severity="critical" if not passed else "info",
-        suggestion="" if passed else f"Add missing skills: {', '.join(required - matched)}",
+        suggestion="" if passed else f"Only add skills you can demonstrate. Missing from this CV: {', '.join(sorted(required - matched))}",
     )
 
 
@@ -65,7 +65,7 @@ def _experience_years(cv: ParsedCV, job: JobData) -> ATSRule:
     else:
         passed = years >= 1
         suggestion = "Add at least one work experience entry." if not passed else ""
-    return ATSRule(rule="Experience Years", passed=passed, severity="warning" if not passed else "info", suggestion=suggestion)
+    return ATSRule(rule="Experience Entries", passed=passed, severity="warning" if not passed else "info", suggestion=suggestion)
 
 
 def _education_match(cv: ParsedCV, job: JobData) -> ATSRule:
@@ -102,7 +102,7 @@ def _quantified_achievements(cv: ParsedCV, _job: JobData) -> ATSRule:
         rule="Quantified Achievements",
         passed=passed,
         severity="warning" if not passed else "info",
-        suggestion="" if passed else "Add numbers to achievements (e.g., 'improved performance by 30%').",
+        suggestion="" if passed else "Include measured results where available; do not invent numbers.",
     )
 
 
@@ -114,7 +114,7 @@ def _job_title_alignment(cv: ParsedCV, job: JobData) -> ATSRule:
         rule="Job Title Alignment",
         passed=overlap,
         severity="info",
-        suggestion="" if overlap else "Consider aligning your job titles closer to the target role.",
+        suggestion="" if overlap else "Keep your actual job titles. Explain relevant responsibilities in your summary or experience.",
     )
 
 
