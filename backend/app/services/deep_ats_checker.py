@@ -1,9 +1,8 @@
-import io
 import json
 import re
-import pdfplumber
 from app.core.groq_client import chat
 from app.models.scoring import DeepATSRule, DeepATSResult
+from app.services.pdf_validation import open_validated_pdf, extract_validated_text
 
 # ── Severity weights ─────────────────────────────────────────────────────────
 WEIGHT = {"critical": 3, "warning": 2, "info": 1}
@@ -39,7 +38,7 @@ def _rule_parsability(text: str, pdf_bytes: bytes) -> DeepATSRule:
 
 def _rule_no_tables(pdf_bytes: bytes) -> DeepATSRule:
     table_count = 0
-    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+    with open_validated_pdf(pdf_bytes) as pdf:
         for page in pdf.pages:
             tables = page.find_tables()
             table_count += len(tables)
@@ -333,8 +332,9 @@ def _grade(score: int) -> str:
 
 # ── Public entry point ────────────────────────────────────────────────────────
 
-def run_deep_ats_check(pdf_bytes: bytes) -> DeepATSResult:
-    text = _extract_text(pdf_bytes)
+def run_deep_ats_check(pdf_bytes: bytes, *, text: str | None = None) -> DeepATSResult:
+    if text is None:
+        text = extract_validated_text(pdf_bytes)
 
     python_rules: list[DeepATSRule] = [
         _rule_parsability(text, pdf_bytes),
@@ -370,12 +370,3 @@ def run_deep_ats_check(pdf_bytes: bytes) -> DeepATSResult:
         rules=all_rules,
         top_fixes=top_fixes,
     )
-
-
-def _extract_text(pdf_bytes: bytes) -> str:
-    try:
-        with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
-            pages = [page.extract_text() or "" for page in pdf.pages]
-        return "\n".join(pages).strip()
-    except Exception:
-        return ""

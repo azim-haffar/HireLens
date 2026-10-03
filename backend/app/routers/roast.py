@@ -4,7 +4,9 @@ from slowapi import Limiter
 from slowapi.util import get_remote_address
 from app.core.groq_client import chat
 from app.models.scoring import RoastResult
-from app.services.cv_parser import extract_text_from_pdf, parse_cv_with_groq
+from app.services.cv_parser import extract_text_from_pdf
+
+from app.services.pdf_validation import read_pdf_upload
 
 router = APIRouter()
 limiter = Limiter(key_func=get_remote_address)
@@ -50,17 +52,9 @@ Return JSON only:
 @limiter.limit("3/hour")
 async def roast_cv(request: Request, file: UploadFile = File(...)):
     """Public endpoint: roast a CV. Rate limited to 3/hour per IP. No auth required."""
-    if not file.filename.endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
-
-    pdf_bytes = await file.read()
-    if len(pdf_bytes) > 3 * 1024 * 1024:
-        raise HTTPException(status_code=400, detail="File too large. Max 3MB.")
+    pdf_bytes = await read_pdf_upload(file, max_bytes=3 * 1024 * 1024)
 
     raw_text = extract_text_from_pdf(pdf_bytes)
-    if not raw_text.strip():
-        raise HTTPException(status_code=422, detail="Could not extract text from PDF.")
-
     content = chat(
         messages=[{"role": "user", "content": ROAST_PROMPT.format(cv_text=raw_text[:4000])}],
         json_mode=True,

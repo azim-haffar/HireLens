@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from app.core.deps import get_current_user
+from app.core.ownership import get_owned_record
 from app.core.groq_client import stream
 from app.core.supabase_client import supabase_admin
 from app.models.cv import ParsedCV
@@ -36,16 +37,12 @@ Answer questions about the candidate's fit for this role, give actionable advice
 @router.post("/stream")
 async def chat_stream(body: ChatRequest, user: dict = Depends(get_current_user)):
     """Stream AI chat responses scoped to the current CV + job analysis."""
-    cv_row = supabase_admin.table("cv_versions").select("parsed_data").eq("id", body.cv_id).eq("user_id", user["id"]).single().execute()
-    if not cv_row.data:
-        raise HTTPException(status_code=404, detail="CV not found.")
+    cv_row = get_owned_record("cv_versions", body.cv_id, user["id"], "parsed_data", "CV")
 
-    job_row = supabase_admin.table("jobs").select("parsed_data").eq("id", body.job_id).eq("user_id", user["id"]).single().execute()
-    if not job_row.data:
-        raise HTTPException(status_code=404, detail="Job not found.")
+    job_row = get_owned_record("jobs", body.job_id, user["id"], "parsed_data", "Job")
 
-    cv = ParsedCV(**cv_row.data["parsed_data"])
-    job = JobData(**job_row.data["parsed_data"])
+    cv = ParsedCV(**cv_row["parsed_data"])
+    job = JobData(**job_row["parsed_data"])
 
     system_content = SYSTEM_PROMPT.format(
         name=cv.name,

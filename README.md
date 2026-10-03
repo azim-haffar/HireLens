@@ -1,7 +1,7 @@
 # HireLens
 ### A CV, a vacancy, and an explanation you can inspect.
 
-**FastAPI · React · Supabase · Groq · Redis**
+**FastAPI · React · Supabase · Groq**
 
 [Live frontend](https://hirelens-alpha.vercel.app) · [Scoring implementation](backend/app/services/match_scorer.py) · [Tests](backend/tests) · [MIT license](LICENSE)
 
@@ -17,7 +17,7 @@ Upload a PDF CV and supply a job description. HireLens combines structured LLM e
 | FastAPI | Dedicated routers, PDF parsing, scoring, LLM orchestration |
 | Groq | Structured extraction and generated text |
 | Supabase | Authentication and PostgreSQL persistence |
-| Redis | Backend caching infrastructure |
+| Redis | Compose service and setting; no application cache integration found |
 
 ## Scores you can trace
 
@@ -26,8 +26,6 @@ The match score weights **skills 35%, experience entries 25%, education 15%, and
 These are application heuristics, **not a real employer ATS score or a hiring prediction**. Experience scoring counts entries rather than calculating years; education matching is coarse. Generated advice needs human review. No user-count, accuracy, or commercial-adoption claim is made. This project uses LLM APIs; it does not implement a retrieval/vector-search pipeline.
 
 ## Run locally
-
-Native frontend development requires Node.js 22.12 or newer.
 
 Native frontend development requires Node.js 22.12 or newer.
 
@@ -55,8 +53,8 @@ For a native backend, use Python 3.11, install `backend/requirements.txt`, set `
 ## Checks
 
 ```sh
-# From backend; scoring tests need only Pydantic
-python -m pip install 'pydantic==2.7.1'
+# From backend
+python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
 
 # From frontend
@@ -64,4 +62,6 @@ npm ci
 npm run build
 ```
 
-CI runs the scoring regression tests and frontend build without paid API calls or personal CVs. It does not validate live provider responses, Supabase permissions, or end-to-end authenticated workflows. The public frontend depends on external services and may require sign-in.
+CI runs scoring regressions, offline authentication/ownership API checks, and the frontend build without paid API calls or personal CVs. It does not validate live provider responses, Supabase permissions, or end-to-end authenticated workflows. The public frontend depends on external services and may require sign-in.
+
+See the [source audit and remaining priorities](docs/engineering-audit.md) for verified flows, limitations, and a synthetic demo checklist.

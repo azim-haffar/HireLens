@@ -1,8 +1,8 @@
 import json
-import requests
 from bs4 import BeautifulSoup
 from app.core.groq_client import chat
 from app.models.job import JobData
+from app.services.safe_fetch import fetch_job_html
 
 HEADERS = {
     "User-Agent": (
@@ -30,9 +30,7 @@ Job Text:
 
 def scrape_job_url(url: str) -> str:
     """Fetch a job posting page and extract visible text."""
-    resp = requests.get(url, headers=HEADERS, timeout=15)
-    resp.raise_for_status()
-    soup = BeautifulSoup(resp.text, "html.parser")
+    soup = BeautifulSoup(fetch_job_html(url, HEADERS), "html.parser")
 
     # Remove noise elements
     for tag in soup(["script", "style", "nav", "footer", "header", "aside"]):

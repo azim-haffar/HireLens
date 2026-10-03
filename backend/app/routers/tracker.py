@@ -1,6 +1,7 @@
 import uuid
 from fastapi import APIRouter, Depends, HTTPException
 from app.core.deps import get_current_user
+from app.core.ownership import get_owned_record
 from app.core.supabase_client import supabase_admin
 from app.models.tracker import ApplicationCreate, ApplicationUpdate
 from app.services.email_service import send_status_notification
@@ -26,6 +27,10 @@ async def list_applications(user: dict = Depends(get_current_user)):
 @router.post("/applications")
 async def create_application(body: ApplicationCreate, user: dict = Depends(get_current_user)):
     """Create a new application in the tracker."""
+    if body.cv_id:
+        get_owned_record("cv_versions", body.cv_id, user["id"], "id", "CV")
+    if body.analysis_id:
+        get_owned_record("analyses", body.analysis_id, user["id"], "id", "Analysis")
     app_id = str(uuid.uuid4())
     row = {
         "id": app_id,
@@ -48,25 +53,17 @@ async def update_application_status(
     user: dict = Depends(get_current_user),
 ):
     """Update application status and send notification email if applicable."""
-    row = (
-        supabase_admin.table("applications")
-        .select("user_id, job_title, company")
-        .eq("id", app_id)
-        .eq("user_id", user["id"])
-        .single()
-        .execute()
-    )
-    if not row.data:
-        raise HTTPException(status_code=404, detail="Application not found.")
+    row = get_owned_record("applications", app_id, user["id"],
+                           "user_id, job_title, company", "Application")
 
-    supabase_admin.table("applications").update({"status": body.status}).eq("id", app_id).execute()
+    supabase_admin.table("applications").update({"status": body.status}).eq("id", app_id).eq("user_id", user["id"]).execute()
 
     if body.status in NOTIFY_STATUSES:
         send_status_notification(
             to_email=user["email"],
             status=body.status,
-            job_title=row.data["job_title"],
-            company=row.data["company"],
+            job_title=row["job_title"],
+            company=row["company"],
         )
 
     return {"id": app_id, "status": body.status}

@@ -3,12 +3,15 @@ from collections import defaultdict
 from fastapi import APIRouter, Depends, HTTPException, Header, UploadFile, File
 from pydantic import BaseModel
 from app.core.deps import get_current_user
+from app.core.ownership import get_owned_record
 from app.core.supabase_client import supabase_admin
 from app.models.cv import ParsedCV
 from app.models.job import JobData
 from app.models.scoring import ATSResult, DeepATSResult
 from app.services.ats_checker import run_ats_check
 from app.services.deep_ats_checker import run_deep_ats_check
+
+from app.services.pdf_validation import read_pdf_upload, extract_validated_text
 
 router = APIRouter()
 
@@ -17,7 +20,6 @@ router = APIRouter()
 _rate_store: dict[str, list[float]] = defaultdict(list)
 RATE_LIMIT   = 5      # max requests
 RATE_WINDOW  = 3600   # per hour (seconds)
-MAX_PDF_SIZE = 5 * 1024 * 1024  # 5 MB
 
 
 def _check_rate_limit(ip: str) -> None:
@@ -52,16 +54,12 @@ class ATSRequest(BaseModel):
 @router.post("/check", response_model=ATSResult)
 async def check_ats(body: ATSRequest, user: dict = Depends(get_current_user)):
     """Run ATS check on a CV against a job posting."""
-    cv_row = supabase_admin.table("cv_versions").select("parsed_data").eq("id", body.cv_id).eq("user_id", user["id"]).single().execute()
-    if not cv_row.data:
-        raise HTTPException(status_code=404, detail="CV not found.")
+    cv_row = get_owned_record("cv_versions", body.cv_id, user["id"], "parsed_data, raw_text", "CV")
 
-    job_row = supabase_admin.table("jobs").select("parsed_data, raw_text").eq("id", body.job_id).eq("user_id", user["id"]).single().execute()
-    if not job_row.data:
-        raise HTTPException(status_code=404, detail="Job not found.")
+    job_row = get_owned_record("jobs", body.job_id, user["id"], "parsed_data, raw_text", "Job")
 
-    cv = ParsedCV(**cv_row.data["parsed_data"])
-    job = JobData(**job_row.data["parsed_data"], raw_text=job_row.data.get("raw_text", ""))
+    cv = ParsedCV(**{**cv_row["parsed_data"], "raw_text": cv_row.get("raw_text") or ""})
+    job = JobData(**job_row["parsed_data"], raw_text=job_row.get("raw_text", ""))
 
     return run_ats_check(cv, job)
 
@@ -84,13 +82,6 @@ async def deep_check_ats(
         ip = x_forwarded_for.split(",")[0].strip() if x_forwarded_for else (x_real_ip or "unknown")
         _check_rate_limit(ip)
 
-    if cv.content_type not in ("application/pdf", "application/octet-stream"):
-        raise HTTPException(status_code=400, detail="Only PDF files are accepted.")
-
-    pdf_bytes = await cv.read()
-    if len(pdf_bytes) == 0:
-        raise HTTPException(status_code=400, detail="Uploaded file is empty.")
-    if len(pdf_bytes) > MAX_PDF_SIZE:
-        raise HTTPException(status_code=413, detail="File exceeds the 5 MB limit.")
-
-    return run_deep_ats_check(pdf_bytes)
+    pdf_bytes = await read_pdf_upload(cv)
+    text = extract_validated_text(pdf_bytes)
+    return run_deep_ats_check(pdf_bytes, text=text)

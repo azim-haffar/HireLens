@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from app.core.deps import get_current_user
+from app.core.ownership import get_owned_record
 from app.core.supabase_client import supabase_admin
 from app.models.cv import ParsedCV
 from app.models.job import JobData
@@ -37,9 +38,9 @@ class ComparisonResponse(BaseModel):
 
 
 def _score_cv(cv_id: str, user_id: str, job: JobData) -> CVScoreSummary:
-    row = supabase_admin.table("cv_versions").select("parsed_data, raw_text").eq("id", cv_id).eq("user_id", user_id).single().execute()
-    data = row.data["parsed_data"]
-    data["raw_text"] = row.data.get("raw_text", "")
+    row = get_owned_record("cv_versions", cv_id, user_id, "parsed_data, raw_text", "CV")
+    data = row["parsed_data"]
+    data["raw_text"] = row.get("raw_text", "")
     cv = ParsedCV(**data)
     match = compute_match_score(cv, job)
     ats = run_ats_check(cv, job)
@@ -60,9 +61,9 @@ def _score_cv(cv_id: str, user_id: str, job: JobData) -> CVScoreSummary:
 @router.post("/compare", response_model=ComparisonResponse)
 async def compare_cvs(body: ComparisonRequest, user: dict = Depends(get_current_user)):
     """Compare two CVs against a single job description."""
-    job_row = supabase_admin.table("jobs").select("parsed_data, raw_text").eq("id", body.job_id).eq("user_id", user["id"]).single().execute()
-    job_data = job_row.data["parsed_data"]
-    job_data["raw_text"] = job_row.data.get("raw_text", "")
+    job_row = get_owned_record("jobs", body.job_id, user["id"], "parsed_data, raw_text", "Job")
+    job_data = job_row["parsed_data"]
+    job_data["raw_text"] = job_row.get("raw_text", "")
     job = JobData(**job_data)
 
     a = _score_cv(body.cv_id_a, user["id"], job)

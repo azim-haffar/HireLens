@@ -1,8 +1,7 @@
-import io
 import json
-import pdfplumber
 from app.core.groq_client import chat
 from app.models.cv import ParsedCV
+from app.services.pdf_validation import extract_validated_text
 
 PARSE_PROMPT = """Extract structured information from this CV text. Return valid JSON only.
 
@@ -22,10 +21,8 @@ CV Text:
 
 
 def extract_text_from_pdf(pdf_bytes: bytes) -> str:
-    """Extract plain text from PDF bytes using pdfplumber."""
-    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
-        pages = [page.extract_text() or "" for page in pdf.pages]
-    return "\n".join(pages).strip()
+    """Validate a CV PDF and extract readable text."""
+    return extract_validated_text(pdf_bytes)
 
 
 def parse_cv_with_groq(raw_text: str) -> ParsedCV:

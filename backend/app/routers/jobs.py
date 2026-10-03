@@ -4,6 +4,7 @@ from app.core.deps import get_current_user
 from app.core.supabase_client import supabase_admin
 from app.models.job import JobIngestRequest, JobIngestResponse
 from app.services.job_scraper import scrape_job_url, extract_job_with_groq
+from app.services.safe_fetch import JobFetchError
 
 router = APIRouter()
 
@@ -33,7 +34,7 @@ async def delete_job(job_id: str, user: dict = Depends(get_current_user)):
     )
     if not existing.data:
         raise HTTPException(status_code=404, detail="Job not found.")
-    supabase_admin.table("jobs").delete().eq("id", job_id).execute()
+    supabase_admin.table("jobs").delete().eq("id", job_id).eq("user_id", user["id"]).execute()
 
 
 @router.post("/ingest", response_model=JobIngestResponse)
@@ -48,8 +49,8 @@ async def ingest_job(
     if body.url:
         try:
             raw_text = scrape_job_url(body.url)
-        except Exception as exc:
-            raise HTTPException(status_code=422, detail=f"Failed to scrape URL: {exc}")
+        except JobFetchError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from None
     else:
         raw_text = body.text
 

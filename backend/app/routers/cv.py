@@ -5,6 +5,8 @@ from app.core.supabase_client import supabase_admin
 from app.models.cv import CVUploadResponse
 from app.services.cv_parser import extract_text_from_pdf, parse_cv_with_groq
 
+from app.services.pdf_validation import read_pdf_upload
+
 router = APIRouter()
 
 
@@ -14,17 +16,9 @@ async def upload_cv(
     user: dict = Depends(get_current_user),
 ):
     """Upload a PDF CV, extract text, parse with Groq, store in Supabase."""
-    if not file.filename.endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
-
-    pdf_bytes = await file.read()
-    if len(pdf_bytes) > 5 * 1024 * 1024:
-        raise HTTPException(status_code=400, detail="File too large. Max 5MB.")
+    pdf_bytes = await read_pdf_upload(file)
 
     raw_text = extract_text_from_pdf(pdf_bytes)
-    if not raw_text.strip():
-        raise HTTPException(status_code=422, detail="Could not extract text from PDF.")
-
     parsed = parse_cv_with_groq(raw_text)
 
     cv_id = str(uuid.uuid4())
@@ -64,4 +58,4 @@ async def delete_cv(cv_id: str, user: dict = Depends(get_current_user)):
     )
     if not existing.data:
         raise HTTPException(status_code=404, detail="CV not found.")
-    supabase_admin.table("cv_versions").delete().eq("id", cv_id).execute()
+    supabase_admin.table("cv_versions").delete().eq("id", cv_id).eq("user_id", user["id"]).execute()
