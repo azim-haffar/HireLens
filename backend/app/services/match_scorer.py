@@ -1,12 +1,14 @@
+import re
+
 from app.models.cv import ParsedCV
 from app.models.job import JobData
 from app.models.scoring import MatchBreakdown, MatchResult
 
 
 def _skill_fit(cv: ParsedCV, job: JobData) -> tuple[float, list[str], list[str]]:
-    cv_skills = {s.lower() for s in cv.skills}
-    required = {s.lower() for s in job.required_skills}
-    nice = {s.lower() for s in job.nice_to_have}
+    cv_skills = {s.strip().casefold() for s in cv.skills if s.strip()}
+    required = {s.strip().casefold() for s in job.required_skills if s.strip()}
+    nice = {s.strip().casefold() for s in job.nice_to_have if s.strip()}
     all_job_skills = required | nice
 
     if not all_job_skills:
@@ -21,7 +23,7 @@ def _skill_fit(cv: ParsedCV, job: JobData) -> tuple[float, list[str], list[str]]
         req_matched = cv_skills & required
         score = (len(req_matched) / len(required)) * 0.7 + (len(matched) / len(all_job_skills)) * 0.3
 
-    return min(score, 1.0), list(matched), list(missing)
+    return min(score, 1.0), sorted(matched), sorted(missing)
 
 
 def _experience_score(cv: ParsedCV, job: JobData) -> float:
@@ -53,11 +55,11 @@ def _education_score(cv: ParsedCV, job: JobData) -> float:
 
 
 def _keyword_coverage(cv: ParsedCV, job: JobData) -> float:
-    job_keywords = set(job.required_skills + job.nice_to_have)
+    job_keywords = {s.strip().casefold() for s in job.required_skills + job.nice_to_have if s.strip()}
     if not job_keywords:
         return 1.0
     raw = (cv.raw_text or "").lower()
-    hits = sum(1 for kw in job_keywords if kw.lower() in raw)
+    hits = sum(1 for kw in job_keywords if re.search(r"(?<!\w)" + re.escape(kw) + r"(?!\w)", raw) is not None)
     return hits / len(job_keywords)
 
 
