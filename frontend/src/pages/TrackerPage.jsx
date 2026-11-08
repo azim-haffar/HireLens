@@ -47,6 +47,7 @@ function ApplicationCard({ app, onDelete, onMove, accentRgb, accentHex }) {
       {/* Top row: grip + title + delete */}
       <div className="flex items-start gap-2">
         <button
+          aria-label={`Move ${app.company} application`}
           {...attributes}
           {...listeners}
           className="mt-0.5 cursor-grab transition-colors shrink-0"
@@ -59,6 +60,7 @@ function ApplicationCard({ app, onDelete, onMove, accentRgb, accentHex }) {
           <p className="text-xs text-gray-500 truncate mt-0.5">{app.job_title}</p>
         </div>
         <button
+          aria-label={`Delete ${app.company} application`}
           onClick={() => onDelete(app.id)}
           className="text-gray-700 hover:text-red-400 transition-colors shrink-0"
         >
@@ -109,26 +111,38 @@ export default function TrackerPage() {
   const [showForm, setShowForm] = useState(false)
   const [form, setForm]         = useState({ job_title: '', company: '', job_url: '' })
   const [draggingOver, setDraggingOver] = useState(null)
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
 
-  useEffect(() => { api.get('/tracker/applications').then(setApps).catch(() => {}) }, [])
+  useEffect(() => { api.get('/tracker/applications').then(setApps).catch((e) => setError(e.message)) }, [])
 
   const createApp = async () => {
+    if (busy || !form.job_title.trim() || !form.company.trim()) return
+    setBusy(true); setError('')
+    try {
     const data = await api.post('/tracker/applications', form)
     setApps((prev) => [data, ...prev])
     setForm({ job_title: '', company: '', job_url: '' })
     setShowForm(false)
+    } catch (e) { setError(e.message) } finally { setBusy(false) }
   }
 
   const deleteApp = async (id) => {
+    setError('')
+    try {
     await api.delete(`/tracker/applications/${id}`)
     setApps((prev) => prev.filter((a) => a.id !== id))
+    } catch (e) { setError(e.message) }
   }
 
   const moveApp = async (id, status) => {
+    setError('')
+    try {
     await api.patch(`/tracker/applications/${id}`, { status })
     setApps((prev) => prev.map((a) => a.id === id ? { ...a, status } : a))
+    } catch (e) { setError(e.message) }
   }
 
   const handleDragEnd = ({ active, over }) => {
@@ -155,7 +169,7 @@ export default function TrackerPage() {
       }}
     >
       {/* ── Header ── */}
-      <div className="flex items-start justify-between mb-2">
+      <div className="flex flex-wrap gap-3 items-start justify-between mb-2">
         <div>
           <h1
             className="text-2xl font-black"
@@ -191,6 +205,8 @@ export default function TrackerPage() {
         </button>
       </div>
 
+      {error && <p role="alert" className="text-red-400 my-4">{error}</p>}
+      {busy && <p role="status">{t('common.loading')}</p>}
       {/* ── Add form ── */}
       {showForm && (
         <div
@@ -203,7 +219,7 @@ export default function TrackerPage() {
           }}
         >
           <p className="text-sm font-semibold text-gray-300 mb-3">{t('tracker.newApplication')}</p>
-          <div className="grid grid-cols-3 gap-3 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
             {[
               { key: 'job_title', placeholder: t('tracker.jobTitlePlaceholder') },
               { key: 'company',   placeholder: t('tracker.companyPlaceholder') },
@@ -222,7 +238,7 @@ export default function TrackerPage() {
             ))}
           </div>
           <div className="flex gap-2">
-            <button onClick={createApp} className="btn-primary px-4 py-2 text-sm">
+            <button disabled={busy || !form.job_title.trim() || !form.company.trim()} onClick={createApp} className="btn-primary px-4 py-2 text-sm">
               {t('common.save')}
             </button>
             <button onClick={() => setShowForm(false)} className="btn-outline px-4 py-2 text-sm">
@@ -239,7 +255,7 @@ export default function TrackerPage() {
         onDragEnd={handleDragEnd}
         onDragOver={handleDragOver}
       >
-        <div className="grid grid-cols-6 gap-3 overflow-x-auto pb-4 mt-5">
+        <div className="flex gap-3 overflow-x-auto pb-4 mt-5">
           {COLUMNS.map((col) => {
             const meta   = COL_META[col]
             const cards  = colApps(col)
@@ -248,7 +264,7 @@ export default function TrackerPage() {
             return (
               <div
                 key={col}
-                className="rounded-2xl flex flex-col transition-all duration-200"
+                className="rounded-2xl flex-1 shrink-0 flex flex-col transition-all duration-200"
                 style={{
                   minWidth: '160px',
                   minHeight: '500px',

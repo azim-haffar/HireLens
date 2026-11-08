@@ -59,7 +59,7 @@
     "dropHere": "Drop your PDF here",
     "clickBrowse": "or click to browse · Max 5MB",
     "releaseToUpload": "Release to upload",
-    "footer": "PDF format only · Your CV is stored securely and never shared",
+    "footer": "PDF only · Text is sent to Groq for analysis and stored in your Supabase account. Use synthetic data for demos.",
     "nextAddJob": "Next: Add Job",
     "uploadAnother": "Upload Another CV",
     "pdfOnly": "Only PDF files are supported."
@@ -212,5 +212,15 @@
     "delete": "Delete",
     "copy": "Copy",
     "copied": "Copied!"
+  },
+  "journey": {
+    "scoreNote": "Scores are rule-based checks on extracted fields, not employer ATS results or hiring predictions.",
+    "adviceNote": "Generated advice may be inaccurate. Check every claim against your CV and the job before using it.",
+    "track": "Track this application",
+    "tracked": "Application saved",
+    "openTracker": "Open tracker",
+    "fileSize": "Upload a non-empty PDF of at most 5 MB.",
+    "copyError": "Could not copy. Select and copy the text manually.",
+    "navigation": "Navigation"
   }
 }

@@ -1,3 +1,5 @@
+from app.core.llm_output import GROUNDING_RULES
+from app.core.sse import stream_events
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -50,8 +52,6 @@ async def explain_stream(body: ExplainRequest, user: dict = Depends(get_current_
     prompt = _build_explain_prompt(cv, job, match_result.score, ats_result.score)
 
     def event_stream():
-        for chunk in stream([{"role": "user", "content": prompt}]):
-            yield f"data: {chunk}\n\n"
-        yield "data: [DONE]\n\n"
+        yield from stream_events(stream([{"role": "system", "content": GROUNDING_RULES}, {"role": "user", "content": prompt}]))
 
     return StreamingResponse(event_stream(), media_type="text/event-stream")

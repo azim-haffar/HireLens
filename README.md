@@ -23,7 +23,7 @@ Upload a PDF CV and supply a job description. HireLens combines structured LLM e
 
 The match score weights **skills 35%, experience entries 25%, education 15%, and keywords 25%**. Skill matching normalizes case and whitespace; keyword matching uses word boundaries so Java does not match JavaScript. Matched and missing skill lists are sorted for repeatable output.
 
-These are application heuristics, **not a real employer ATS score or a hiring prediction**. Experience scoring counts entries rather than calculating years; education matching is coarse. Generated advice needs human review. No user-count, accuracy, or commercial-adoption claim is made. This project uses LLM APIs; it does not implement a retrieval/vector-search pipeline.
+These are application heuristics, **not a real employer ATS score or a hiring prediction**. Experience scoring counts entries rather than calculating years; education comparison checks requirement words against listed degree text and cannot establish equivalency. Generated advice needs human review. No user-count, accuracy, or commercial-adoption claim is made. This project uses LLM APIs; it does not implement a retrieval/vector-search pipeline.
 
 ## Run locally
 
@@ -65,3 +65,9 @@ npm run build
 CI runs scoring regressions, offline authentication/ownership API checks, and the frontend build without paid API calls or personal CVs. It does not validate live provider responses, Supabase permissions, or end-to-end authenticated workflows. The public frontend depends on external services and may require sign-in.
 
 See the [source audit and remaining priorities](docs/engineering-audit.md) for verified flows, limitations, and a synthetic demo checklist.
+
+## Reproducible quality evidence
+
+[Journey checks and output evaluation](docs/quality-demo.md) document the synthetic API flow, desktop/mobile Chromium checks, error recovery, and offline extraction evaluator. Run `npm test` and `npm run test:journey` from `frontend`; the browser runner needs `npx playwright install chromium`. Run `python -m evaluation.evaluate --self-check` from `backend` to verify the evaluator against authored positive/negative controls.
+
+The demo uses mocked authentication and provider responses. It demonstrates application behavior without claiming live service verification or measured model quality. Generated advice is labelled separately from rule-based scores, and uploading a CV discloses external processing.

@@ -4,39 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { api } from '../lib/api'
 import { Upload, CheckCircle, FileText, ArrowRight, Briefcase, GraduationCap } from 'lucide-react'
 
-/* ── Progress bar that fills to ~82% while loading, 100% on done ── */
-function ProgressBar({ loading, done }) {
-  const [width, setWidth] = useState(0)
-
-  useEffect(() => {
-    if (loading) {
-      setWidth(0)
-      // Small delay so browser paints 0% first
-      const t = setTimeout(() => setWidth(82), 30)
-      return () => clearTimeout(t)
-    }
-    if (done) setWidth(100)
-  }, [loading, done])
-
-  return (
-    <div
-      className="w-full h-1 rounded-full overflow-hidden"
-      style={{ background: 'var(--progress-track)' }}
-    >
-      <div
-        className="h-full rounded-full"
-        style={{
-          width: `${width}%`,
-          background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
-          transition: loading
-            ? 'width 2.5s cubic-bezier(0.4,0,0.2,1)'
-            : 'width 0.3s ease',
-        }}
-      />
-    </div>
-  )
-}
-
 /* ── Next button with animated arrow ─────────────────────────────── */
 function NextButton({ onClick }) {
   const { t } = useTranslation()
@@ -108,10 +75,12 @@ export default function UploadPage() {
   }
 
   const handleFile = async (file) => {
-    if (!file || !file.name.endsWith('.pdf')) {
+    if (loading) return
+    if (!file || !file.name.toLowerCase().endsWith('.pdf')) {
       setError(t('upload.pdfOnly'))
       return
     }
+    if (!file.size || file.size > 5 * 1024 * 1024) { setError(t('journey.fileSize')); return }
     setSelectedFile(file)
     setLoading(true)
     setDone(false)
@@ -122,7 +91,7 @@ export default function UploadPage() {
       const data = await api.upload('/cv/upload', form)
       setDone(true)
       // brief pause so progress bar hits 100% visibly
-      setTimeout(() => setResult(data), 350)
+      setResult(data)
     } catch (e) {
       setError(e.message)
       setLoading(false)
@@ -309,6 +278,7 @@ export default function UploadPage() {
         {/* Error */}
         {error && (
           <p
+            role="alert"
             className="mb-4 text-sm rounded-xl px-4 py-2.5 text-center"
             style={{
               background: 'rgba(248,113,113,0.08)',
@@ -325,6 +295,12 @@ export default function UploadPage() {
           onDragOver={(e) => { e.preventDefault(); setDragging(true) }}
           onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setDragging(false) }}
           onDrop={onDrop}
+          role="button"
+          tabIndex={loading ? -1 : 0}
+          aria-label={t('upload.clickBrowse')}
+          aria-disabled={loading}
+          aria-busy={loading}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); if (!loading) fileRef.current?.click() } }}
           onClick={() => !loading && fileRef.current?.click()}
           className="relative rounded-2xl flex flex-col items-center justify-center gap-5 transition-all duration-300"
           style={{
@@ -363,7 +339,7 @@ export default function UploadPage() {
 
               {/* Progress bar */}
               <div className="w-full">
-                <ProgressBar loading={loading} done={done} />
+                <span className="sr-only">{t('cv.parsing')}</span>
               </div>
 
               {/* Spinner + label */}
@@ -372,7 +348,7 @@ export default function UploadPage() {
                   className="animate-spin rounded-full h-5 w-5 border-b-2"
                   style={{ borderColor: '#3b82f6' }}
                 />
-                <span className="text-sm text-gray-400">{t('cv.parsing')}</span>
+                <span role="status" className="text-sm text-gray-400">{t('cv.parsing')}</span>
               </div>
             </div>
           ) : (

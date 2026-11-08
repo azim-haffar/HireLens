@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { api } from '../lib/api'
@@ -53,28 +53,37 @@ export default function AnalysisPage() {
   const [tab, setTab] = useState('scores')
   const [copied, setCopied] = useState(false)
   const [interviewLoading, setInterviewLoading] = useState(false)
+  const [actionLoading, setActionLoading] = useState('')
+  const [tracked, setTracked] = useState(false)
+  const selection = useRef('')
+  selection.current = `${cvId}:${jobId}`
+
+  useEffect(() => {
+    setMatch(null); setAts(null); setInterview(null); setCoverLetter(null)
+    setComparison(null); setTracked(false); setError(''); setTab('scores')
+  }, [cvId, jobId])
 
   useEffect(() => {
     Promise.all([
-      api.get('/cv/versions').catch(() => []),
-      api.get('/jobs/list').catch(() => []),
+      api.get('/cv/versions'),
+      api.get('/jobs/list'),
     ]).then(([c, j]) => {
       setCvs(c)
       setJobs(j)
-    })
+    }).catch((e) => setError(e.message))
   }, [])
 
   const runAnalysis = async () => {
     if (!cvId || !jobId) return
     setLoading(true)
     setError('')
+    setMatch(null); setAts(null); setInterview(null); setCoverLetter(null); setComparison(null); setTracked(false)
+    const key = selection.current
     try {
-      const [m, a] = await Promise.all([
-        api.post('/match/score',  { cv_id: cvId, job_id: jobId }),
-        api.post('/ats/check',    { cv_id: cvId, job_id: jobId }),
-      ])
+      const m = await api.post('/match/score', { cv_id: cvId, job_id: jobId })
+      if (key !== selection.current) return
       setMatch(m)
-      setAts(a)
+      setAts(m.ats)
       setTab('scores')
     } catch (e) {
       setError(e.message)
@@ -86,34 +95,52 @@ export default function AnalysisPage() {
   const loadInterview = async () => {
     if (interviewLoading) return
     setInterviewLoading(true)
+    setError('')
+    const key = selection.current
     try {
       const data = await api.post('/interview/generate', { cv_id: cvId, job_id: jobId })
+      if (key !== selection.current) return
       setInterview(data)
       setTab('interview')
     } catch (e) {
-      console.error('Interview fetch failed:', e)
+      if (key === selection.current) setError(e.message)
     } finally {
       setInterviewLoading(false)
     }
   }
 
-  const loadCoverLetter = async () => {
-    const data = await api.post('/cover-letter/generate', { cv_id: cvId, job_id: jobId })
-    setCoverLetter(data)
-    setTab('cover')
+  const runAction = async (name, path, body, onSuccess) => {
+    if (actionLoading) return
+    const key = selection.current
+    setActionLoading(name); setError('')
+    try {
+      const data = await api.post(path, body)
+      if (key === selection.current) onSuccess(data)
+    } catch (e) {
+      if (key === selection.current) setError(e.message)
+    } finally { setActionLoading('') }
   }
 
-  const loadComparison = async () => {
-    if (!cvBId) return
-    const data = await api.post('/comparison/compare', { cv_id_a: cvId, cv_id_b: cvBId, job_id: jobId })
-    setComparison(data)
-    setTab('compare')
+  const loadCoverLetter = () => runAction('cover', '/cover-letter/generate',
+    { cv_id: cvId, job_id: jobId }, (data) => { setCoverLetter(data); setTab('cover') })
+
+  const loadComparison = () => cvBId && runAction('compare', '/comparison/compare',
+    { cv_id_a: cvId, cv_id_b: cvBId, job_id: jobId }, (data) => { setComparison(data); setTab('compare') })
+
+  const trackApplication = () => {
+    const job = jobs.find((j) => j.id === jobId)?.parsed_data
+    if (!job || !match?.analysis_id) return
+    return runAction('track', '/tracker/applications', {
+      job_title: job.title, company: job.company, cv_id: cvId, analysis_id: match.analysis_id,
+    }, () => setTracked(true))
   }
 
-  const copyCoverLetter = () => {
-    navigator.clipboard.writeText(`Subject: ${coverLetter.subject}\n\n${coverLetter.body}`)
+  const copyCoverLetter = async () => {
+    try {
+    await navigator.clipboard.writeText(`Subject: ${coverLetter.subject}\n\n${coverLetter.body}`)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+    } catch { setError(t('journey.copyError')) }
   }
 
   const deleteCV = async (id) => {
@@ -129,13 +156,13 @@ export default function AnalysisPage() {
   }
 
   return (
-    <div className="p-8 max-w-4xl mx-auto animate-page">
+    <div className="p-4 sm:p-8 max-w-4xl mx-auto animate-page">
       <h1 className="text-2xl font-bold mb-1 text-gray-100">{t('analysis.pageTitle')}</h1>
       <p className="text-sm mb-6" style={{ color: '#94a3b8' }}>Run a full AI-powered analysis of your CV against a job. Get match score, ATS audit, interview questions, and a cover letter.</p>
 
       {/* Setup card */}
       <div className="glass-card p-6 mb-6">
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('analysis.selectCV')}</label>
             <DeletableSelect
@@ -164,6 +191,7 @@ export default function AnalysisPage() {
             ) : (
               <DeletableSelect
                 value={jobId}
+                disabled={loading || interviewLoading || !!actionLoading}
                 onChange={setJobId}
                 onDelete={deleteJob}
                 options={jobs.map((j) => ({
@@ -178,6 +206,7 @@ export default function AnalysisPage() {
 
         {error && (
           <p
+            role="alert"
             className="mb-4 text-sm rounded-xl px-3 py-2"
             style={{
               background: 'rgba(248,113,113,0.08)',
@@ -199,11 +228,12 @@ export default function AnalysisPage() {
         </button>
       </div>
 
+      {actionLoading && <p role="status" className="mb-4 text-sm">{t('common.loading')}</p>}
       {(match || ats) && (
         <>
           {/* Tab bar */}
           <div
-            className="flex mb-6"
+            className="flex overflow-x-auto mb-6"
             style={{ borderBottom: '1px solid var(--border-subtle)' }}
           >
             {TABS.map(({ key, label }) => (
@@ -225,7 +255,8 @@ export default function AnalysisPage() {
           {/* Scores */}
           {tab === 'scores' && match && ats && (
             <div className="space-y-5">
-              <div className="grid grid-cols-2 gap-5">
+              <p className="text-sm text-gray-400">{t('journey.scoreNote')}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {/* Match score */}
                 <div className="glass-card p-6 flex flex-col items-center gap-4">
                   <ScoreGauge score={match.score} label={t('analysis.matchScore')} size="lg" />
@@ -297,12 +328,16 @@ export default function AnalysisPage() {
               </div>
 
               <div className="flex gap-3 flex-wrap">
-                <button onClick={loadInterview} className="btn-primary px-4 py-2">
+                <button disabled={interviewLoading || !!actionLoading} onClick={loadInterview} className="btn-primary px-4 py-2">
                   {t('analysis.interviewPrep')}
                 </button>
-                <button onClick={loadCoverLetter} className="btn-outline px-4 py-2">
+                <button disabled={!!actionLoading} onClick={loadCoverLetter} className="btn-outline px-4 py-2">
                   {t('analysis.coverLetter')}
                 </button>
+                <button onClick={trackApplication} disabled={tracked || !!actionLoading} className="btn-outline px-4 py-2">
+                  {t(tracked ? 'journey.tracked' : 'journey.track')}
+                </button>
+                {tracked && <Link to="/tracker" className="text-blue-400">{t('journey.openTracker')}</Link>}
               </div>
             </div>
           )}
@@ -313,12 +348,14 @@ export default function AnalysisPage() {
               <h3 className="font-semibold text-gray-200 mb-4">{t('analysis.aiExplanation')}</h3>
               <StreamingText
                 path="/explain/stream"
+                key={`${cvId}:${jobId}`}
                 body={{ cv_id: cvId, job_id: jobId }}
                 triggerLabel={t('analysis.explainScore')}
               />
             </div>
           )}
 
+          {tab !== 'scores' && <p className="text-sm text-gray-400 mb-4">{t('journey.adviceNote')}</p>}
           {/* Interview */}
           {tab === 'interview' && (
             <div className="space-y-3">
@@ -334,7 +371,7 @@ export default function AnalysisPage() {
               {!interviewLoading && !interview && (
                 <div className="glass-card p-8 text-center">
                   <p className="text-sm text-gray-500 mb-4">{t('analysis.questionsNotReady')}</p>
-                  <button onClick={loadInterview} className="btn-primary px-4 py-2">
+                  <button disabled={interviewLoading || !!actionLoading} onClick={loadInterview} className="btn-primary px-4 py-2">
                     {t('analysis.generateQuestions')}
                   </button>
                 </div>
@@ -355,7 +392,7 @@ export default function AnalysisPage() {
                         >
                           {q.type}
                         </span>
-                        <span className="font-medium text-sm text-gray-200 truncate">{q.question}</span>
+                        <span className="font-medium text-sm text-gray-200 break-words">{q.question}</span>
                       </div>
                       <ChevronDown
                         size={15}
@@ -404,7 +441,7 @@ export default function AnalysisPage() {
                 </>
               ) : (
                 <div className="text-center py-4">
-                  <button onClick={loadCoverLetter} className="btn-primary px-5 py-2.5">
+                  <button disabled={!!actionLoading} onClick={loadCoverLetter} className="btn-primary px-5 py-2.5">
                     {t('analysis.generateCoverLetter')}
                   </button>
                 </div>
@@ -430,7 +467,7 @@ export default function AnalysisPage() {
                 </select>
                 <button
                   onClick={loadComparison}
-                  disabled={!cvBId}
+                  disabled={!cvBId || !!actionLoading}
                   className="btn-primary px-4 py-2 disabled:opacity-50"
                 >
                   {t('analysis.compareBtn')}
@@ -439,7 +476,7 @@ export default function AnalysisPage() {
               {comparison && (
                 <div>
                   <p className="text-sm font-semibold text-blue-300 mb-5">{comparison.verdict}</p>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {[comparison.cv_a, comparison.cv_b].map((cv) => (
                       <div
                         key={cv.cv_id}

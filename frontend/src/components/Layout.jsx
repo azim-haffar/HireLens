@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../hooks/useAuth'
@@ -57,6 +58,7 @@ function SectionLabel({ children, first }) {
 /* ── Layout ───────────────────────────────────────────────────────── */
 export default function Layout() {
   const { t, i18n } = useTranslation()
+  const [mobileOpen, setMobileOpen] = useState(false)
   const { user, signOut } = useAuth()
   const { theme, toggle } = useTheme()
   const navigate = useNavigate()
@@ -96,13 +98,18 @@ export default function Layout() {
   ]
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col md:flex-row">
 
+      <header className="md:hidden flex items-center justify-between p-4" style={{ background: 'var(--sidebar-bg)' }}>
+        <span className="font-bold text-xl">HireLens</span>
+        <button type="button" onClick={() => setMobileOpen((open) => !open)} aria-expanded={mobileOpen}
+          aria-controls="hirelens-navigation" className="btn-outline px-3 py-2">{t('journey.navigation')}</button>
+      </header>
       {/* ════════════════════ Sidebar ════════════════════ */}
       <aside
-        className="shrink-0 flex flex-col"
+        id="hirelens-navigation"
+        className={`${mobileOpen ? 'flex' : 'hidden'} md:flex shrink-0 flex-col w-full md:w-[220px]`}
         style={{
-          width: '220px',
           background: 'var(--sidebar-bg)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -140,6 +147,7 @@ export default function Layout() {
                   <NavLink
                     key={to}
                     to={to}
+                    onClick={() => setMobileOpen(false)}
                     title={label}
                     className={({ isActive }) =>
                       `flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
@@ -281,7 +289,7 @@ export default function Layout() {
       </aside>
 
       {/* ── Main content ── */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 min-w-0 overflow-auto">
         <Outlet />
       </main>
 

@@ -27,6 +27,8 @@ class MatchResult(BaseModel):
     breakdown: MatchBreakdown
     matched_skills: list[str]
     missing_skills: list[str]
+    analysis_id: Optional[str] = None
+    ats: Optional[ATSResult] = None
 
 
 class RoastBreakdown(BaseModel):

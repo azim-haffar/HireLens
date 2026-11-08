@@ -59,7 +59,7 @@
     "dropHere": "Slip din PDF her",
     "clickBrowse": "eller klik for at gennemse · Maks. 5 MB",
     "releaseToUpload": "Slip for at uploade",
-    "footer": "Kun PDF · Dit CV opbevares sikkert og deles aldrig",
+    "footer": "Kun PDF · Tekst sendes til Groq og gemmes i din Supabase-konto. Brug syntetiske data til demoer.",
     "nextAddJob": "Næste: Tilføj job",
     "uploadAnother": "Upload et andet CV",
     "pdfOnly": "Kun PDF-filer understøttes."
@@ -212,5 +212,15 @@
     "delete": "Slet",
     "copy": "Kopiér",
     "copied": "Kopieret!"
+  },
+  "journey": {
+    "scoreNote": "Scorer er regelbaserede tjek af udtrukne felter, ikke arbejdsgiverens ATS-resultater eller ansættelsesprognoser.",
+    "adviceNote": "Genererede råd kan være unøjagtige. Kontrollér alle påstande mod dit CV og jobbet.",
+    "track": "Gem ansøgning",
+    "tracked": "Ansøgning gemt",
+    "openTracker": "Åbn oversigt",
+    "fileSize": "Upload en ikke-tom PDF på højst 5 MB.",
+    "copyError": "Kunne ikke kopiere. Markér og kopiér teksten manuelt.",
+    "navigation": "Navigation"
   }
 }

@@ -51,11 +51,12 @@ export default function StreamingText({ path, body, triggerLabel, className = ''
   const [text, setText]       = useState('')
   const [loading, setLoading] = useState(false)
   const [started, setStarted] = useState(false)
+  const [error, setError] = useState('')
 
   const start = async () => {
     setLoading(true)
     setStarted(true)
-    setText('')
+    setText(''); setError('')
     try {
       await streamSSE(
         path,
@@ -63,7 +64,8 @@ export default function StreamingText({ path, body, triggerLabel, className = ''
         (chunk) => setText((prev) => prev + chunk),
         () => setLoading(false),
       )
-    } catch {
+    } catch (e) {
+      setError(e.message); setStarted(false)
       setLoading(false)
     }
   }
@@ -72,7 +74,8 @@ export default function StreamingText({ path, body, triggerLabel, className = ''
   const lastParaIdx = blocks.reduce((acc, b, i) => (b.type === 'para' ? i : acc), -1)
 
   return (
-    <div className={className}>
+    <div className={className} aria-busy={loading}>
+      {error && <p role="alert" className="text-red-400 mb-3">{error}</p>}
       {!started && (
         <button
           onClick={start}

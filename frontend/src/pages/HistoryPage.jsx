@@ -181,12 +181,13 @@ export default function HistoryPage() {
   const [analyses, setAnalyses] = useState([])
   const [search, setSearch]     = useState('')
   const [loading, setLoading]   = useState(true)
+  const [error, setError] = useState('')
   const [searchFocused, setSearchFocused] = useState(false)
 
   useEffect(() => {
     api.get('/history/analyses')
       .then((data) => { setAnalyses(data); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch((e) => { setError(e.message); setLoading(false) })
   }, [])
 
   const filtered = analyses.filter((a) => {
@@ -205,7 +206,7 @@ export default function HistoryPage() {
 
   return (
     <div
-      className="p-8 max-w-4xl mx-auto animate-page"
+      className="p-4 sm:p-8 max-w-4xl mx-auto animate-page"
       style={{
         backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px)',
         backgroundSize: '28px 28px',
@@ -227,6 +228,7 @@ export default function HistoryPage() {
         <p className="text-sm mt-1" style={{ color: '#94a3b8' }}>Browse all your past analyses and see how your match score improves over time.</p>
       </div>
 
+      {error && <p role="alert" className="text-red-400 mb-4">{error}</p>}
       {/* ── Chart ── */}
       {chartData.length > 1 && (
         <div
@@ -336,7 +338,7 @@ export default function HistoryPage() {
             style={{ borderColor: '#3b82f6' }}
           />
         </div>
-      ) : analyses.length === 0 ? (
+      ) : error ? null : analyses.length === 0 ? (
         <EmptyState navigate={navigate} />
       ) : filtered.length === 0 ? (
         <div className="text-center py-14">

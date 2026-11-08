@@ -1,19 +1,20 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import Layout from './components/Layout'
-import LandingPage from './pages/LandingPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
-import ForgotPasswordPage from './pages/ForgotPasswordPage'
-import ResetPasswordPage from './pages/ResetPasswordPage'
-import DashboardPage from './pages/DashboardPage'
-import UploadPage from './pages/UploadPage'
-import JobsPage from './pages/JobsPage'
-import AnalysisPage from './pages/AnalysisPage'
-import TrackerPage from './pages/TrackerPage'
-import HistoryPage from './pages/HistoryPage'
-import RoastPage from './pages/RoastPage'
-import ATSCheckerPage from './pages/ATSCheckerPage'
+const LandingPage = lazy(() => import('./pages/LandingPage'))
+const LoginPage = lazy(() => import('./pages/LoginPage'))
+const RegisterPage = lazy(() => import('./pages/RegisterPage'))
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'))
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'))
+const DashboardPage = lazy(() => import('./pages/DashboardPage'))
+const UploadPage = lazy(() => import('./pages/UploadPage'))
+const JobsPage = lazy(() => import('./pages/JobsPage'))
+const AnalysisPage = lazy(() => import('./pages/AnalysisPage'))
+const TrackerPage = lazy(() => import('./pages/TrackerPage'))
+const HistoryPage = lazy(() => import('./pages/HistoryPage'))
+const RoastPage = lazy(() => import('./pages/RoastPage'))
+const ATSCheckerPage = lazy(() => import('./pages/ATSCheckerPage'))
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()
@@ -23,6 +24,7 @@ function ProtectedRoute({ children }) {
 
 export default function App() {
   return (
+    <Suspense fallback={<div role="status" className="p-6">Loading…</div>}>
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -40,5 +42,6 @@ export default function App() {
         <Route path="/ats-checker" element={<ATSCheckerPage />} />
       </Route>
     </Routes>
+    </Suspense>
   )
 }

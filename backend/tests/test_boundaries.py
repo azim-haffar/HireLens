@@ -15,12 +15,19 @@ class BoundaryTests(unittest.TestCase):
         db = ModuleType("app.core.supabase_client")
         db.supabase = MagicMock()
         db.supabase_admin = MagicMock()
+        config = ModuleType("app.core.config")
+        config.settings = SimpleNamespace(
+            groq_api_key="synthetic-key", supabase_url="https://example.invalid",
+            supabase_anon_key="synthetic-anon", supabase_service_role_key="synthetic-service",
+            resend_api_key="", redis_url="redis://localhost", environment="test",
+        )
         groq = ModuleType("app.core.groq_client")
         groq.chat = MagicMock()
         groq.stream = MagicMock()
         email = ModuleType("app.services.email_service")
         email.send_status_notification = MagicMock()
         cls.modules = patch.dict(sys.modules, {
+            "app.core.config": config,
             "app.core.supabase_client": db, "app.core.groq_client": groq,
             "app.services.email_service": email,
         })

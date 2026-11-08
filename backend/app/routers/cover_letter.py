@@ -1,5 +1,6 @@
+from app.core.llm_output import GROUNDING_RULES, validated_json
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from app.core.deps import get_current_user
 from app.core.ownership import get_owned_record
 from app.core.groq_client import chat
@@ -16,8 +17,8 @@ class CoverLetterRequest(BaseModel):
 
 
 class CoverLetterResponse(BaseModel):
-    subject: str
-    body: str
+    subject: str = Field(min_length=1, max_length=500)
+    body: str = Field(min_length=1, max_length=10000)
 
 
 PROMPT = """Write a tailored cover letter for this job application. Return JSON only.
@@ -61,6 +62,5 @@ async def generate_cover_letter(body: CoverLetterRequest, user: dict = Depends(g
         level=job.experience_level,
     )
 
-    content = chat([{"role": "user", "content": prompt}], json_mode=True)
-    data = json.loads(content)
-    return CoverLetterResponse(**data)
+    content = chat([{"role": "system", "content": GROUNDING_RULES}, {"role": "user", "content": prompt}], json_mode=True)
+    return validated_json(content, CoverLetterResponse)

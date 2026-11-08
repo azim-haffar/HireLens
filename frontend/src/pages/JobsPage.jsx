@@ -267,6 +267,7 @@ export default function JobsPage() {
         {/* Error */}
         {error && (
           <div
+            role="alert"
             className="flex items-start gap-3 rounded-xl px-4 py-3 mb-5"
             style={{
               background: 'rgba(248,113,113,0.08)',
@@ -301,6 +302,7 @@ export default function JobsPage() {
               >
                 <Link2 size={15} className="text-gray-500 shrink-0" />
                 <input
+                  aria-label={t('job.url')}
                   type="url"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
@@ -334,6 +336,7 @@ export default function JobsPage() {
                 {t('job.paste')}
               </label>
               <textarea
+                aria-label={t('job.paste')}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 required

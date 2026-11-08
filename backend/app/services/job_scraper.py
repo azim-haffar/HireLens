@@ -1,3 +1,4 @@
+from app.core.llm_output import GROUNDING_RULES, validated_json
 import json
 from bs4 import BeautifulSoup
 from app.core.groq_client import chat
@@ -54,8 +55,7 @@ def scrape_job_url(url: str) -> str:
 def extract_job_with_groq(text: str) -> JobData:
     """Use Groq to parse job text into structured JSON."""
     content = chat(
-        messages=[{"role": "user", "content": EXTRACT_PROMPT + text}],
+        messages=[{"role": "system", "content": GROUNDING_RULES}, {"role": "user", "content": EXTRACT_PROMPT + text}],
         json_mode=True,
     )
-    data = json.loads(content)
-    return JobData(**data, raw_text=text)
+    return validated_json(content, JobData, raw_text=text)

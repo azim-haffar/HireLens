@@ -59,7 +59,7 @@
     "dropHere": "PDF'nizi buraya bırakın",
     "clickBrowse": "veya göz atmak için tıklayın · Maks. 5 MB",
     "releaseToUpload": "Yüklemek için bırakın",
-    "footer": "Yalnızca PDF · CV'niz güvenle saklanır ve paylaşılmaz",
+    "footer": "Yalnızca PDF · Metin analiz için Groq’a gönderilir ve Supabase hesabınızda saklanır. Demolarda sentetik veri kullanın.",
     "nextAddJob": "Sonraki: İlan Ekle",
     "uploadAnother": "Başka CV Yükle",
     "pdfOnly": "Yalnızca PDF dosyaları desteklenir."
@@ -212,5 +212,15 @@
     "delete": "Sil",
     "copy": "Kopyala",
     "copied": "Kopyalandı!"
+  },
+  "journey": {
+    "scoreNote": "Puanlar çıkarılan alanlara uygulanan kurallardır; işveren ATS sonuçları veya işe alım tahminleri değildir.",
+    "adviceNote": "Üretilen öneriler hatalı olabilir. Her iddiayı CV ve iş ilanıyla karşılaştırın.",
+    "track": "Başvuruyu kaydet",
+    "tracked": "Başvuru kaydedildi",
+    "openTracker": "Takibi aç",
+    "fileSize": "En fazla 5 MB olan, boş olmayan bir PDF yükleyin.",
+    "copyError": "Kopyalanamadı. Metni seçip elle kopyalayın.",
+    "navigation": "Gezinme"
   }
 }

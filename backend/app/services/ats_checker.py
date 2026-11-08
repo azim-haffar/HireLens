@@ -58,27 +58,30 @@ def _experience_years(cv: ParsedCV, job: JobData) -> ATSRule:
     years = len(cv.experience)
     if "senior" in level or "lead" in level:
         passed = years >= 3
-        suggestion = "Senior roles typically require 3+ positions/tenures on the CV." if not passed else ""
+        suggestion = "This heuristic found fewer than three experience entries; it does not calculate years of experience." if not passed else ""
     elif "junior" in level or "entry" in level or "graduate" in level:
         passed = True
         suggestion = ""
     else:
         passed = years >= 1
         suggestion = "Add at least one work experience entry." if not passed else ""
-    return ATSRule(rule="Experience Entries", passed=passed, severity="warning" if not passed else "info", suggestion=suggestion)
+    return ATSRule(rule="Experience Entries (heuristic)", passed=passed, severity="warning" if not passed else "info", suggestion=suggestion)
 
 
 def _education_match(cv: ParsedCV, job: JobData) -> ATSRule:
     req = (job.education_requirement or "").lower()
     if not req:
         return ATSRule(rule="Education Match", passed=True, severity="info", suggestion="")
-    has_edu = bool(cv.education)
-    passed = has_edu
+    required_terms = {term for term in re.findall(r"[a-z0-9]+", req) if len(term) > 2}
+    passed = any(
+        required_terms.issubset(set(re.findall(r"[a-z0-9]+", entry.degree.lower())))
+        for entry in cv.education
+    )
     return ATSRule(
         rule="Education Match",
         passed=passed,
         severity="warning" if not passed else "info",
-        suggestion="" if passed else "Add your education credentials.",
+        suggestion="" if passed else "The listed education does not clearly match the stated requirement. Check the vacancy wording and confirm equivalency where needed.",
     )
 
 

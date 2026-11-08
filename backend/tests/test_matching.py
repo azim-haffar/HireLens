@@ -39,7 +39,21 @@ class MatchingTests(unittest.TestCase):
         self.assertIn("demonstrate", rules["Keyword Match"].suggestion)
         self.assertIn("do not invent", rules["Quantified Achievements"].suggestion)
         self.assertIn("actual job titles", rules["Job Title Alignment"].suggestion)
-        self.assertIn("Experience Entries", rules)
+        self.assertIn("Experience Entries (heuristic)", rules)
+
+    def test_education_rule_does_not_pass_for_unrelated_degree(self):
+        from app.models.cv import Education
+        cv = ParsedCV(name="Synthetic applicant", education=[Education(degree="Bachelor of Arts", institution="Example")])
+        job = JobData(title="Intern", company="Example", education_requirement="Master degree in Computer Science")
+        rule = {r.rule: r for r in run_ats_check(cv, job).rules}["Education Match"]
+        self.assertFalse(rule.passed)
+        self.assertIn("confirm equivalency", rule.suggestion)
+
+    def test_experience_rule_labels_entry_count_as_heuristic(self):
+        cv = ParsedCV(name="Synthetic applicant")
+        job = JobData(title="Senior Engineer", company="Example", experience_level="senior")
+        rule = {r.rule: r for r in run_ats_check(cv, job).rules}["Experience Entries (heuristic)"]
+        self.assertIn("does not calculate years", rule.suggestion)
 
 
 if __name__ == "__main__":

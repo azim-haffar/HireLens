@@ -1,3 +1,4 @@
+from app.core.llm_output import GROUNDING_RULES, validated_json
 import json
 from app.core.groq_client import chat
 from app.models.cv import ParsedCV
@@ -28,9 +29,7 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
 def parse_cv_with_groq(raw_text: str) -> ParsedCV:
     """Use Groq to parse raw CV text into structured JSON."""
     content = chat(
-        messages=[{"role": "user", "content": PARSE_PROMPT + raw_text[:6000]}],
+        messages=[{"role": "system", "content": GROUNDING_RULES}, {"role": "user", "content": PARSE_PROMPT + raw_text[:6000]}],
         json_mode=True,
     )
-    data = json.loads(content)
-    parsed = ParsedCV(**data, raw_text=raw_text)
-    return parsed
+    return validated_json(content, ParsedCV, raw_text=raw_text)

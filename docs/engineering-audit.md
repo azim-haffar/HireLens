@@ -1,5 +1,7 @@
 # HireLens engineering audit — 4 October 2026
 
+This is the historical source audit. See [the 6 October quality and demo record](quality-demo.md) for subsequent improvements, current checks and remaining verification limits.
+
 ## Source baseline
 
 Source baseline: `83123f6` on main. The audit covers the HireLens repository only.

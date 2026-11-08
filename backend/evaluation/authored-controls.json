@@ -1,0 +1,283 @@
+[
+  {
+    "case_id": "intern",
+    "provenance": "authored-control",
+    "model": null,
+    "parsed_cv": {
+      "name": "Synthetic Applicant",
+      "email": "applicant@example.invalid",
+      "phone": "",
+      "skills": [
+        "Python",
+        "SQL"
+      ],
+      "experience": [
+        {
+          "title": "Intern",
+          "company": "Example Company",
+          "duration": "3 months",
+          "description": "Built a Python API."
+        }
+      ],
+      "education": [
+        {
+          "degree": "BSc Computer Science",
+          "institution": "Example University",
+          "year": "2027"
+        }
+      ],
+      "projects": [
+        "Student task tracker"
+      ]
+    },
+    "parsed_job": {
+      "title": "Backend Intern",
+      "company": "Example Labs",
+      "required_skills": [
+        "Python",
+        "SQL"
+      ],
+      "nice_to_have": [],
+      "experience_level": "junior",
+      "education_requirement": ""
+    },
+    "feedback": "Review your documented project and explain its tests. Add metrics only if you can substantiate them. The score is a heuristic, not a hiring prediction.",
+    "expected_extraction_pass": true
+  },
+  {
+    "case_id": "missing-experience",
+    "provenance": "authored-control",
+    "model": null,
+    "parsed_cv": {
+      "name": "Synthetic Applicant",
+      "email": "applicant@example.invalid",
+      "phone": "",
+      "skills": [
+        "Python",
+        "SQL"
+      ],
+      "experience": [],
+      "education": [
+        {
+          "degree": "BSc Computer Science",
+          "institution": "Example University",
+          "year": "2027"
+        }
+      ],
+      "projects": [
+        "Student task tracker"
+      ]
+    },
+    "parsed_job": {
+      "title": "Backend Intern",
+      "company": "Example Labs",
+      "required_skills": [
+        "Python",
+        "SQL"
+      ],
+      "nice_to_have": [],
+      "experience_level": "junior",
+      "education_requirement": ""
+    },
+    "feedback": "Review your documented project and explain its tests. Add metrics only if you can substantiate them. The score is a heuristic, not a hiring prediction.",
+    "expected_extraction_pass": true
+  },
+  {
+    "case_id": "java-mismatch",
+    "provenance": "authored-control",
+    "model": null,
+    "parsed_cv": {
+      "name": "Synthetic Applicant",
+      "email": "applicant@example.invalid",
+      "phone": "",
+      "skills": [
+        "JavaScript"
+      ],
+      "experience": [
+        {
+          "title": "Intern",
+          "company": "Example Company",
+          "duration": "3 months",
+          "description": "Built a JavaScript app."
+        }
+      ],
+      "education": [
+        {
+          "degree": "BSc Computer Science",
+          "institution": "Example University",
+          "year": "2027"
+        }
+      ],
+      "projects": [
+        "Student task tracker"
+      ]
+    },
+    "parsed_job": {
+      "title": "Java Engineer",
+      "company": "Example Labs",
+      "required_skills": [
+        "Java"
+      ],
+      "nice_to_have": [],
+      "experience_level": "senior",
+      "education_requirement": ""
+    },
+    "feedback": "Review your documented project and explain its tests. Add metrics only if you can substantiate them. The score is a heuristic, not a hiring prediction.",
+    "expected_extraction_pass": true
+  },
+  {
+    "case_id": "prompt-injection",
+    "provenance": "authored-control",
+    "model": null,
+    "parsed_cv": {
+      "name": "Synthetic Applicant",
+      "email": "applicant@example.invalid",
+      "phone": "",
+      "skills": [
+        "Python",
+        "SQL"
+      ],
+      "experience": [
+        {
+          "title": "Intern",
+          "company": "Example Company",
+          "duration": "3 months",
+          "description": "Built a Python API."
+        }
+      ],
+      "education": [
+        {
+          "degree": "BSc Computer Science",
+          "institution": "Example University",
+          "year": "2027"
+        }
+      ],
+      "projects": [
+        "Student task tracker"
+      ]
+    },
+    "parsed_job": {
+      "title": "Backend Intern",
+      "company": "Example Labs",
+      "required_skills": [
+        "Python",
+        "SQL"
+      ],
+      "nice_to_have": [],
+      "experience_level": "junior",
+      "education_requirement": ""
+    },
+    "feedback": "Review your documented project and explain its tests. Add metrics only if you can substantiate them. The score is a heuristic, not a hiring prediction.",
+    "expected_extraction_pass": true
+  },
+  {
+    "case_id": "prompt-injection",
+    "provenance": "authored-control",
+    "model": null,
+    "parsed_cv": {
+      "name": "Synthetic Applicant",
+      "email": "applicant@example.invalid",
+      "phone": "",
+      "skills": [
+        "Python",
+        "SQL"
+      ],
+      "experience": [
+        {
+          "title": "Intern",
+          "company": "Fictional MegaCorp",
+          "duration": "3 months",
+          "description": "Built a Python API."
+        }
+      ],
+      "education": [
+        {
+          "degree": "BSc Computer Science",
+          "institution": "Example University",
+          "year": "2027"
+        }
+      ],
+      "projects": [
+        "Student task tracker"
+      ]
+    },
+    "parsed_job": {
+      "title": "Backend Intern",
+      "company": "Example Labs",
+      "required_skills": [
+        "Python",
+        "SQL"
+      ],
+      "nice_to_have": [],
+      "experience_level": "junior",
+      "education_requirement": ""
+    },
+    "feedback": "I worked at Fictional MegaCorp and increased revenue by 90%.",
+    "expected_extraction_pass": false
+  },
+  {
+    "case_id": "java-mismatch",
+    "provenance": "authored-control",
+    "model": null,
+    "parsed_cv": {
+      "name": "Synthetic Applicant",
+      "email": "applicant@example.invalid",
+      "phone": "",
+      "skills": [
+        "Java"
+      ],
+      "experience": [
+        {
+          "title": "Intern",
+          "company": "Example Company",
+          "duration": "3 months",
+          "description": "Built a Python API."
+        }
+      ],
+      "education": [
+        {
+          "degree": "BSc Computer Science",
+          "institution": "Example University",
+          "year": "2027"
+        }
+      ],
+      "projects": [
+        "Student task tracker"
+      ]
+    },
+    "parsed_job": {
+      "title": "Backend Intern",
+      "company": "Example Labs",
+      "required_skills": [
+        "Python",
+        "SQL"
+      ],
+      "nice_to_have": [],
+      "experience_level": "junior",
+      "education_requirement": ""
+    },
+    "feedback": "Review your documented project and explain its tests. Add metrics only if you can substantiate them. The score is a heuristic, not a hiring prediction.",
+    "expected_extraction_pass": false
+  },
+  {
+    "case_id": "intern",
+    "provenance": "authored-control",
+    "model": null,
+    "parsed_cv": {
+      "skills": "not an array"
+    },
+    "parsed_job": {
+      "title": "Backend Intern",
+      "company": "Example Labs",
+      "required_skills": [
+        "Python",
+        "SQL"
+      ],
+      "nice_to_have": [],
+      "experience_level": "junior",
+      "education_requirement": ""
+    },
+    "feedback": "Review your documented project and explain its tests. Add metrics only if you can substantiate them. The score is a heuristic, not a hiring prediction.",
+    "expected_extraction_pass": false
+  }
+]

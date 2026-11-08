@@ -1,6 +1,9 @@
+from app.core.sse import stream_events
+from app.core.llm_output import GROUNDING_RULES
+from typing import Literal
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from app.core.deps import get_current_user
 from app.core.ownership import get_owned_record
 from app.core.groq_client import stream
@@ -12,14 +15,14 @@ router = APIRouter()
 
 
 class ChatMessage(BaseModel):
-    role: str
-    content: str
+    role: Literal["user", "assistant"]
+    content: str = Field(min_length=1, max_length=4000)
 
 
 class ChatRequest(BaseModel):
     cv_id: str
     job_id: str
-    messages: list[ChatMessage]
+    messages: list[ChatMessage] = Field(min_length=1, max_length=20)
 
 
 SYSTEM_PROMPT = """You are a career coach assistant embedded in HireLens, an AI-powered recruitment analysis tool.
@@ -53,12 +56,10 @@ async def chat_stream(body: ChatRequest, user: dict = Depends(get_current_user))
         required_skills=", ".join(job.required_skills[:10]),
     )
 
-    messages = [{"role": "system", "content": system_content}]
+    messages = [{"role": "system", "content": GROUNDING_RULES + "\n" + system_content}]
     messages += [{"role": m.role, "content": m.content} for m in body.messages[-10:]]
 
     def event_stream():
-        for chunk in stream(messages):
-            yield f"data: {chunk}\n\n"
-        yield "data: [DONE]\n\n"
+        yield from stream_events(stream(messages))
 
     return StreamingResponse(event_stream(), media_type="text/event-stream")

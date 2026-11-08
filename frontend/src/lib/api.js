@@ -1,3 +1,4 @@
+import { consumeSSE, responseError } from './sse'
 import { supabase } from './supabase'
 
 const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
@@ -16,8 +17,7 @@ async function request(method, path, body, isFormData = false) {
     body: isFormData ? body : body ? JSON.stringify(body) : undefined,
   })
   if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: 'Unknown error' }))
-    throw new Error(err.detail || `HTTP ${res.status}`)
+    throw new Error(await responseError(res))
   }
   if (res.status === 204 || res.headers.get('content-length') === '0') return null
   return res.json()
@@ -39,22 +39,5 @@ export async function streamSSE(path, body, onChunk, onDone) {
     headers,
     body: JSON.stringify(body),
   })
-  const reader = res.body.getReader()
-  const decoder = new TextDecoder()
-  let buffer = ''
-  while (true) {
-    const { done, value } = await reader.read()
-    if (done) break
-    buffer += decoder.decode(value, { stream: true })
-    const lines = buffer.split('\n')
-    buffer = lines.pop()
-    for (const line of lines) {
-      if (line.startsWith('data: ')) {
-        const data = line.slice(6)
-        if (data === '[DONE]') { onDone?.(); return }
-        onChunk(data)
-      }
-    }
-  }
-  onDone?.()
+  return consumeSSE(res, onChunk, onDone)
 }

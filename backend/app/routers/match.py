@@ -8,6 +8,7 @@ from app.models.cv import ParsedCV
 from app.models.job import JobData
 from app.models.scoring import MatchResult
 from app.services.match_scorer import compute_match_score
+from app.services.ats_checker import run_ats_check
 
 router = APIRouter()
 
@@ -33,6 +34,7 @@ async def score_match(body: MatchRequest, user: dict = Depends(get_current_user)
     job = JobData(**job_data)
 
     result = compute_match_score(cv, job)
+    ats_result = run_ats_check(cv, job)
 
     # Persist analysis
     analysis_id = str(uuid.uuid4())
@@ -42,8 +44,8 @@ async def score_match(body: MatchRequest, user: dict = Depends(get_current_user)
         "cv_id": body.cv_id,
         "job_id": body.job_id,
         "match_score": result.score,
-        "ats_score": None,
+        "ats_score": ats_result.score,
         "breakdown": result.breakdown.model_dump(),
     }).execute()
 
-    return result
+    return result.model_copy(update={"analysis_id": analysis_id, "ats": ats_result})
