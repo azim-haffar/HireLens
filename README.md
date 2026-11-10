@@ -7,6 +7,14 @@
 
 ![HireLens analysis interface](screenshots/analysis.png)
 
+## 60-second project tour — no account required
+
+1. **See the workflow:** the screenshot above shows the analysis interface. [Open the case study](https://www.azimx.dev/projects/hirelens) for the annotated synthetic journey.
+2. **Inspect the decision:** [match_scorer.py](backend/app/services/match_scorer.py) separates deterministic matching from generated explanations. The score is a heuristic, not an employer ATS result.
+3. **Check the evidence:** [backend tests](backend/tests) and [engineering audit](docs/engineering-audit.md) document regressions and remaining gaps.
+
+**Access:** the [hosted frontend](https://hirelens-alpha.vercel.app) depends on external authentication and API services. Use the screenshot, source and case study for a review without credentials. The case study also describes newer local work that may differ from this default branch; live provider quality is unverified.
+
 ## What it does
 
 Upload a PDF CV and supply a job description. HireLens combines structured LLM extraction with a rule-based match score and AI-generated explanations. The application also includes interview preparation, cover letters, CV comparison, analysis history, and an application tracker.
