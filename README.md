@@ -3,7 +3,7 @@
 
 **FastAPI · React · Supabase · Groq**
 
-[Live frontend](https://hirelens-alpha.vercel.app) · [Scoring implementation](backend/app/services/match_scorer.py) · [Tests](backend/tests) · [MIT license](LICENSE)
+[Visual walkthrough](https://www.azimx.dev/projects/hirelens) · [Scoring implementation](backend/app/services/match_scorer.py) · [Tests](backend/tests) · [MIT license](LICENSE)
 
 ![HireLens analysis interface](screenshots/analysis.png)
 
@@ -13,7 +13,7 @@
 2. **Inspect the decision:** [match_scorer.py](backend/app/services/match_scorer.py) separates deterministic matching from generated explanations. The score is a heuristic, not an employer ATS result.
 3. **Check the evidence:** [backend tests](backend/tests) and [engineering audit](docs/engineering-audit.md) document regressions and remaining gaps.
 
-**Access:** the [hosted frontend](https://hirelens-alpha.vercel.app) depends on external authentication and API services. Use the screenshot, source and case study for a review without credentials. The case study also describes newer local work that may differ from this default branch; live provider quality is unverified.
+**Access:** the [hosted preview](https://hirelens-alpha.vercel.app) could not be reached during the 11 November 2026 browser check; availability is unverified. It also depends on external authentication and API services. Use the screenshot, source and case study for a review without credentials. The case study also describes newer local work that may differ from this default branch; live provider quality is unverified.
 
 ## What it does
 
